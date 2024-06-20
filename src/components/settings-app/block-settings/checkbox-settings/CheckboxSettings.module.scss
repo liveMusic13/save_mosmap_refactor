@@ -1,0 +1,31 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/functions';
+
+.block__checkbox {
+  display: flex;
+  align-items: center;
+  gap: adapt(15px, 1440px);
+  position: relative;
+  margin: 0px adapt(12px, 1440px);
+
+  >.image__checkbox {
+    width: adapt(25px, 1440px);
+    height: adapt(25px, 1440px);
+  }
+
+  >.input__checkbox {
+    position: absolute;
+    left: 0;
+    top: 30%;
+    opacity: 0;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  >span {
+    font-size: 1rem;
+    color: $color_eight;
+  }
+}

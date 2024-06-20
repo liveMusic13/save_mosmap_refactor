@@ -1,0 +1,95 @@
+@import '../../styles/variables';
+@import '../../styles/functions';
+
+.header {
+	height: adapt(51px, 1440px);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: adapt(4px, 1440px);
+	border-bottom: 1px solid $color_seven;
+
+	@media (max-width: 991.98px) {
+		height: adapt(71px, 1440px);
+	}
+
+	/*MOBILE*/
+	@media (max-width: 767.98px) {
+		height: adapt(180px, 1440px);
+	}
+
+	> .map__buttons {
+		display: flex;
+		align-items: center;
+		gap: adapt(4px, 1440px);
+
+		@media (max-width: 991.98px) {
+			gap: adapt(20px, 1440px);
+		}
+
+		@media (max-width: 767.98px) {
+			gap: adapt(60px, 1440px);
+		}
+
+		> .block__title {
+			display: flex;
+			align-items: center;
+			gap: adapt(4px, 1440px);
+
+			@media (max-width: 991.98px) {
+				gap: adapt(15px, 1440px);
+			}
+
+			@media (max-width: 767.98px) {
+				display: none;
+			}
+
+			> .title {
+				font-weight: 700;
+				font-size: 1.13rem;
+			}
+		}
+	}
+
+	> .settings__buttons {
+		display: flex;
+		align-items: center;
+		gap: adapt(4px, 1920px);
+
+		@media (max-width: 991.98px) {
+			gap: adapt(20px, 1440px);
+		}
+
+		@media (max-width: 767.98px) {
+			gap: adapt(60px, 1440px);
+		}
+	}
+}
+
+.line {
+	width: 1px;
+	height: adapt(32px, 1440px);
+	background-color: $color_four;
+
+	@media (max-width: 991.98px) {
+		height: adapt(42px, 1440px);
+	}
+
+	/*MOBILE*/
+	@media (max-width: 767.98px) {
+		height: adapt(52px, 1440px);
+	}
+}
+
+.crd__button {
+	background-color: transparent;
+	display: flex;
+	align-items: center;
+
+	.crd__marker {
+		width: adapt(100px, 1440px);
+		height: adapt(100px, 1440px);
+		border-radius: 50%;
+	}
+}
+

@@ -1,0 +1,134 @@
+@import '../../styles/variables';
+@import '../../styles/functions';
+
+.wrapper_settings {
+	position: absolute;
+	z-index: 5500;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: $color_three;
+	padding: adapt(35px, 1440px) adapt(20px, 1440px);
+	padding-top: adapt(122px, 1440px);
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+
+	>.block__buttons{
+		position: fixed;
+		top: 0;
+		z-index: 5555;
+		width: 100%;
+		background-color: $color_three;
+	}
+
+		> .settings__button {
+			align-self: end;
+			width: adapt(102px, 1440px);
+			height: adapt(102px, 1440px);
+			background-color: transparent;
+			position: fixed;
+			top: 0;
+			z-index: 5555;
+	
+			&:hover {
+				cursor: pointer;
+				background-color: $color_four;
+			}
+	
+			> span {
+				width: adapt(102px, 1440px);
+				height: 2px;
+				background-color: $color_two;
+				display: block;
+				transform: rotate(-45deg);
+			}
+	
+			&::after {
+				position: absolute;
+				content: '';
+				width: adapt(102px, 1440px);
+				height: 2px;
+				left: 0;
+				bottom: 44.5%;
+				background-color: $color_two;
+				transform: rotate(45deg);
+				z-index: 6000;
+			}
+		}
+	
+
+}
+
+
+.buttonEditing {
+	position: relative;
+	width: adapt(32px, 1440px);
+	height: adapt(32px, 1440px);
+	background-color: transparent;
+	border-radius: 50%;
+
+	&:hover {
+		cursor: pointer;
+		background-color: $color_four;
+	}
+
+	&:disabled {
+		cursor: default;
+		opacity: 0.5;
+		background-color: transparent;
+	}
+
+	@media (max-width: 991.98px) {
+		width: adapt(42px, 1440px);
+		height: adapt(42px, 1440px);
+	}
+
+	@media (max-width: 767.98px) {
+		width: adapt(112px, 1440px);
+		height: adapt(112px, 1440px);
+	}
+
+	> .icon_svg {
+		color: $color_two;
+		width: adapt(32px, 1440px);
+		height: adapt(32px, 1440px);
+		padding: adapt(4px, 1440px);
+		border-radius: 50%;
+
+		@media (max-width: 991.98px) {
+			width: adapt(42px, 1440px);
+			height: adapt(42px, 1440px);
+		}
+
+		@media (max-width: 767.98px) {
+			width: adapt(112px, 1440px);
+			height: adapt(112px, 1440px);
+		}
+	}
+
+	> .icon_svg_home {
+		color: rgba($color: $color_two, $alpha: 0.6);
+		width: adapt(32px, 1440px);
+		height: adapt(32px, 1440px);
+		padding: adapt(4px, 1440px);
+		border-radius: 50%;
+
+		@media (max-width: 991.98px) {
+			width: adapt(42px, 1440px);
+			height: adapt(42px, 1440px);
+		}
+
+		@media (max-width: 767.98px) {
+			width: adapt(62px, 1440px);
+			height: adapt(62px, 1440px);
+		}
+	}
+}
+
+.button__save {
+	position: relative;
+	z-index: 999999;
+	top: -5.5%;
+}

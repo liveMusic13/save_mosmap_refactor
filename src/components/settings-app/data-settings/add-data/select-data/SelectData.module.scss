@@ -1,0 +1,55 @@
+@import '../../../../../styles/variables';
+@import '../../../../../styles/functions';
+
+.wrapper_selectData {
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.block__selectData {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid $color_eight;
+  width: adapt(102px, 1440px);
+  height: adapt(50px, 1440px);
+
+  >p {
+    font-size: 1rem;
+    color: $color_one;
+  }
+
+  > img {
+    width: adapt(24px, 1440px);
+  height: adapt(24px, 1440px);
+  }
+}
+
+.block__options {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: $color_three;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12), 0 1px 5px 0 rgba(0, 0, 0, .2);
+
+  >.option {
+    font-size: 1rem;
+    color: $color_two;
+    padding: adapt(14px, 1440px) adapt(16px, 1440px);
+    min-height: adapt(50px, 1440px);
+    width: adapt(106px, 1440px);
+  }
+
+  >.active {
+    background-color: rgba(0, 0, 0, .03);
+  }
+
+  >.target {
+    background-color: rgba(0, 0, 0, .1);
+  }
+}

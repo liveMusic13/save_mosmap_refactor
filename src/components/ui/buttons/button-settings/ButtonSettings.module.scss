@@ -1,0 +1,84 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/functions';
+
+.button_settings {
+	position: relative;
+	width: adapt(32px, 1440px);
+	height: adapt(32px, 1440px);
+	background-color: transparent;
+	border-radius: 50%;
+
+	&:hover {
+		cursor: pointer;
+		background-color: $color_four;
+
+		> .hover__text {
+			display: block;
+		}
+	}
+
+	&:disabled {
+		cursor: default;
+		opacity: 0.5;
+		background-color: transparent;
+	}
+
+	@media (max-width: 991.98px) {
+		width: adapt(42px, 1440px);
+		height: adapt(42px, 1440px);
+	}
+
+	@media (max-width: 767.98px) {
+		width: adapt(112px, 1440px);
+		height: adapt(112px, 1440px);
+	}
+
+	> .icon_svg {
+		color: $color_two;
+		width: adapt(32px, 1440px);
+		height: adapt(32px, 1440px);
+		padding: adapt(4px, 1440px);
+		border-radius: 50%;
+
+		@media (max-width: 991.98px) {
+			width: adapt(42px, 1440px);
+			height: adapt(42px, 1440px);
+		}
+
+		@media (max-width: 767.98px) {
+			width: adapt(112px, 1440px);
+			height: adapt(112px, 1440px);
+		}
+	}
+
+	> .icon_svg_home {
+		color: rgba($color: $color_two, $alpha: 0.6);
+		width: adapt(32px, 1440px);
+		height: adapt(32px, 1440px);
+		padding: adapt(4px, 1440px);
+		border-radius: 50%;
+
+		@media (max-width: 991.98px) {
+			width: adapt(42px, 1440px);
+			height: adapt(42px, 1440px);
+		}
+
+		@media (max-width: 767.98px) {
+			width: adapt(62px, 1440px);
+			height: adapt(62px, 1440px);
+		}
+	}
+
+	> .hover__text {
+		display: none;
+		position: absolute;
+		top: 150%;
+		z-index: 7000;
+		font-size: 1rem;
+		background-color: $color_six;
+		color: $color_three;
+		border-radius: adapt(2px, 1440px);
+		min-width: max-content;
+		padding: adapt(10px, 1440px) adapt(8px, 1440px);
+	}
+}

@@ -1,0 +1,23 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/functions';
+
+.button {
+  box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, .25);
+  border: 1px solid $color_twelve;
+  // padding: 0px adapt(4px, 1440px);
+  padding: 0px 4px;
+  text-align: center;
+  border-radius: 2px;
+  background-color: $color_three;
+  font-size: 1rem;
+  color: $color_one;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $color_three;
+  }
+}
+
+.hover_option {
+  background-color: $color_twelve;
+}

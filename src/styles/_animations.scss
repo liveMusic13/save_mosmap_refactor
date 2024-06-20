@@ -1,0 +1,92 @@
+@import './variables';
+@import './functions';
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+@keyframes auth-label {
+	0% {
+		top: 20%;
+
+		@media (max-width: 991.98px) {
+			top: 30%;
+		}
+	}
+	100% {
+		top: 0%;
+		color: $color_two;
+		font-size: 0.7rem;
+
+		@media (max-width: 991.98px) {
+			font-size: 1.4rem;
+		}
+	}
+}
+
+@keyframes auth-label-not-focus {
+	0% {
+		top: 0%;
+		color: $color_two;
+		font-size: 0.7rem;
+	}
+	100% {
+		top: 20%;
+		color: $color_eight;
+		font-size: 1rem;
+	}
+}
+
+@keyframes auth-label_adaptive {
+	0% {
+		top: 30%;
+	}
+	100% {
+		top: -10%;
+		color: $color_two;
+		font-size: 1.2rem;
+	}
+}
+
+@keyframes auth-label-not-focus_adaptive {
+	0% {
+		top: -10%;
+		color: $color_two;
+		font-size: 1.2rem;
+	}
+	100% {
+		color: $color_eight;
+		top: 30%;
+		font-size: 1.8rem;
+	}
+}
+
+@keyframes button-auth {
+	0%{
+		background-color: $color_two;
+		box-shadow: 0px adapt(2px, 1440px) adapt(2px, 1440px) rgba($color: $color_eight, $alpha: .5);
+	}
+	100%{
+		background-color: $color_two_light;
+		box-shadow: 0px adapt(3px, 1440px) adapt(3px, 1440px) rgba($color: $color_eight, $alpha: .5);
+	}
+}
+
+@keyframes button-auth-reverse {
+	0%{
+		background-color: $color_two_light;
+		box-shadow: 0px adapt(3px, 1440px) adapt(3px, 1440px) rgba($color: $color_eight, $alpha: .5);
+	}
+	100%{
+		background-color: $color_two;
+		box-shadow: 0px adapt(2px, 1440px) adapt(2px, 1440px) rgba($color: $color_eight, $alpha: .5);
+	}
+}

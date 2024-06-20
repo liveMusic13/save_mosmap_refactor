@@ -1,0 +1,11 @@
+@import '../../../styles/variables';
+@import '../../../styles/functions';
+@import '../../../styles/animations';
+
+.loading {
+	height: 100%;
+	width: 100%;
+	background: linear-gradient(270deg, $color_two, $color_three);
+	background-size: 200% 200%;
+	animation: gradient 1.5s ease infinite;
+}

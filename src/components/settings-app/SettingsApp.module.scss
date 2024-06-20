@@ -1,0 +1,79 @@
+@import '../../styles/variables';
+@import '../../styles/animations';
+
+.wrapper_settingsApp {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: $color_three;
+  z-index: 7000;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  >.header__settingsApp{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    border-bottom: 1px solid $color_eight;
+    box-shadow: 0px 1px 2px rgba($color: $color_nine, $alpha: .3);
+    height: adapt(61px, 1440px);
+    padding: adapt(4px, 1440px) adapt(400px, 1440px);
+    background-color: $color_three;
+
+    >h2 {
+      font-size: 1.12rem;
+      font-weight: bold;
+    }
+
+    >.button__goMap {
+      width: adapt(105px, 1440px);
+      height: adapt(45px, 1440px);
+      text-transform: uppercase;
+      border-radius: 2px;
+      letter-spacing: 0.5px;
+      font-size: 0.8rem;
+      cursor: pointer;
+
+      @media (max-width: 991.98px) {
+        font-size: 0.7rem;
+      }
+
+      @media (max-width: 767.98px) {
+        width: adapt(355px, 1440px);
+        height: adapt(110px, 1440px);
+        font-size: 0.9rem;
+      }
+
+      color: $color_three;
+				background-color: $color_two;
+				box-shadow:
+					0 2px 2px 0 rgba(0, 0, 0, 0.14),
+					0 3px 1px -2px rgba(0, 0, 0, 0.12),
+					0 1px 5px 0 rgba(0, 0, 0, 0.2);
+
+				&:hover {
+					background-color: $color_two_light;
+					box-shadow:
+						0 3px 3px 0 rgba(0, 0, 0, 0.14),
+						0 1px 7px 0 rgba(0, 0, 0, 0.12),
+						0 3px 1px -1px rgba(0, 0, 0, 0.2);
+				}
+    }
+  }
+
+  >.block__content {
+    padding-top: adapt(91px, 1440px);
+    padding-bottom: adapt(30px, 1440px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: adapt(32px, 1440px);
+  }
+}

@@ -1,0 +1,79 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/functions';
+
+.wrapper_addData {
+  display: flex;
+  gap: adapt(16px, 1440px);
+  align-items: center;
+}
+
+.button__add {
+  text-transform: uppercase;
+  font-size: 0.87rem;
+  width: adapt(127px, 1440px);
+  height: adapt(40px, 1440px);
+  padding: 0px adapt(16px, 1440px);
+  color: $color_three;
+	background-color: $color_two;
+	box-shadow:
+		0 2px 2px 0 rgba(0, 0, 0, 0.14),
+		0 3px 1px -2px rgba(0, 0, 0, 0.12),
+		0 1px 5px 0 rgba(0, 0, 0, 0.2);
+
+	&:hover {
+    cursor: pointer;
+		background-color: $color_two_light;
+		box-shadow:
+			0 3px 3px 0 rgba(0, 0, 0, 0.14),
+			0 1px 7px 0 rgba(0, 0, 0, 0.12),
+			0 3px 1px -1px rgba(0, 0, 0, 0.2);
+	}
+}
+
+.addNames {
+  // width: adapt(102px, 1440px);
+  // min-width: adapt(102px, 1440px);
+  width: 100%;
+  height: adapt(50px, 1440px);
+  border-bottom: 1px solid $color_eight;
+  outline: none;
+}
+
+.block__checkbox {
+  display: flex;
+  align-items: center;
+  // justify-content: space-between;
+  position: relative;
+  gap: adapt(20px, 1440px);
+  width: adapt(104.5px, 1440px);
+  // height: adapt(74.5px, 1440px);
+}
+
+.checkbox {
+  width: adapt(20px, 1440px);
+  height: adapt(20px, 1440px);
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  opacity: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+}
+
+.square {
+  width: adapt(20px, 1440px);
+  height: adapt(20px, 1440px);
+  border: 2px solid $color_nine;
+}
+
+.image__ok {
+  width: adapt(20px, 1440px);
+  height: adapt(20px, 1440px);
+}
+
+.checkbox__name {
+  width: adapt(55px, 1440px);
+}

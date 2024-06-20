@@ -1,0 +1,149 @@
+@import '../../../styles/variables';
+@import '../../../styles/functions';
+
+.block__info {
+	height: 100%;
+	width: adapt(300px, 1440px);
+	position: absolute;
+	z-index: 5490;
+	left: 0;
+	background-color: $color_three;
+
+	&::-webkit-scrollbar {
+		width: adapt(10px, 1440px);
+		background-color: $color_five;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: $color_four;
+	}
+
+	@media (max-width: 991.98px) {
+		min-width: adapt(300px, 1440px);
+	}
+
+	@media (max-width: 767.98px) {
+		width: 100%;
+		position: relative;
+		overflow-y: auto; //HELP: ЧТОБЫ В МОБИЛЬНОЙ ВЕРСИИ НОРМАЛЬНО ПРОКРУЧИВАЛОСЬ
+	}
+
+	> .block__title {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: adapt(8px, 1440px);
+		background-color: $color_five;
+		border-bottom: 1px solid $color_four;
+		border-left: 1px solid $color_four;
+		height: adapt(52px, 1440px);
+
+		@media (max-width: 767.98px) {
+			height: adapt(110px, 1440px);
+		}
+
+		> .title {
+			font-size: 1rem;
+			line-height: 1.5;
+			font-weight: 500;
+		}
+
+		> .button__close {
+			width: adapt(25px, 1440px);
+			height: adapt(25px, 1440px);
+			background-color: transparent;
+			position: relative;
+			top: 0;
+			z-index: 5555;
+
+			&:hover {
+				cursor: pointer;
+				background-color: $color_four;
+			}
+
+			@media (max-width: 767.98px) {
+				display: none;
+			}
+
+			> span {
+				width: adapt(25px, 1440px);
+				height: 2px;
+				background-color: $color_two;
+				display: block;
+				transform: rotate(-45deg);
+			}
+
+			&::after {
+				position: absolute;
+				content: '';
+				width: adapt(25px, 1440px);
+				height: 2px;
+				left: 0;
+				bottom: 44.5%;
+				background-color: $color_two;
+				transform: rotate(45deg);
+				z-index: 6000;
+			}
+		}
+	}
+
+	> .block__aboutObjects {
+		height: 100%;
+		overflow-y: auto;
+		padding-bottom: adapt(70px, 1440px);
+
+		&::-webkit-scrollbar {
+			width: adapt(10px, 1440px);
+			background-color: $color_five;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: $color_four;
+		}
+
+		> .block__descriptionInfo {
+			width: adapt(283px, 1440px);
+			min-height: adapt(67px, 1440px);
+			margin-top: adapt(8px, 1440px);
+			padding: 0px adapt(16px, 1440px);
+
+			@media (max-width: 767.98px) {
+				width: 100%;
+			}
+
+			> .title__info {
+				font-size: 0.81rem;
+				color: $color_nine;
+
+				@media (max-width: 767.98px) {
+					font-size: 1rem;
+				}
+			}
+
+			> .description__info {
+				font-size: 1rem;
+				color: $color_two;
+				border-bottom: 1px solid $color_four;
+				line-height: 2;
+
+				@media (max-width: 767.98px) {
+					font-size: 1.2rem;
+				}
+			}
+		}
+
+		> .block__loader {
+			width: 90%;
+			min-height: adapt(67px, 1440px);
+			margin-top: adapt(8px, 1440px);
+			padding: 0px adapt(16px, 1440px);
+			border-bottom: 1px solid $color_four;
+			padding: adapt(20px, 1440px) 0px;
+			margin: 0px adapt(16px, 1440px);
+
+			@media (max-width: 767.98px) {
+				width: 98%;
+			}
+		}
+	}
+}

@@ -1,0 +1,73 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/functions';
+
+.wrapper_option {
+  display: grid;
+  padding: adapt(15px, 1440px) 0px;
+
+  >.index {
+    text-align: center;
+  }
+
+  >.name {
+    font-weight: 600;
+  }
+
+  >.block__checkbox {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    >.checkbox {
+      position: absolute;
+      z-index: 1;
+      opacity: 0;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    >.circle {
+      width: adapt(18px, 1440px);
+      height: adapt(18px, 1440px);
+      border-radius: 50%;
+      border: 2px solid $color_eight;
+    }
+
+    >.check {
+      background-color: $color_eight;
+    }
+    
+    >.square {
+      width: adapt(18px, 1440px);
+      height: adapt(18px, 1440px);
+      border: 2px solid $color_eight;
+    }
+
+    >.image__checkbox {
+      width: adapt(25px, 1440px);
+      height: adapt(25px, 1440px);
+      padding-bottom: adapt(3px, 1440px);
+    }
+  }
+}
+
+.block__action {
+  display: flex;
+  gap: adapt(10px, 1440px);
+}
+
+
+// .debug {
+//   color: red;
+//   font-size: 0.8rem;
+//   margin-top: 5px;
+// }
+
+// // DataSettings.module.scss
+// .debug {
+//   color: red;
+//   font-size: 0.8rem;
+//   display: block;
+// }

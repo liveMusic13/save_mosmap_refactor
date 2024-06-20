@@ -1,0 +1,14 @@
+@import '../../../styles/variables';
+@import '../../../styles/functions';
+
+.block__inputs {
+	> .title__inputs {
+		font-size: 0.8rem;
+		color: $color_eight;
+		padding: adapt(8px, 1440px);
+	}
+	> .inputs {
+		display: flex;
+		gap: adapt(15px, 1440px);
+	}
+}

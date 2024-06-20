@@ -1,0 +1,61 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/functions';
+@import '../../../../styles/animations';
+
+.block__input {
+  height: adapt(66.8px, 1440px);
+  margin-bottom: adapt(8px, 1440px);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+	@media (max-width: 767.98px) {
+		height: adapt(196.8px, 1440px);
+  	margin-bottom: adapt(38px, 1440px);
+	}
+
+  &:focus-within,
+  &.has_content {
+    .input__label{
+      animation: auth-label 1s ease 1 forwards;
+
+			@media (max-width: 767.98px) {
+				animation: auth-label_adaptive 1s ease 1 forwards;
+			}
+    }
+  }
+
+  >.input__label {
+    color: $color_eight;
+    margin-left: adapt(12px, 1440px);
+    position: absolute;
+    animation: auth-label-not-focus 1s ease 1 forwards;
+
+		@media (max-width: 767.98px) {
+		  animation: auth-label-not-focus_adaptive 1s ease 1 forwards;
+		}
+
+		&:hover {
+			cursor: pointer;
+		}
+  }
+  
+  >.input__login{
+    margin: adapt(16px, 1440px) adapt(12px, 1440px);
+    border-bottom: 1px solid $color_eight;
+    height: 100%;
+    outline: none;
+
+		@media (max-width: 767.98px) {
+		  padding-top: adapt(40px, 1440px);
+		}
+
+    &:focus {
+      box-shadow: 0px 2px 2px $color_two;
+    }
+
+		&:hover {
+			cursor: pointer;
+		}
+  }
+}

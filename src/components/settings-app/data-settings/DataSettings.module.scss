@@ -1,0 +1,36 @@
+@import '../../../styles/variables';
+@import '../../../styles/functions';
+
+.wrapper_settings {
+  width: adapt(805px, 1440px);
+  border-radius: 4px;
+  box-shadow: 0px adapt(11px, 1440px) adapt(15px, 1440px) adapt(-7px, 1440px) rgba(0, 0, 0, .2), 0px adapt(24px, 1440px) adapt(38px, 1440px) adapt(3px, 1440px) rgba(0, 0, 0, .14), 0px adapt(9px, 1440px) adapt(46px, 1440px) adapt(8px, 1440px) rgba(0, 0, 0, .12);
+  padding: adapt(16px, 1440px);
+
+  >.block__title {
+    width: 100%;
+    border-bottom: 1px solid $color_four;
+
+    >.title {
+      font-size: 1.12rem;
+      font-weight: bold;
+    }
+  }
+
+  >.block__content {
+    >.block__columnTitle {
+      display: grid;
+
+      >.column__title {
+        font-size: 1rem;
+        font-weight: bold;
+        // padding: adapt(15px, 1440px) adapt(5px, 1440px);
+        padding: adapt(15px, 1440px) 0px;
+      }
+    }
+  }
+}
+
+.block__settings {
+  display: flex;
+}

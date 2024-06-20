@@ -1,0 +1,107 @@
+@import '../../../styles/variables';
+@import '../../../styles/functions';
+
+.block__filters {
+	display: flex;
+	flex-direction: column;
+	width: adapt(300px, 1440px);
+	height: 100%;
+	position: absolute;
+	z-index: 5490;
+	left: 0;
+	background-color: $color_three;
+
+	@media (max-width: 767.98px) {
+		width: 100%;
+		position: relative;
+	}
+
+	> .title {
+		background-color: $color_five;
+		font-weight: 500;
+		padding: adapt(8px, 1440px);
+		height: adapt(52px, 1440px);
+		border-bottom: 1px solid $color_four;
+
+		@media (max-width: 767.98px) {
+			height: adapt(100px, 1440px);
+		}
+	}
+
+	> .wrapper_block__filters {
+		padding-top: adapt(20px, 1440px);
+		height: 100%;
+		width: 100%;
+		overflow-y: auto;
+		overflow-x: hidden;
+
+		&::-webkit-scrollbar {
+			width: adapt(10px, 1440px);
+			background-color: $color_five;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: $color_four;
+		}
+
+		> .block__buttons {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: adapt(20px, 1440px);
+			background-color: $color_five;
+			height: adapt(53px, 1440px);
+			border-top: 1px solid $color_four;
+			border-bottom: 1px solid $color_four;
+
+			@media (max-width: 767.98px) {
+				height: adapt(300px, 1440px);
+				flex-direction: column;
+			}
+
+			> button {
+				width: adapt(105px, 1440px);
+				height: adapt(36px, 1440px);
+				text-transform: uppercase;
+				border-radius: 2px;
+				letter-spacing: 0.5px;
+				font-size: 0.8rem;
+				cursor: pointer;
+
+				@media (max-width: 991.98px) {
+					font-size: 0.7rem;
+				}
+
+				@media (max-width: 767.98px) {
+					width: adapt(355px, 1440px);
+					height: adapt(110px, 1440px);
+					font-size: 0.9rem;
+				}
+			}
+
+			> .button_clear {
+				background-color: transparent;
+
+				&:hover {
+					background-color: $color_two_light;
+				}
+			}
+			> .button {
+				color: $color_three;
+				background-color: $color_two;
+				box-shadow:
+					0 2px 2px 0 rgba(0, 0, 0, 0.14),
+					0 3px 1px -2px rgba(0, 0, 0, 0.12),
+					0 1px 5px 0 rgba(0, 0, 0, 0.2);
+
+				&:hover {
+					background-color: $color_two_light;
+					box-shadow:
+						0 3px 3px 0 rgba(0, 0, 0, 0.14),
+						0 1px 7px 0 rgba(0, 0, 0, 0.12),
+						0 3px 1px -1px rgba(0, 0, 0, 0.2);
+				}
+			}
+		}
+	}
+}

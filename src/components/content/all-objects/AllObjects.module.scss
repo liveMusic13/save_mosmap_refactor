@@ -1,0 +1,117 @@
+@import '../../../styles/variables';
+@import '../../../styles/functions';
+@import '../../../styles/animations';
+
+.block__allObjects {
+	width: adapt(283px, 1440px);
+	border: 1px solid $color_four;
+	border-top: none;
+	position: absolute;
+	z-index: 5490; //HELP: ПОСТАВИЛ МЕНЬШЕ ЧЕМ У SETTINGS MAP, ЧТОБЫ ОНО ПЕРЕКРЫЛО ВЕРСИЮ ИЗ ПК
+	left: adapt(300px, 1440px);
+	background-color: $color_three;
+	height: 100%;
+
+	@media (max-width: 991.98px) {
+		min-width: adapt(300px, 1440px);
+	}
+
+	@media (max-width: 767.98px) {
+		position: static;
+		width: 100%;
+	}
+
+	> .block__title {
+		background-color: $color_five;
+		padding: 0px adapt(8px, 1440px);
+		height: adapt(52px, 1440px);
+		border-bottom: 1px solid $color_four;
+
+		@media (max-width: 767.98px) {
+			margin-bottom: 13%;
+		}
+
+		> .allObjects {
+			display: flex;
+			justify-content: space-between;
+			padding: 0px adapt(4px, 1440px);
+			border-bottom: 1px solid $color_four;
+
+			@media (max-width: 767.98px) {
+				background-color: #f7f7f7;
+				padding: adapt(20px, 1440px);
+				padding-right: adapt(50px, 1440px);
+			}
+
+			> p {
+				font-weight: 500;
+				font-size: 0.8rem;
+				height: adapt(25px, 1440px);
+				padding-top: adapt(2px, 1440px);
+
+				@media (max-width: 767.98px) {
+					height: adapt(70px, 1440px);
+				}
+			}
+		}
+		> .allObjects__inMap {
+			display: flex;
+			justify-content: space-between;
+			padding: 0px adapt(4px, 1440px);
+			border-top: 1px solid $color_four;
+
+			@media (max-width: 767.98px) {
+				background-color: #f7f7f7;
+				border-bottom: 1px solid $color_four;
+				padding: adapt(20px, 1440px);
+				padding-right: adapt(50px, 1440px);
+			}
+
+			> p {
+				font-weight: 500;
+				font-size: 0.8rem;
+				height: adapt(25px, 1440px);
+				padding-top: adapt(2px, 1440px);
+
+				@media (max-width: 767.98px) {
+					height: adapt(70px, 1440px);
+				}
+			}
+		}
+	}
+
+	> .block__objects {
+		height: 100%;
+		overflow: auto;
+		padding-bottom: adapt(70px, 1440px);
+
+		&::-webkit-scrollbar {
+			width: adapt(10px, 1440px);
+			background-color: $color_five;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: $color_four;
+		}
+
+		> .object {
+			width: 100%;
+			background-color: transparent;
+			padding: adapt(10px, 1440px) adapt(20px, 1440px);
+			border-bottom: 1px solid $color_four;
+			color: $color_two;
+			font-size: 1rem;
+			display: flex;
+			justify-content: space-between;
+
+			&:hover {
+				background-color: $color_four;
+				cursor: pointer;
+			}
+
+			>p{
+				text-align: start;
+			}
+		}
+	}
+}

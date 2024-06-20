@@ -1,0 +1,453 @@
+@import './variables';
+@import './functions';
+@import './animations';
+
+*,
+*::before,
+*::after {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul,
+ol,
+li {
+	list-style: none;
+}
+
+img {
+	vertical-align: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: inherit;
+	font-size: inherit;
+}
+
+html,
+body {
+	height: 100%;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+	font-size: $fz_standart;
+	line-height: 1.5;
+	color: $color_one;
+	overflow: hidden;
+
+	@media (max-width: 1920px) {
+		font-size: 18px;
+	}
+
+	@media (max-width: 1720px) {
+		font-size: 17px;
+	}
+
+	@media (max-width: 1520px) {
+		font-size: 16px;
+	}
+
+	@media (max-width: 1320px) {
+		font-size: 15px;
+	}
+
+	@media (max-width: 1120px) {
+		font-size: 14px;
+	}
+
+	@media (max-width: 991.98px) {
+		font-size: 13px;
+	}
+
+	@media (max-width: 767.98px) {
+		font-size: 14px;
+	}
+
+	@media (max-width: 479.98px) {
+		font-size: 10px;
+	}
+}
+
+#__next {
+	height: 100vh;
+}
+
+.background__opacity{
+  position: absolute;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba($color: #000000, $alpha: .4);
+}
+
+.wrapper_auth {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	>.block__auth {
+		width: adapt(500px,1440px);
+		height: adapt(310px, 1440px);
+		box-shadow: 0px adapt(5px, 1440px) adapt(10px, 1440px) rgba($color: $color_eight, $alpha: .5);
+		border-radius: adapt(5px, 1440px);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		font-size: 1rem;
+
+		@media (max-width: 991.98px) {
+			width: 80%;
+			height: 80%;
+		}
+
+		>.title__auth {
+			height: adapt(48.8px, 1440px);
+			width: 100%;
+			background-color: rgba($color: $color_seven, $alpha: .25);
+			border-top-left-radius: adapt(5px, 1440px);
+			border-top-right-radius: adapt(5px, 1440px);
+			font-weight: 600;
+			padding: adapt(12px, 1440px) adapt(12px, 1440px) 0px;
+			border-bottom: 1px solid $color_seven;
+
+			@media (max-width: 991.98px) {
+				height: 15%;
+				font-size: 3rem;
+			}
+		}
+
+		// >.form {
+		// 	>.block__input {
+		// 		height: adapt(66.8px, 1440px);
+		// 		margin-bottom: adapt(8px, 1440px);
+		// 		display: flex;
+		// 		flex-direction: column;
+		// 		position: relative;
+
+		// 		&:focus-within {
+		// 			>.input__label_login {
+		// 				animation: auth-label 1s ease 1 forwards;
+		// 			}
+
+		// 			>.input__label_password {
+		// 				animation: auth-label 1s ease 1 forwards;
+		// 			}
+		// 		}
+	
+		// 		>.input__label_login {
+		// 			color: $color_eight;
+		// 			margin-left: adapt(12px, 1440px);
+		// 			position: absolute;
+		// 			animation: auth-label-not-focus 1s ease 1 forwards;
+		// 		}
+				
+		// 		>.input__login{
+		// 			margin: adapt(16px, 1440px) adapt(12px, 1440px);
+		// 			border-bottom: 1px solid $color_eight;
+		// 			height: 100%;
+		// 			outline: none;
+
+		// 			&:focus {
+		// 				box-shadow: 0px 2px 2px $color_two;
+		// 			}
+		// 		}
+		
+		// 		>.input__label_password{
+		// 			color: $color_eight;
+		// 			margin-left: adapt(12px, 1440px);
+		// 			position: absolute;
+		// 			animation: auth-label-not-focus 1s ease 1 forwards;
+		// 		}
+				
+		// 		>.input__password{
+		// 			margin: adapt(16px, 1440px) adapt(12px, 1440px);
+		// 			border-bottom: 1px solid $color_eight;
+		// 			height: 100%;
+		// 			outline: none;
+
+		// 			&:focus {
+		// 				box-shadow: 0px 2px 2px $color_two;
+		// 			}
+		// 		}
+		// 	}
+
+		// 	>.button__auth{
+		// 		width: adapt(476px, 1440px);
+		// 		height: adapt(36px, 1440px);
+		// 		margin: 0px adapt(12px, 1440px) adapt(8px, 1440px);
+		// 		// background-color: $color_two;
+		// 		border-radius: 2px;
+		// 		// box-shadow: 0px adapt(2px, 1440px) adapt(2px, 1440px) rgba($color: $color_eight, $alpha: .5);
+		// 		color: $color_three;
+		// 		animation: button-auth-reverse 0.8s ease 1 forwards;
+	
+		// 		&:hover {
+		// 			cursor: pointer;
+		// 			// background-color: $color_two_light;
+		// 			// height: adapt(40px, 1440px);
+		// 			animation: button-auth 0.8s ease 1 forwards;
+		// 		}
+		// 	}
+		// }
+
+		>.form {
+			@media (max-width: 991.98px) {
+				height: 85%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+				>.block__input {
+					height: adapt(66.8px, 1440px);
+					margin-bottom: adapt(18px, 1440px);
+					display: flex;
+					flex-direction: column;
+					position: relative;
+
+					@media (max-width: 991.98px) {
+						height: 25%;
+					}
+	
+					&:focus-within,
+					&.has-content {
+						.input__label_login,
+						.input__label_password {
+							animation: auth-label 1s ease 1 forwards;
+
+							@media (max-width: 991.98px) {
+								animation: auth-label_adaptive 1s ease 1 forwards;
+							}
+						}
+					}
+		
+					>.input__label_login {
+						color: $color_eight;
+						margin-left: adapt(12px, 1440px);
+						position: absolute;
+						animation: auth-label-not-focus 1s ease 1 forwards;
+
+						@media (max-width: 991.98px) {
+							animation: auth-label-not-focus_adaptive 1s ease 1 forwards;
+						}
+					}
+					
+					>.input__login{
+						margin: adapt(16px, 1440px) adapt(12px, 1440px);
+						border-bottom: 1px solid $color_eight;
+						height: 100%;
+						outline: none;
+						
+						&:focus {
+							box-shadow: 0px 2px 2px $color_two;
+						}
+
+						@media (max-width: 991.98px) {
+							font-size: 4rem;
+						}
+					}
+			
+					>.input__label_password{
+						color: $color_eight;
+						margin-left: adapt(12px, 1440px);
+						position: absolute;
+						animation: auth-label-not-focus 1s ease 1 forwards;
+
+						@media (max-width: 991.98px) {
+							animation: auth-label-not-focus_adaptive 1s ease 1 forwards;
+						}
+					}
+					
+					>.input__password{
+						margin: adapt(16px, 1440px) adapt(12px, 1440px);
+						border-bottom: 1px solid $color_eight;
+						height: 100%;
+						outline: none;
+	
+						&:focus {
+							box-shadow: 0px 2px 2px $color_two;
+						}
+
+						@media (max-width: 991.98px) {
+							font-size: 4rem;
+						}
+					}
+				}
+	
+				>.button__auth{
+					width: adapt(476px, 1440px);
+					height: adapt(36px, 1440px);
+					margin: 0px adapt(12px, 1440px) adapt(8px, 1440px);
+					// background-color: $color_two;
+					border-radius: 2px;
+					// box-shadow: 0px adapt(2px, 1440px) adapt(2px, 1440px) rgba($color: $color_eight, $alpha: .5);
+					color: $color_three;
+					animation: button-auth-reverse 0.8s ease 1 forwards;
+
+					@media (max-width: 991.98px) {
+						width: 98%;
+						height: 20%;
+						font-size: 2rem;
+						margin: adapt(45px, 1440px) adapt(12px, 1440px) adapt(8px, 1440px);
+					}
+		
+					&:hover {
+						cursor: pointer;
+						// background-color: $color_two_light;
+						// height: adapt(40px, 1440px);
+						animation: button-auth 0.8s ease 1 forwards;
+					}
+
+					&:disabled {
+						cursor: default;
+						background-color: rgba($color: $color_two, $alpha: .5) !important;
+					}
+				}
+			}
+		
+
+		>.block__all{
+			display: flex;
+			justify-content: space-between;
+			padding: adapt(8px, 1440px) adapt(12px, 1440px);
+
+			>button {
+				color: $color_ten;
+				background-color: transparent;
+
+				&:hover {
+					cursor: pointer;
+				}
+			}
+
+			>.button__register{
+				@media (max-width: 991.98px) {
+					font-size: 1.4rem;
+				}
+			}
+
+			>.button__restore-password{
+				@media (max-width: 991.98px) {
+					font-size: 1.4rem;
+				}
+			}
+		}
+	}
+}
+
+//убираем логотип с украинским флагом
+.leaflet-control-attribution.leaflet-control {
+	display: none;
+}
+.my-custom-icon {
+	border-radius: 50%;
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+}
+
+.block-map.leaflet-container {
+	width: 400px;
+}
+
+.hidden-layer {
+	display: none;
+	opacity: 0;
+}
+
+////////HELP: ЧТОБЫ НЕ ВЫЛЕТАЛО ОШИБКИ СВЯЗАННОЙ С ИМПОРТОМ СТИЛЕЙ В БИБЛИОТЕКИ С КЛАСТЕРИЗАЦИЕЙ. ИСПРАВЛЯЕТСЯ ДОБАВЛЕНИЕМ СТИЛЕЙ ИЗ БИБЛИОТЕКИ СЮДА, А ТАМ В ФАЙЛЕ ОЫ КОММЕНТИРОВАНИЕМ ИЛИ УДАЛЕНИЕМ ИМПОРТОВ ///////
+
+.leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {
+	-webkit-transition: -webkit-transform 0.3s ease-out, opacity 0.3s ease-in;
+	-moz-transition: -moz-transform 0.3s ease-out, opacity 0.3s ease-in;
+	-o-transition: -o-transform 0.3s ease-out, opacity 0.3s ease-in;
+	transition: transform 0.3s ease-out, opacity 0.3s ease-in;
+}
+
+.leaflet-cluster-spider-leg {
+	/* stroke-dashoffset (duration and function) should match with leaflet-marker-icon transform in order to track it exactly */
+	-webkit-transition: -webkit-stroke-dashoffset 0.3s ease-out, -webkit-stroke-opacity 0.3s ease-in;
+	-moz-transition: -moz-stroke-dashoffset 0.3s ease-out, -moz-stroke-opacity 0.3s ease-in;
+	-o-transition: -o-stroke-dashoffset 0.3s ease-out, -o-stroke-opacity 0.3s ease-in;
+	transition: stroke-dashoffset 0.3s ease-out, stroke-opacity 0.3s ease-in;
+}
+
+.marker-cluster-small {
+	background-color: rgba(181, 226, 140, 0.6);
+	}
+.marker-cluster-small div {
+	background-color: rgba(110, 204, 57, 0.6);
+	}
+
+.marker-cluster-medium {
+	background-color: rgba(241, 211, 87, 0.6);
+	}
+.marker-cluster-medium div {
+	background-color: rgba(240, 194, 12, 0.6);
+	}
+
+.marker-cluster-large {
+	background-color: rgba(253, 156, 115, 0.6);
+	}
+.marker-cluster-large div {
+	background-color: rgba(241, 128, 23, 0.6);
+	}
+
+	/* IE 6-8 fallback colors */
+.leaflet-oldie .marker-cluster-small {
+	background-color: rgb(181, 226, 140);
+	}
+.leaflet-oldie .marker-cluster-small div {
+	background-color: rgb(110, 204, 57);
+	}
+
+.leaflet-oldie .marker-cluster-medium {
+	background-color: rgb(241, 211, 87);
+	}
+.leaflet-oldie .marker-cluster-medium div {
+	background-color: rgb(240, 194, 12);
+	}
+
+.leaflet-oldie .marker-cluster-large {
+	background-color: rgb(253, 156, 115);
+	}
+.leaflet-oldie .marker-cluster-large div {
+	background-color: rgb(241, 128, 23);
+}
+
+.marker-cluster {
+	background-clip: padding-box;
+	border-radius: 20px;
+	}
+.marker-cluster div {
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-top: 5px;
+
+	text-align: center;
+	border-radius: 15px;
+	font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+	}
+.marker-cluster span {
+	line-height: 30px;
+	}
+
+	//HELP: УБИРАЕМ КНОПКУ ДЛЯ РЕДАКТИРОВАНИЯ ВЫДЕЛЕННОЙ ОБЛАСТИ
+	.leaflet-bar {
+		>.leaflet-draw-edit-edit {
+			display: none;
+		}
+	}
