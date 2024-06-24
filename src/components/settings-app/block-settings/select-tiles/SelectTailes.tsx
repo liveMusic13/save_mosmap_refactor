@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from './SelectTailes.module.scss'
 
 const SelectTailes: FC<{formState:any, setFormState:any}> = ({formState, setFormState}) => {
-  const { tiles_list, tiles_id} = useSelector((state:RootState) => state.dataMapSettings.data)
+  const data = useSelector((state:RootState) => state.dataMapSettings)
   const [isViewOptions, setIsViewOptions] = useState<boolean>(false);
   const [isMouse, setIsMouse] = useState<boolean>(false)
   const dispatch = useDispatch()
@@ -37,7 +37,7 @@ const SelectTailes: FC<{formState:any, setFormState:any}> = ({formState, setForm
     setIsMouse(false)
   }
 
-  const targetOption = tiles_list.filter((elem:any) => elem.id === tiles_id)
+  const targetOption = (data.tiles_list && data) ? data.tiles_list.filter((elem:any) => elem.id === data.tiles_id) : [{name: ''}]
   console.log(targetOption)
   return (
     <div className={styles.wrapper_selectData} onClick={()=> setIsViewOptions(!isViewOptions)}>
@@ -50,7 +50,7 @@ const SelectTailes: FC<{formState:any, setFormState:any}> = ({formState, setForm
         isViewOptions && (
           <div className={styles.block__options} onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
             {
-              tiles_list.map((option:{name: string, id: string}) => (
+              (data.tiles_list && data) && data.tiles_list.map((option:{name: string, id: string}) => (
                 <p 
                   key={option.name} 
                   className={formState[option.name] === option.name ? `${styles.option} ${styles.active}` : hoveredOption === option.name ? `${styles.option} ${styles.target}` : styles.option} 
