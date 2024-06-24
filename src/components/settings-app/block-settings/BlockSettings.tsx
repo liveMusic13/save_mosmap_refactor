@@ -37,7 +37,7 @@ const BlockSettings: FC<IBlockSettings> = ({title}) => {
     // const lastKey = keys[keys.length - 1];
     // const sizeMarker = points.icon_sizes[lastKey][0];
     // setFormState((prevState:any) => ({...prevState, ['Вид карты']: data.tiles_list[0].name }));
-
+      console.log(data)
       setFormState((prevState:any) => ({...prevState, ['Название карты']: data.title }));
       setFormState((prevState:any) => ({...prevState, ['Описание карты']: data.descr }));
       setFormState((prevState:any) => ({...prevState, ['Размер значков']: data.iconsize }));
@@ -49,7 +49,7 @@ const BlockSettings: FC<IBlockSettings> = ({title}) => {
   
       setFormStateCheck((prevState:any) => ({...prevState, ['Кластеризация']: points.clastering === 0 ? false : true }));
   
-  }, [])
+  }, [data])
 
   const debouncedDispatch = useCallback(debounce((action:any) => {
     dispatch(action);

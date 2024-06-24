@@ -1,6 +1,6 @@
 import { actions as dataMapSettingsAction } from '@/store/data-map-settings/dataMapSettings.slice'
 import { RootState } from '@/store/store'
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './SelectTailes.module.scss'
 
@@ -37,8 +37,15 @@ const SelectTailes: FC<{formState:any, setFormState:any}> = ({formState, setForm
     setIsMouse(false)
   }
 
-  const targetOption = (data.tiles_list && data) ? data.tiles_list.filter((elem:any) => elem.id === data.tiles_id) : [{name: ''}]
-  console.log(targetOption)
+  // let targetOption:any
+
+  useEffect(()=> {
+    // targetOption = (data.data.tiles_list && data.data) ? data.data.tiles_list.filter((elem:any) => elem.id === data.data.tiles_id) : [{name: ''}]   
+    console.log(targetOption)
+    console.log(data.data)
+  }, [data.data])
+  const targetOption = (data.data.tiles_list && data.data) ? data.data.tiles_list.filter((elem:any) => elem.id === data.data.tiles_id) : [{name: ''}]
+
   return (
     <div className={styles.wrapper_selectData} onClick={()=> setIsViewOptions(!isViewOptions)}>
       <div className={styles.block__selectData}>
@@ -50,7 +57,7 @@ const SelectTailes: FC<{formState:any, setFormState:any}> = ({formState, setForm
         isViewOptions && (
           <div className={styles.block__options} onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
             {
-              (data.tiles_list && data) && data.tiles_list.map((option:{name: string, id: string}) => (
+              (data.data.tiles_list && data.data) && data.data.tiles_list.map((option:{name: string, id: string}) => (
                 <p 
                   key={option.name} 
                   className={formState[option.name] === option.name ? `${styles.option} ${styles.active}` : hoveredOption === option.name ? `${styles.option} ${styles.target}` : styles.option} 
