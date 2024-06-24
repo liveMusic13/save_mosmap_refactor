@@ -1,5 +1,7 @@
 import { $axiosAuth } from "@/api";
+import { actions as dataMapSettingsAction } from "@/store/data-map-settings/dataMapSettings.slice";
 import { actions as dataSettingsAction } from "@/store/data-settings/dataSettings.slice";
+import { actions as viewSettingsAction } from "@/store/view-settings/viewSettings.slice";
 import { IFields, ILists, IMaps } from "@/types/slice.types";
 
 export const settingsService = {
@@ -67,36 +69,23 @@ export const settingsService = {
       console.log(error);
     }
   },
-  getSettings: async(map:string, dispatch:any) => {
+  getSettings: async(dispatch:any) => {
     try {
-      // const response = await $axiosAuth.get(`/api/settings.php?map=${map}`)
-      // const response = await $axiosAuth.get(`/settings.php?map=${map}`)
-      const data = {
-        title:'Тестовая карта',
-        descr: 'Над этим набором данных можно издеваться как угодно, он специально для этого предназначен.',
-        iconsize: '28',
-        autosize: '0',
-        showhouses: '0',
-        showanalytic: '0',
-        radius: '0',
-        showcuts: 'on',
-        tiles_id: '0',
-        tiles_list: [
-          {
-            name: 'MoscowMap',
-            id: '0'
-          },
-          {
-            name: "Yandex map",
-            id: '1'
-          },
-        ],
-        map_id: map
-      }
-      const response1 = await $axiosAuth.post(`/api/save_settings.php`, data)
-      // const response1 = await $axiosAuth.get(`/api/save_settings.php`)
-      console.log(response1)
+      const response = await $axiosAuth.get(`/api/save_settings.php`)
+      console.log(response)
       // dispatch(dataSettingsAction.addGetIcons(response.data))
+      dispatch(dataMapSettingsAction.addDataMapSettings(response.data))
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  saveSettings: async(map:string, dispatch:any, data:any) => {
+    try {
+      const updatedData = { ...data, map_id: map };
+      const response = await $axiosAuth.post(`/api/save_settings.php`, updatedData);
+      console.log(response)
+      dispatch(dataMapSettingsAction.addDataMapSettings(response.data))
+      dispatch(viewSettingsAction.defaultSettingsApp(''));
     } catch (error) {
       console.log(error);
     }

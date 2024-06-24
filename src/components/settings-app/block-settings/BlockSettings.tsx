@@ -1,60 +1,109 @@
+import { useDebounce } from '@/hooks/useDebounce';
+import { useSaveSettingsMap } from '@/hooks/useSaveSettingsMap';
 import { settingsService } from '@/services/settings.service';
+import { actions as dataMapSettingsAction } from '@/store/data-map-settings/dataMapSettings.slice';
 import { RootState } from '@/store/store';
 import { IBlockSettings } from '@/types/props.types';
 import { useRouter } from 'next/router';
-import { FC, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { FC, useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './BlockSettings.module.scss';
 import CheckboxSettings from './checkbox-settings/CheckboxSettings';
 import InputSettings from './input-settings/InputSettings';
 import { arrayCheckboxName, arrayInputsName } from './inputs.data';
+import SelectTailes from './select-tiles/SelectTailes';
 
 const BlockSettings: FC<IBlockSettings> = ({title}) => {
+  const dispatch = useDispatch()
+  const { debounce } = useDebounce()
+  const saveData = useSaveSettingsMap()
   const {query} = useRouter()
   const [formState, setFormState] = useState<any>({});
   const [formStateCheck, setFormStateCheck] = useState<any>({});
   const {points} = useSelector((state:RootState) => state.dataObjectsInMap)
+  const {data} = useSelector((state:RootState) => state.dataMapSettings)
 
   useEffect(()=> {
-    if (typeof query.map === 'string') settingsService.getSettings(query.map, '')
+    if (typeof query.map === 'string') settingsService.getSettings(dispatch)
   }, [])
 
-  useEffect(()=> {
-    console.log(formState)
-  }, [formState])
+  // useEffect(()=> {
+  //   console.log(formState)
+  //   console.log(formStateCheck)
+  // }, [formState,formStateCheck])
 
   useEffect(()=> {
-    const keys = Object.keys(points.icon_sizes);
-    const lastKey = keys[keys.length - 1];
-    const sizeMarker = points.icon_sizes[lastKey][0];
+    // const keys = Object.keys(points.icon_sizes);
+    // const lastKey = keys[keys.length - 1];
+    // const sizeMarker = points.icon_sizes[lastKey][0];
+    // setFormState((prevState:any) => ({...prevState, ['Вид карты']: data.tiles_list[0].name }));
 
-    setFormState((prevState:any) => ({...prevState, ['Название карты']: points.title }));
-    setFormState((prevState:any) => ({...prevState, ['Описание карты']: points.description }));
-    setFormState((prevState:any) => ({...prevState, ['Размер значков']: sizeMarker }));
-    setFormState((prevState:any) => ({...prevState, ['Радиус зоны в метрах для анализа местности:']: 500 }));
-
-    setFormStateCheck((prevState:any) => ({...prevState, ['Кластеризация']: points.clastering === 0 ? false : true }));
+      setFormState((prevState:any) => ({...prevState, ['Название карты']: data.title }));
+      setFormState((prevState:any) => ({...prevState, ['Описание карты']: data.descr }));
+      setFormState((prevState:any) => ({...prevState, ['Размер значков']: data.iconsize }));
+      setFormState((prevState:any) => ({...prevState, ['Автоматическое масштабирование значков']: data.autosize === 0 ? false : true }));
+      setFormState((prevState:any) => ({...prevState, ['Заменять значки на контуры домов']: data.showhouses === 0 ? false : true }));
+      setFormState((prevState:any) => ({...prevState, ['Добавлять в карточку объекта анализ местности']: data.showanalytic === 0 ? false : true }));
+      setFormState((prevState:any) => ({...prevState, ['Радиус зоны в метрах для анализа местности:']: data.radius })); 
+      setFormState((prevState:any) => ({...prevState, ['tiles_id']: data.tiles_id })); 
+  
+      setFormStateCheck((prevState:any) => ({...prevState, ['Кластеризация']: points.clastering === 0 ? false : true }));
+  
   }, [])
+
+  const debouncedDispatch = useCallback(debounce((action:any) => {
+    dispatch(action);
+  }, 500), [dispatch]);
 
   const handleChange = (selectedOption:any, name:string) => {
     setFormState((prevState:any) => ({...prevState, [name]: selectedOption}));
-    // if (type === 'input') {
-    //   debouncedDispatch(name, selectedOption);
-    // } else {
-    //   debouncedDispatch(name, selectedOption.label, selectedOption.value);
-    // }
+
+    const key = name === 'Название карты' ? 'title' : name === 'Описание карты' ? 'descr' : name === 'Размер значков' ? 'iconsize' : 'radius';
+
+    const action = dataMapSettingsAction.editDataMapSettings({[key]: selectedOption})
+    debouncedDispatch(action);
   };
 
   const handleChangeCheckbox = (name:string) => {
     setFormStateCheck((prevState:any) => ({...prevState, [name]: !prevState[name]}));
   }
 
+  useEffect(() => {
+    const add: any = {};
+  
+    for (const checkbox in formStateCheck) {
+      if (formStateCheck.hasOwnProperty(checkbox)) {
+        switch (checkbox) {
+          case 'Автоматическое масштабирование значков':
+            add.autosize = formStateCheck[checkbox] ? '1' : '0';
+            break;
+          case 'Кластеризация':
+            add.clastering = formStateCheck[checkbox] ? '1' : '0';
+            break;
+          case 'Заменять значки на контуры домов':
+            add.showhouses = formStateCheck[checkbox] ? '1' : '0';
+            break;
+          case 'Добавлять в карточку объекта анализ местности':
+            add.showanalytic = formStateCheck[checkbox] ? '1' : '0';
+            break;
+          default:
+            break;
+        }
+      }
+    }
+  
+    const action = dataMapSettingsAction.editDataMapSettings(add);
+    debouncedDispatch(action);
+  }, [formStateCheck]);
+
+  
+  
   return (
     <div className={styles.block__settings}>
       <div className={styles.block__title}>
         <h2 className={styles.title}>{title}</h2>
       </div>
-      <form className={styles.form}>
+      <div className={styles.form}>
         {
           arrayInputsName.map(field => <InputSettings key={field} formState={formState} field={field} handleChange={handleChange} />)
         }
@@ -62,9 +111,10 @@ const BlockSettings: FC<IBlockSettings> = ({title}) => {
           arrayCheckboxName.map(checkbox => <CheckboxSettings key={checkbox} formStateCheck={formStateCheck} checkbox={checkbox} handleChangeCheckbox={handleChangeCheckbox} />)
         }
         <InputSettings formState={formState} field={'Радиус зоны в метрах для анализа местности:'} handleChange={handleChange} />
-        <CheckboxSettings formStateCheck={formStateCheck} checkbox={'Радиус зоны в метрах для анализа местности:'} handleChangeCheckbox={handleChangeCheckbox} />
-        <button className={styles.button__saveForm}>Сохранить</button>
-      </form>
+        {/* <CheckboxSettings formStateCheck={formStateCheck} checkbox={'Показывать пешеходный траффик'} handleChangeCheckbox={handleChangeCheckbox} /> */}
+        <SelectTailes formState={formState} setFormState={setFormState}/>
+        <button type='button' className={styles.button__saveForm} onClick={saveData}>Сохранить</button>
+      </div>
     </div>
   )
 }
