@@ -1,3 +1,4 @@
+import { actions as dataMapSettingsAction } from '@/store/data-map-settings/dataMapSettings.slice'
 import { actions as popupEditAction } from '@/store/popup-edit/popupEdit.slice'
 import { actions as viewSettingsAction } from '@/store/view-settings/viewSettings.slice'
 import { IButtonOptionSettings } from '@/types/props.types'
@@ -18,7 +19,9 @@ const ButtonOptionSettings: FC<PropsWithChildren<IButtonOptionSettings>> = ({chi
       dispatch(popupEditAction.addId(data?.id))
       dispatch(viewSettingsAction.activeIsViewDeletePopup(''))
     } else {
-      console.log(button)
+      console.log(button, data)
+      dispatch(dataMapSettingsAction.addDataIdGroups(data?.id))
+      dispatch(viewSettingsAction.activeIsPopupSettingGroups(''))
     }
   }
 

@@ -1,0 +1,28 @@
+@import '../../../../../../../styles/variables';
+@import '../../../../../../../styles/functions';
+
+.block__icons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.img__close {
+  width: adapt(32px, 1440px);
+  height: adapt(32px, 1440px);
+}
+
+.button__colors {
+  margin: adapt(5px, 1440px) 0px;
+  background-color: transparent;
+  font-size: 1rem;
+  width: adapt(127px, 1440px);
+  height: adapt(40px, 1440px);
+  padding: 0px adapt(16px, 1440px);
+  background-color: transparent;
+      
+  &:hover {
+    cursor: pointer;
+    background-color: $color_two_light;
+    color: $color_three;
+  }
+}

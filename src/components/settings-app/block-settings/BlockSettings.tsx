@@ -20,7 +20,6 @@ const BlockSettings: FC<IBlockSettings> = ({title}) => {
   const {query} = useRouter()
   const [formState, setFormState] = useState<any>({});
   const [formStateCheck, setFormStateCheck] = useState<any>({});
-  const {points} = useSelector((state:RootState) => state.dataObjectsInMap)
   const {data} = useSelector((state:RootState) => state.dataMapSettings)
 
   useEffect(()=> {
@@ -33,23 +32,17 @@ const BlockSettings: FC<IBlockSettings> = ({title}) => {
   // }, [formState,formStateCheck])
 
   useEffect(()=> {
-    // const keys = Object.keys(points.icon_sizes);
-    // const lastKey = keys[keys.length - 1];
-    // const sizeMarker = points.icon_sizes[lastKey][0];
-    // setFormState((prevState:any) => ({...prevState, ['Вид карты']: data.tiles_list[0].name }));
-      console.log(data)
       setFormState((prevState:any) => ({...prevState, ['Название карты']: data.title }));
       setFormState((prevState:any) => ({...prevState, ['Описание карты']: data.descr }));
       setFormState((prevState:any) => ({...prevState, ['Размер значков']: data.iconsize }));
-      setFormState((prevState:any) => ({...prevState, ['Автоматическое масштабирование значков']: data.autosize === 0 ? false : true }));
-      setFormState((prevState:any) => ({...prevState, ['Заменять значки на контуры домов']: data.showhouses === 0 ? false : true }));
-      setFormState((prevState:any) => ({...prevState, ['Добавлять в карточку объекта анализ местности']: data.showanalytic === 0 ? false : true }));
       setFormState((prevState:any) => ({...prevState, ['Радиус зоны в метрах для анализа местности:']: data.radius })); 
       setFormState((prevState:any) => ({...prevState, ['tiles_id']: data.tiles_id })); 
-  
-      setFormStateCheck((prevState:any) => ({...prevState, ['Кластеризация']: points.clastering === 0 ? false : true }));
-  
-  }, [data])
+
+      setFormStateCheck((prevState:any) => ({...prevState, ['Кластеризация']: data.clastering === '0' ? false : true }));
+      setFormStateCheck((prevState:any) => ({...prevState, ['Автоматическое масштабирование значков']: data.autosize === '0' ? false : true }));
+      setFormStateCheck((prevState:any) => ({...prevState, ['Заменять значки на контуры домов']: data.showhouses === '0' ? false : true }));
+      setFormStateCheck((prevState:any) => ({...prevState, ['Добавлять в карточку объекта анализ местности']: data.showanalytic === '0' ? false : true }));
+}, [data])
 
   const debouncedDispatch = useCallback(debounce((action:any) => {
     dispatch(action);
@@ -95,8 +88,6 @@ const BlockSettings: FC<IBlockSettings> = ({title}) => {
     const action = dataMapSettingsAction.editDataMapSettings(add);
     debouncedDispatch(action);
   }, [formStateCheck]);
-
-  
   
   return (
     <div className={styles.block__settings}>

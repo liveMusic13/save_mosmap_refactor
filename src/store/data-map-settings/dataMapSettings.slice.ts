@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 
 const initialState:any = {
-  data: {}
+  data: {},
+  dataIdGroups:''
 };
 
 export const dataMapSettings = createSlice({
@@ -21,7 +22,9 @@ export const dataMapSettings = createSlice({
         state.data[key] = payload[key];
       });
     },
-
+    addDataIdGroups: (state, {payload}) => {
+      state.dataIdGroups = payload;
+    }
   }
 })
 

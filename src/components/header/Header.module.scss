@@ -8,6 +8,8 @@
 	justify-content: space-between;
 	padding: adapt(4px, 1440px);
 	border-bottom: 1px solid $color_seven;
+	position: relative;
+	z-index: 201;
 
 	@media (max-width: 991.98px) {
 		height: adapt(71px, 1440px);
@@ -93,3 +95,57 @@
 	}
 }
 
+
+.block__burger {
+	position: relative;
+	width: adapt(90px, 1440px);
+	height: adapt(90px, 1440px);
+	padding-left: adapt(15px, 1440px);
+
+	>button {
+		margin-top: adapt(40px, 1440px);
+		width: adapt(90px, 1440px);
+		height: adapt(8px, 1440px);
+		background-color: $color_two;
+		padding-left: adapt(15px, 1440px);
+		
+		&::after {
+			content: '';
+			width: adapt(90px, 1440px);
+			height: adapt(8px, 1440px);
+			background-color: $color_two;
+			position: absolute;
+			bottom: 20%;
+			left: adapt(15px, 1440px);
+		}
+
+		&::before {
+			content: '';
+			width: adapt(90px, 1440px);
+			height: adapt(8px, 1440px);
+			background-color: $color_two;
+			position: absolute;
+			top: 18%;
+			left: adapt(15px, 1440px);
+		}
+	}
+}
+
+.close {
+	>button {
+		transform: rotate(-45deg);
+		margin-left: adapt(10px, 1440px);
+
+		&::after {
+			transform: rotate(90deg);
+			bottom: 0;
+			top: 10%;
+			left: -1%;
+		}
+
+		&::before {
+			display: none;
+			opacity: 0;
+		}
+	}
+}

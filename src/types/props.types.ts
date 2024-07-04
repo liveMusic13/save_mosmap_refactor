@@ -102,3 +102,18 @@ export interface ISelectData {
 	valueSelect:string;
 	setValueSelect: Dispatch<SetStateAction<string>>;
 }
+
+export interface IOptionBlock {
+	option: {id: number, name: string, icon_name?: string, color?: string};
+	index: number;
+	listItems: any;
+	handleChange: any;
+	deleteOption: any;
+	setListItems: any;
+}
+
+export interface IChoiceIcon {
+	option: {id: number, name: string, icon_name?: string, color?: string};
+	setListItems: any;
+	setIsViewIcon: Dispatch<SetStateAction<boolean>>;
+}

@@ -37,12 +37,8 @@ const SelectTailes: FC<{formState:any, setFormState:any}> = ({formState, setForm
     setIsMouse(false)
   }
 
-  // let targetOption:any
-
   useEffect(()=> {
-    // targetOption = (data.data.tiles_list && data.data) ? data.data.tiles_list.filter((elem:any) => elem.id === data.data.tiles_id) : [{name: ''}]   
-    console.log(targetOption)
-    console.log(data.data)
+    
   }, [data.data])
   const targetOption = (data.data.tiles_list && data.data) ? data.data.tiles_list.filter((elem:any) => elem.id === data.data.tiles_id) : [{name: ''}]
 

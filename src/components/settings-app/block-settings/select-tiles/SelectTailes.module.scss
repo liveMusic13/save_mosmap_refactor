@@ -8,6 +8,15 @@
   &:hover {
     cursor: pointer;
   }
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    padding: 0px adapt(22px, 1440px) adapt(22px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    padding: 0px adapt(32px, 1440px) adapt(32px, 1440px);
+  }
 }
 
 .block__selectData {
@@ -18,14 +27,41 @@
   width: adapt(202px, 1440px);
   height: adapt(50px, 1440px);
 
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    width: adapt(222px, 1440px);
+    height: adapt(60px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    width: adapt(352px, 1440px);
+    height: adapt(90px, 1440px);
+  }
+
   >p {
     font-size: 1rem;
     color: $color_one;
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      font-size: 1.25rem;
+    }
   }
 
   > img {
     width: adapt(24px, 1440px);
     height: adapt(24px, 1440px);
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      width: adapt(35px, 1440px);
+      height: adapt(35px, 1440px);
+    }
+
+    @media (max-width: 767.98px) {
+      width: adapt(45px, 1440px);
+      height: adapt(45px, 1440px);
+    }
   }
 }
 
@@ -44,6 +80,14 @@
     padding: adapt(14px, 1440px) adapt(16px, 1440px);
     min-height: adapt(50px, 1440px);
     width: adapt(216px, 1440px);
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      width: adapt(245px, 1440px);
+      min-height: adapt(60px, 1440px);
+      padding: adapt(20px, 1440px) adapt(26px, 1440px);
+      font-size: 1.25rem;
+    }
   }
 
   >.active {

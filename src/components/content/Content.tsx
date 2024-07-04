@@ -8,6 +8,7 @@ import { actions as viewSettingsAction } from '@/store/view-settings/viewSetting
 import useWindowDimensions from '@/hooks/useWindowDimensions';
 
 import { IMarker } from '@/types/slice.types';
+import BurgerMenu from '../ui/burger-menu/BurgerMenu';
 import ConfirmPopup from '../ui/confirm-popup/ConfirmPopup';
 import styles from './Content.module.scss';
 import { AllObjects } from './all-objects/AllObjects';
@@ -56,6 +57,7 @@ export function Content({data}:any) {
 
 	return (
 		<div className={styles.wrapper } >
+			{viewSettings.isBurger && <BurgerMenu/>}
 			{(viewSettings.editingObjects.isViewPopup.isObject || viewSettings.editingObjects.isViewPopup.isMarker) && <ConfirmPopup/>}
 			{(viewSettings.editingObjects.isActiveAddButton || viewSettings.editingObjects.isActiveEditButton) && <AddAndEditObject/>}
 			{viewSettings.isViewFilters && <Filters />}

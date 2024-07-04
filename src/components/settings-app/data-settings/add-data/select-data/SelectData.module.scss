@@ -17,14 +17,45 @@
   width: adapt(102px, 1440px);
   height: adapt(50px, 1440px);
 
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    width: adapt(122px, 1440px);
+    height: adapt(60px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    width: adapt(322px, 1440px);
+    height: adapt(130px, 1440px);
+  }
+
   >p {
     font-size: 1rem;
     color: $color_one;
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 767.98px) {
+      font-size: 1.4rem;
+    }
   }
 
   > img {
     width: adapt(24px, 1440px);
-  height: adapt(24px, 1440px);
+    height: adapt(24px, 1440px);
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      width: adapt(34px, 1440px);
+      height: adapt(34px, 1440px);
+    }
+
+    @media (max-width: 767.98px) {
+      width: adapt(64px, 1440px);
+      height: adapt(64px, 1440px);
+    }
   }
 }
 
@@ -43,6 +74,21 @@
     padding: adapt(14px, 1440px) adapt(16px, 1440px);
     min-height: adapt(50px, 1440px);
     width: adapt(106px, 1440px);
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      font-size: 1.1rem;
+      padding: adapt(24px, 1440px) adapt(26px, 1440px);
+      min-height: adapt(60px, 1440px);
+      width: adapt(126px, 1440px);
+    }
+
+    @media (max-width: 767.98px) {
+      font-size: 1.4rem;
+      padding: adapt(34px, 1440px) adapt(36px, 1440px);
+      min-height: adapt(80px, 1440px);
+      width: adapt(326px, 1440px);
+    }
   }
 
   >.active {

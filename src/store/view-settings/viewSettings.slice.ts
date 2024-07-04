@@ -15,6 +15,8 @@ const initialState: IViewSettings = {
 	isSelectArea: false,
 	isViewPopupSettings: false,
 	isViewDeletePopup: false,
+	isPopupSettingGroups: false,
+	isBurger: false,
 	editingObjects: {
 		isAddObject: true,
 		isEditObjects: false,
@@ -34,6 +36,15 @@ export const viewSettings = createSlice({
 	name: 'viewSettings',
 	initialState,
 	reducers: {
+		activeIsPopupSettingGroups: (state, {payload}) => {
+			state.isPopupSettingGroups = true;
+		},
+		defaultIsPopupSettingGroups: (state, {payload}) => {
+			state.isPopupSettingGroups = false;
+		},
+		toggleBurger: (state, {payload}) => {
+			state.isBurger = !state.isBurger
+		},
 		activeIsViewDeletePopup: (state, {payload}) => {
 			state.isViewDeletePopup = true;
 		},

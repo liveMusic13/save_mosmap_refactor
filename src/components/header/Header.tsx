@@ -39,21 +39,48 @@ export function Header({data}:any) {
 	return (
 		<header className={styles.header}>
 			<div className={styles.map__buttons}>
-				{	(isAuth && isEdit1) && 
-					arrayEditingObjects.map(icon => {
-						return <ButtonEditing key={icon.id} icon={icon} />;
-					})
+
+				{
+					(width && width <= 767.98) && ( <div className={viewSettings.isBurger ? `${styles.block__burger} ${styles.close}` : styles.block__burger} onClick={()=> dispatch(viewSettingsAction.toggleBurger(''))}>
+						<button></button> 
+					</div>
+					)
 				}
-				<div className={styles.line}></div>
-				{ arrayNumIcons.map(icon => {
-					return <Button key={icon.id} icon={icon} />;
-				})}
-				<div className={styles.line}></div>
+				{ !(width && width <= 767.98) && <>
+				
+					{	(isAuth && isEdit1) && 
+						arrayEditingObjects.map(icon => {
+							return <ButtonEditing key={icon.id} icon={icon} />;
+						})
+					}
+					<div className={styles.line}></div>
+					{ arrayNumIcons.map(icon => {
+						return <Button key={icon.id} icon={icon} />;
+					})}
+					<div className={styles.line}></div>
 				{ (isAuth && isEdit1) && 
 					(arrayNumSettingIcons.map(icon => {
 						return <ButtonSettings key={icon.id} icon={icon} />
 					}))
 				}
+					</>
+				}
+
+{/* {	(isAuth && isEdit1) && 
+						arrayEditingObjects.map(icon => {
+							return <ButtonEditing key={icon.id} icon={icon} />;
+						})
+					}
+					<div className={styles.line}></div>
+					{ arrayNumIcons.map(icon => {
+						return <Button key={icon.id} icon={icon} />;
+					})} */}
+				{/* <div className={styles.line}></div>
+				{ (isAuth && isEdit1) && 
+					(arrayNumSettingIcons.map(icon => {
+						return <ButtonSettings key={icon.id} icon={icon} />
+					}))
+				} */}
 				
 				{((isAuth && isEdit1) && (width && width <= 767.98)) && <button className={styles.crd__button} onClick={()=> {
 						if (viewSettings.editingObjects.isMobileEditCrd) {
@@ -73,11 +100,10 @@ export function Header({data}:any) {
 										xlinkHref={'/images/svg/sprite.svg#target'}
 									></use>
 								</svg></button> }
-
 				<div className={styles.block__title}>
 					<div className={styles.line}></div>
 					<div className={styles.line}></div>
-					<h1 className={styles.title}>т
+					<h1 className={styles.title}>
 							{data.title
 							? data.title
 							: 'Тестовая карта'}

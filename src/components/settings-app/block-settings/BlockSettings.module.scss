@@ -9,6 +9,14 @@
               0 2px 2px 0 rgba(42, 70, 115, .14),
               0 1px 5px 0 rgba(42, 70, 115, .12);
               
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    width: adapt(850px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    width: adapt(1250px, 1440px);    
+  }
 
   >.block__title {
     width: 100%;
@@ -18,11 +26,37 @@
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      padding: adapt(22px, 1440px);
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+    @media (max-width: 767.98px) {
+      padding: adapt(32px, 1440px);
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;  
+    }
+
     >.title {
       font-size: 1rem;
       font-weight: bold;
       border-top-left-radius: 4px;
       border-top-right-radius: 4px;
+
+      /*TABLE*/
+      @media (max-width: 991.98px) {
+        font-size: 1.25rem;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+
+      @media (max-width: 767.98px) {
+        font-size: 1.45rem;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;  
+      }
     }
   }
   
@@ -31,6 +65,17 @@
     display: flex;
     flex-direction: column;
     gap: adapt(10px, 1440px);
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      padding: adapt(20px, 1440px) 0px;
+      gap: adapt(20px, 1440px);
+    }
+
+    @media (max-width: 767.98px) {
+      padding: adapt(30px, 1440px) 0px;
+      gap: adapt(35px, 1440px); 
+    }
 
     >.button__saveForm {
       margin-left: adapt(15px, 1440px);
@@ -42,14 +87,19 @@
       font-size: 0.8rem;
       cursor: pointer;
 
+      /*TABLE*/
       @media (max-width: 991.98px) {
-        font-size: 0.7rem;
+        font-size: 0.9rem;
+        width: adapt(150px, 1440px);
+        height: adapt(55px, 1440px);
+        margin-left: adapt(25px, 1440px);
       }
 
       @media (max-width: 767.98px) {
-        width: adapt(355px, 1440px);
-        height: adapt(110px, 1440px);
-        font-size: 0.9rem;
+        width: adapt(305px, 1440px);
+        height: adapt(100px, 1440px);
+        font-size: 1rem;
+        margin-left: adapt(35px, 1440px);
       }
 
       color: $color_three;

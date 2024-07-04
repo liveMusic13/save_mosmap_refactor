@@ -8,9 +8,31 @@
   position: relative;
   margin: 0px adapt(12px, 1440px);
 
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    margin: 0px adapt(22px, 1440px);
+    gap: adapt(20px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    margin: 0px adapt(32px, 1440px);
+    gap: adapt(30px, 1440px);
+  }
+
   >.image__checkbox {
     width: adapt(25px, 1440px);
     height: adapt(25px, 1440px);
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      width: adapt(40px, 1440px);
+      height: adapt(40px, 1440px);
+    }
+
+    @media (max-width: 767.98px) {
+      width: adapt(60px, 1440px);
+      height: adapt(60px, 1440px);
+    }
   }
 
   >.input__checkbox {
@@ -22,10 +44,28 @@
     &:hover {
       cursor: pointer;
     }
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      width: adapt(40px, 1440px);
+      height: adapt(40px, 1440px);
+      top: 0;
+    }
+
+    @media (max-width: 767.98px) {
+      width: adapt(60px, 1440px);
+      height: adapt(60px, 1440px);
+      top: 10%;
+    }
   }
 
   >span {
     font-size: 1rem;
     color: $color_eight;
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      font-size: 1.25rem;
+    }
   }
 }

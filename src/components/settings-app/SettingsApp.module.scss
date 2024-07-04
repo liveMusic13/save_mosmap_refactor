@@ -26,10 +26,28 @@
     height: adapt(61px, 1440px);
     padding: adapt(4px, 1440px) adapt(400px, 1440px);
     background-color: $color_three;
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      height: adapt(81px, 1440px);
+      padding: adapt(4px, 1440px) adapt(220px, 1440px);
+    }
+
+    @media (max-width: 767.98px) {
+      height: adapt(141px, 1440px);
+      padding: adapt(4px, 1440px) adapt(80px, 1440px);
+    }
 
     >h2 {
       font-size: 1.12rem;
       font-weight: bold;
+      /*TABLE*/
+      @media (max-width: 991.98px) {
+        font-size: 1.4rem;
+      }
+
+      @media (max-width: 767.98px) {
+        font-size: 1.6rem;
+      }
     }
 
     >.button__goMap {
@@ -40,15 +58,18 @@
       letter-spacing: 0.5px;
       font-size: 0.8rem;
       cursor: pointer;
-
+      /*TABLE*/
       @media (max-width: 991.98px) {
-        font-size: 0.7rem;
+        // font-size: 0.7rem;
+        font-size: 0.9rem;
+        width: adapt(130px, 1440px);
+        height: adapt(55px, 1440px);
       }
 
       @media (max-width: 767.98px) {
-        width: adapt(355px, 1440px);
-        height: adapt(110px, 1440px);
-        font-size: 0.9rem;
+        width: adapt(265px, 1440px);
+        height: adapt(100px, 1440px);
+        font-size: 1rem;
       }
 
       color: $color_three;
@@ -75,5 +96,13 @@
     flex-direction: column;
     align-items: center;
     gap: adapt(32px, 1440px);
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      padding-top: adapt(111px, 1440px);
+    }
+
+    @media (max-width: 767.98px) {
+      padding-top: adapt(191px, 1440px);      
+    }
   }
 }

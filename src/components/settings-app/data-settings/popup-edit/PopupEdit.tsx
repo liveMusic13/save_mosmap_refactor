@@ -109,6 +109,8 @@ const PopupEdit: FC = () => {
     };
   }, [inputValue, debouncedDispatch]);
 
+  console.log(checkedState)
+
   return (
     <div className={styles.block__popupEdit}>
       <h2 className={styles.title}>Изменить поле</h2>

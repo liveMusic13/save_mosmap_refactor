@@ -47,7 +47,14 @@ export const settingsService = {
   },
   editFields: async (map:string, dispatch:any, data:IFields | any) => {
     try {
-      const response = await $axiosAuth.post(`/api/fields.php?map=${map}`, data)
+      const newData = {
+        address: data.address,
+        id: String(data.id),
+        name: data.name,
+        on_list: data.namefield,
+        on_map: data.nameonmap
+      }
+      const response = await $axiosAuth.post(`/api/fields.php?map=${map}`, newData)
       dispatch(dataSettingsAction.addFields(response.data))
     } catch (error) {
       console.log(error);
@@ -72,7 +79,7 @@ export const settingsService = {
   getSettings: async(dispatch:any) => {
     try {
       const response = await $axiosAuth.get(`/api/save_settings.php`)
-      console.log(response)
+      console.log(response.data)
       // dispatch(dataSettingsAction.addGetIcons(response.data))
       dispatch(dataMapSettingsAction.addDataMapSettings(response.data))
     } catch (error) {
@@ -86,6 +93,20 @@ export const settingsService = {
       console.log(response)
       dispatch(dataMapSettingsAction.addDataMapSettings(response.data))
       dispatch(viewSettingsAction.defaultSettingsApp(''));
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  listItems: async(map:string, dispatch:any, id:any, items?: any) => {
+    const data = items ? {id: id, items: items} : {id: id}
+
+    try {
+      // const response = await $axiosAuth.post(`/api/list_items.php?map=${map}`, {id: id});
+      const response = await $axiosAuth.post(`/api/list_items.php?map=${map}`, data);
+      console.log(response)
+      // dispatch(dataMapSettingsAction.addDataMapSettings(response.data))
+      // dispatch(viewSettingsAction.defaultSettingsApp(''));
+      return response.data
     } catch (error) {
       console.log(error);
     }

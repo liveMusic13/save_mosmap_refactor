@@ -7,6 +7,17 @@
   box-shadow: 0px adapt(11px, 1440px) adapt(15px, 1440px) adapt(-7px, 1440px) rgba(0, 0, 0, .2), 0px adapt(24px, 1440px) adapt(38px, 1440px) adapt(3px, 1440px) rgba(0, 0, 0, .14), 0px adapt(9px, 1440px) adapt(46px, 1440px) adapt(8px, 1440px) rgba(0, 0, 0, .12);
   padding: adapt(16px, 1440px);
 
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    border-radius: 8px;
+    width: adapt(985px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    border-radius: 4px;
+    width: adapt(1305px, 1440px);
+  }
+
   >.block__title {
     width: 100%;
     border-bottom: 1px solid $color_four;
@@ -14,18 +25,52 @@
     >.title {
       font-size: 1.12rem;
       font-weight: bold;
+
+      /*TABLE*/
+      @media (max-width: 991.98px) {
+        font-size: 1.3rem;
+      }
+
+      @media (max-width: 767.98px) {
+        font-size: 1.5rem;
+      }
     }
   }
 
   >.block__content {
+    overflow-x: auto;
+
+    @media (max-width: 767.98px) {
+      display: flex;
+    }
+
     >.block__columnTitle {
       display: grid;
+
+      @media (max-width: 767.98px) {
+        display: block;
+      }
 
       >.column__title {
         font-size: 1rem;
         font-weight: bold;
         // padding: adapt(15px, 1440px) adapt(5px, 1440px);
         padding: adapt(15px, 1440px) 0px;
+
+        /*TABLE*/
+        @media (max-width: 991.98px) {
+          font-size: 1.15rem;
+          padding: adapt(25px, 1440px) 0px;
+        }
+
+        @media (max-width: 767.98px) {
+          font-size: 1.45rem;
+          padding: adapt(35px, 1440px) adapt(20px, 1440px) 0px;
+
+          &:last-child { // Добавляем стиль только для последнего элемента
+            padding: adapt(35px, 1440px) adapt(20px, 1440px) adapt(35px, 1440px);
+          }
+        }
       }
     }
   }

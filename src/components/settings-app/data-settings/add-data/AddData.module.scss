@@ -5,6 +5,17 @@
   display: flex;
   gap: adapt(16px, 1440px);
   align-items: center;
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    gap: adapt(20px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    flex-wrap: wrap;
+    gap: adapt(66px, 1440px);
+    margin-top: adapt(66px, 1440px);
+  }
 }
 
 .button__add {
@@ -28,6 +39,21 @@
 			0 1px 7px 0 rgba(0, 0, 0, 0.12),
 			0 3px 1px -1px rgba(0, 0, 0, 0.2);
 	}
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    font-size: 1rem;
+    width: adapt(157px, 1440px);
+    height: adapt(50px, 1440px);
+    padding: 0px adapt(20px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    font-size: 1.2rem;
+    width: adapt(317px, 1440px);
+    height: adapt(120px, 1440px);
+    padding: 0px adapt(30px, 1440px);
+  }
 }
 
 .addNames {
@@ -37,6 +63,16 @@
   height: adapt(50px, 1440px);
   border-bottom: 1px solid $color_eight;
   outline: none;
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    height: adapt(60px, 1440px);
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 767.98px) {
+    height: adapt(100px, 1440px);
+    font-size: 1.4rem;
+  }
 }
 
 .block__checkbox {
@@ -47,6 +83,17 @@
   gap: adapt(20px, 1440px);
   width: adapt(104.5px, 1440px);
   // height: adapt(74.5px, 1440px);
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    gap: adapt(15px, 1440px);
+    width: adapt(124.5px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    gap: adapt(25px, 1440px);
+    width: adapt(224.5px, 1440px);
+  }
 }
 
 .checkbox {
@@ -60,20 +107,59 @@
   &:hover {
     cursor: pointer;
   }
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    width: adapt(30px, 1440px);
+    height: adapt(30px, 1440px);
+  }
 
+  @media (max-width: 767.98px) {
+    width: adapt(75px, 1440px);
+    height: adapt(75px, 1440px);
+  }
 }
 
 .square {
   width: adapt(20px, 1440px);
   height: adapt(20px, 1440px);
   border: 2px solid $color_nine;
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    width: adapt(30px, 1440px);
+    height: adapt(30px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    width: adapt(75px, 1440px);
+    height: adapt(75px, 1440px);
+  }
 }
 
 .image__ok {
   width: adapt(20px, 1440px);
   height: adapt(20px, 1440px);
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    width: adapt(30px, 1440px);
+    height: adapt(30px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    width: adapt(75px, 1440px);
+    height: adapt(75px, 1440px);
+  }
 }
 
 .checkbox__name {
   width: adapt(55px, 1440px);
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    width: adapt(65px, 1440px);
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 767.98px) {
+    width: adapt(105px, 1440px);
+    font-size: 1.4rem;
+  }
 }

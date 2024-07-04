@@ -46,6 +46,8 @@ export interface IUserMap {
 }
 
 export interface IViewSettings {
+	isPopupSettingGroups: boolean;
+	isBurger: boolean;
 	isViewDeletePopup: boolean;
 	isViewPopupSettings: boolean;
 	isViewFilters: boolean;

@@ -9,6 +9,12 @@
   flex-direction: column;
   position: relative;
 
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    height: adapt(80px, 1440px);
+    margin-bottom: adapt(20px, 1440px);
+  }
+
 	@media (max-width: 767.98px) {
 		height: adapt(196.8px, 1440px);
   	margin-bottom: adapt(38px, 1440px);
@@ -18,6 +24,11 @@
   &.has_content {
     .input__label{
       animation: auth-label 1s ease 1 forwards;
+      
+      /*TABLE*/
+      @media (max-width: 991.98px) {
+        animation: auth-label_Table 1s ease 1 forwards;
+      }
 
 			@media (max-width: 767.98px) {
 				animation: auth-label_adaptive 1s ease 1 forwards;
@@ -31,7 +42,14 @@
     position: absolute;
     animation: auth-label-not-focus 1s ease 1 forwards;
 
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      margin-left: adapt(22px, 1440px);
+      animation: auth-label-not-focus_Table 1s ease 1 forwards;
+    }
+
 		@media (max-width: 767.98px) {
+      margin-left: adapt(32px, 1440px);
 		  animation: auth-label-not-focus_adaptive 1s ease 1 forwards;
 		}
 
@@ -46,8 +64,16 @@
     height: 100%;
     outline: none;
 
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      margin: adapt(26px, 1440px) adapt(22px, 1440px);
+      font-size: 1.25rem;
+    }
+
 		@media (max-width: 767.98px) {
+      margin: adapt(36px, 1440px) adapt(32px, 1440px);
 		  padding-top: adapt(40px, 1440px);
+      // font-size: 1.25rem;
 		}
 
     &:focus {

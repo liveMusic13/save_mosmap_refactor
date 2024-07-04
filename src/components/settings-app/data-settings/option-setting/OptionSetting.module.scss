@@ -4,6 +4,22 @@
 .wrapper_option {
   display: grid;
   padding: adapt(15px, 1440px) 0px;
+  font-size: 1rem;
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    padding: adapt(25px, 1440px) 0px;
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 767.98px) {
+    padding: adapt(35px, 1440px) 0px;
+    font-size: 1.4rem;
+  }
+
+  @media (max-width: 767.98px) {
+    // display: grid;
+    display: block;
+  }
 
   >.index {
     text-align: center;
@@ -11,12 +27,20 @@
 
   >.name {
     font-weight: 600;
+
+    @media (max-width: 767.98px) {
+      text-align: center;
+    }
   }
 
   >.block__checkbox {
     position: relative;
     display: flex;
     align-items: center;
+
+    // @media (max-width: 767.98px) {
+    //   margin-top: adapt(46px, 1440px);
+    // }
 
     >.checkbox {
       position: absolute;
@@ -26,6 +50,16 @@
       &:hover {
         cursor: pointer;
       }
+
+      @media (max-width: 991.98px) {
+        width: adapt(28px, 1440px);
+        height: adapt(28px, 1440px);
+      }
+
+      @media (max-width: 767.98px) {
+        width: adapt(88px, 1440px);
+        height: adapt(88px, 1440px);
+      }
     }
 
     >.circle {
@@ -33,6 +67,17 @@
       height: adapt(18px, 1440px);
       border-radius: 50%;
       border: 2px solid $color_eight;
+
+      /*TABLE*/
+      @media (max-width: 991.98px) {
+        width: adapt(28px, 1440px);
+        height: adapt(28px, 1440px);
+      }
+
+      @media (max-width: 767.98px) {
+        width: adapt(88px, 1440px);
+        height: adapt(88px, 1440px);
+      }
     }
 
     >.check {
@@ -43,12 +88,33 @@
       width: adapt(18px, 1440px);
       height: adapt(18px, 1440px);
       border: 2px solid $color_eight;
+      /*TABLE*/
+      @media (max-width: 991.98px) {
+        width: adapt(28px, 1440px);
+        height: adapt(28px, 1440px);
+      }
+
+      @media (max-width: 767.98px) {
+        width: adapt(88px, 1440px);
+        height: adapt(88px, 1440px);
+      }
     }
 
     >.image__checkbox {
       width: adapt(25px, 1440px);
       height: adapt(25px, 1440px);
       padding-bottom: adapt(3px, 1440px);
+      /*TABLE*/
+      @media (max-width: 991.98px) {
+        width: adapt(35px, 1440px);
+        height: adapt(35px, 1440px);
+        padding-bottom: adapt(6px, 1440px);
+      }
+
+      @media (max-width: 767.98px) {
+        width: adapt(95px, 1440px);
+        height: adapt(95px, 1440px);
+      }
     }
   }
 }
@@ -56,6 +122,16 @@
 .block__action {
   display: flex;
   gap: adapt(10px, 1440px);
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    gap: adapt(15px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    padding-top: adapt(35px, 1440px);
+    gap: adapt(35px, 1440px);
+  }
 }
 
 

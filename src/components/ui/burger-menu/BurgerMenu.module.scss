@@ -1,0 +1,42 @@
+@import '../../../styles/variables';
+@import '../../../styles/functions';
+@import '../../../styles/animations';
+
+.wrapper_burger {
+	position: absolute;
+	top: 0%;
+	left: 0;
+	z-index: 100;
+  display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: adapt(4px, 1440px);
+	border-bottom: 1px solid $color_seven;
+	width: 100%;
+	background-color: $color_three;
+	animation: on_burger 0.5s ease-out 1;
+
+	@media (max-width: 991.98px) {
+		height: adapt(71px, 1440px);
+	}
+
+	/*MOBILE*/
+	@media (max-width: 767.98px) {
+		height: adapt(180px, 1440px);
+	}
+}
+
+.line {
+	width: 1px;
+	height: adapt(32px, 1440px);
+	background-color: $color_four;
+
+	@media (max-width: 991.98px) {
+		height: adapt(42px, 1440px);
+	}
+
+	/*MOBILE*/
+	@media (max-width: 767.98px) {
+		height: adapt(52px, 1440px);
+	}
+}

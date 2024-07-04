@@ -90,3 +90,46 @@
 		box-shadow: 0px adapt(2px, 1440px) adapt(2px, 1440px) rgba($color: $color_eight, $alpha: .5);
 	}
 }
+
+@keyframes auth-label_Table {
+	0% {
+		top: 20%;
+	}
+	100% {
+		top: -10%;
+		color: $color_two;
+		font-size: 1.1rem;
+	}
+}
+
+@keyframes auth-label-not-focus_Table {
+	0% {
+		top: -10%;
+		color: $color_two;
+		font-size: 1.1rem;
+	}
+	100% {
+		color: $color_eight;
+		top: 20%;
+		font-size: 1.25rem;
+	}
+}
+
+@keyframes on_burger {
+	0% {
+		transform: translateY(adapt(-100px, 1440px));
+		z-index: 0;
+	}
+	20% {
+		transform: translateY(adapt(-95px, 1440px));
+		z-index: 0;
+	}
+	// 90% {
+	// 	transform: translateY(adapt(-25px, 1440px));
+	// 	z-index: 80;
+	// }
+	100% {
+		transform: translateY(0);
+		z-index: 100;
+	}
+}
