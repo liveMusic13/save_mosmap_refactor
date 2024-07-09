@@ -13,6 +13,21 @@
   border-radius: adapt(4px, 1440px);
   box-shadow: 0px adapt(11px, 1440px) adapt(15px, 1440px) adapt(-7px, 1440px) rgba(0, 0, 0, .2), 0px adapt(24px, 1440px) adapt(38px, 1440px) adapt(3px, 1440px) rgba(0, 0, 0, .14), 0px adapt(9px, 1440px) adapt(46px, 1440px) adapt(8px, 1440px) rgba(0, 0, 0, .12);
 
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    width: adapt(1067px, 1440px);
+    max-height: adapt(916px, 1440px);
+    top: 12%;
+    left: 12.7%;
+  }
+
+  @media (max-width: 767.98px) {
+    width: adapt(1337px, 1440px);
+    max-height: adapt(1956px, 1440px);
+    top: 10%;
+    left: 3.7%;
+  }
+
   >.title {
     font-size: 1.25rem;
     line-height: 2rem;
@@ -22,6 +37,17 @@
     color: $color_one;
     padding: 0px adapt(24px, 1440px);
     padding-bottom: adapt(15px, 1440px);
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      font-size: 1.45rem;
+      padding-bottom: adapt(25px, 1440px);
+    }
+
+    @media (max-width: 767.98px) {
+      font-size: 1.65rem;
+      padding-bottom: adapt(35px, 1440px);
+    }
   }
 
   >.block__content {
@@ -29,8 +55,20 @@
     height: adapt(500px, 1440px);
     // height: 100%;
     
+    @media (max-width: 767.98px) {
+      height: adapt(1350px, 1440px);
+      display: flex;
+      overflow-x: auto;
+    }
+    
     >.block__columns {
       display: flex;
+
+      @media (max-width: 767.98px) {
+        flex-direction: column;
+        width: adapt(1500px, 1440px);
+        align-items: center;
+      }
 
       >h2 {
         padding: adapt(15px, 1440px) adapt(5px, 1440px);
@@ -38,6 +76,33 @@
         line-height: 1.5rem;
         letter-spacing: .03125em;
         color: rgba(0, 0, 0, .6);
+
+        /*TABLE*/
+        @media (max-width: 991.98px) {
+          font-size: 1.25rem;
+          padding: adapt(15px, 1440px);
+
+          &:first-child {
+            min-width: adapt(44px, 1440px);
+          }
+
+          &:nth-child(2) {
+            margin-right: adapt(45px, 1440px);
+          }
+        }
+
+        @media (max-width: 767.98px) {
+          padding: adapt(100px, 1440px) adapt(15px, 1440px);
+          font-size: 1.4rem;
+          line-height: 1.5rem;
+          letter-spacing: .03125em;
+          color: rgba(0, 0, 0, .6);
+          width: auto !important;
+
+          &:nth-child(2) {
+            margin-right: 0px;
+          }
+        }
       }
     }
 
@@ -46,6 +111,12 @@
       // max-height: 100%;
       height: 90%;
       padding: adapt(8px, 1440px);
+
+      @media (max-width: 767.98px) {
+        display: flex;
+        height: 100%;
+        padding: 0px;
+      }
     }
   }
 
@@ -76,10 +147,17 @@
 
       /*TABLE*/
       @media (max-width: 991.98px) {
-        font-size: 1.07rem;
+        font-size: 1rem;
         width: adapt(167px, 1440px);
         height: adapt(50px, 1440px);
         padding: 0px adapt(16px, 1440px);
+      }
+
+      @media (max-width: 767.98px) {
+        font-size: 1.2rem;
+        width: adapt(337px, 1440px);
+        height: adapt(100px, 1440px);
+        padding: adapt(16px, 1440px) adapt(26px, 1440px);
       }
   }
 
@@ -89,6 +167,11 @@
     display: flex;
     justify-content: flex-end;
     gap: adapt(12px, 1440px);
+
+    @media (max-width: 767.98px) {
+      padding: adapt(28px, 1440px);
+      gap: adapt(52px, 1440px);
+    }
 
     >.button {
       text-transform: uppercase;
@@ -105,10 +188,17 @@
 
       /*TABLE*/
       @media (max-width: 991.98px) {
-        font-size: 1.07rem;
+        font-size: 1rem;
         width: adapt(167px, 1440px);
         height: adapt(50px, 1440px);
         padding: 0px adapt(16px, 1440px);
+      }
+
+      @media (max-width: 767.98px) {
+        font-size: 1.2rem;
+        width: adapt(337px, 1440px);
+        height: adapt(100px, 1440px);
+        padding: adapt(16px, 1440px) adapt(26px, 1440px);
       }
     }
 

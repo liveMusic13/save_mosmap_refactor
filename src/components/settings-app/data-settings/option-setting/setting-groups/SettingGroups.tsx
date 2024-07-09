@@ -1,3 +1,4 @@
+import useWindowDimensions from '@/hooks/useWindowDimensions';
 import { settingsService } from '@/services/settings.service';
 import { RootState } from '@/store/store';
 import { actions as viewSettingsAction } from '@/store/view-settings/viewSettings.slice';
@@ -8,6 +9,7 @@ import OptionBlock from './option-block/OptionBlock';
 import styles from './SettingGroups.module.scss';
 
 const SettingGroups: FC = () => {
+  const {width} = useWindowDimensions()
   const {query} = useRouter()
   const dispatch = useDispatch();
   const {dataIdGroups} = useSelector((state: RootState) => state.dataMapSettings)
@@ -64,15 +66,27 @@ const SettingGroups: FC = () => {
     });
   }
 
+  const objStyleName = {
+    zero: (width && width <= 767.98) ? 'calc(186/1440*100vw)' : (width && width > 767.98 && width <= 991.98) ? 'calc(680/1440*100vw)' : 'calc(599/1440*100vw)',
+    one: (width && width <= 767.98) ? 'calc(186/1440*100vw)' : (width && width > 767.98 && width <= 991.98) ? 'calc(486/1440*100vw)' : 'calc(279/1440*100vw)',
+    two: (width && width <= 767.98) ? 'calc(186/1440*100vw)' : (width && width > 767.98 && width <= 991.98) ? 'calc(386/1440*100vw)' : 'calc(186/1440*100vw)', 
+  }
+
+  const centerTitleStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+
   const renderColumn = (listItems:any) => {
     if (listItems && listItems.length > 0) {
       if (listItems[0].color !== undefined && listItems[0].icon_name !== undefined) {
         return (
           <>
             <h2 style={{width: 'calc(23.5/1440*100vw)'}} >#</h2>
-            <h2 style={{width: 'calc(186/1440*100vw)'}}>Название</h2>
-            <h2 style={{width: 'calc(186/1440*100vw)'}}>Иконка</h2>
-            <h2 style={{width: 'calc(186/1440*100vw)'}}>Цвет</h2>
+            <h2 style={{width: objStyleName.two}}>Название</h2>
+            <h2 style={{width: 'calc(186/1440*100vw)', ...centerTitleStyle}}>Иконка</h2>
+            <h2 style={{width: 'calc(186/1440*100vw)', ...centerTitleStyle}}>Цвет</h2>
             <h2 style={{width: 'calc(194/1440*100vw)'}}>Действие</h2>
           </>
         )
@@ -81,8 +95,8 @@ const SettingGroups: FC = () => {
         return (
           <>
             <h2 style={{width: 'calc(23.5/1440*100vw)'}} >#</h2>
-            <h2 style={{width: 'calc(279/1440*100vw)'}}>Название</h2>
-            <h2 style={{width: 'calc(279/1440*100vw)'}}>Иконка</h2>
+            <h2 style={{width: objStyleName.one}}>Название</h2>
+            <h2 style={{width: 'calc(279/1440*100vw)', ...centerTitleStyle}}>Иконка</h2>
             <h2 style={{width: 'calc(194/1440*100vw)'}}>Действие</h2>
           </>
         )
@@ -91,8 +105,8 @@ const SettingGroups: FC = () => {
         return (
           <>
             <h2 style={{width: 'calc(23.5/1440*100vw)'}} >#</h2>
-            <h2 style={{width: 'calc(279/1440*100vw)'}}>Название</h2>
-            <h2 style={{width: 'calc(279/1440*100vw)'}}>Цвет</h2>
+            <h2 style={{width: objStyleName.one}}>Название</h2>
+            <h2 style={{width: 'calc(279/1440*100vw)', ...centerTitleStyle }}>Цвет</h2>
             <h2 style={{width: 'calc(194/1440*100vw)'}}>Действие</h2>
           </>
         )
@@ -101,7 +115,7 @@ const SettingGroups: FC = () => {
         return (
           <>
             <h2 style={{width: 'calc(23.5/1440*100vw)'}} >#</h2>
-            <h2 style={{width: 'calc(559/1440*100vw)'}}>Название</h2>
+            <h2 style={{width: objStyleName.zero}}>Название</h2>
             <h2 style={{width: 'calc(194/1440*100vw)'}}>Действие</h2>
           </>
         )

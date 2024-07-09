@@ -1,14 +1,60 @@
 @import '../../../../../../../styles/variables';
 @import '../../../../../../../styles/functions';
 
+.wrapper_choiceIcon {
+  position: absolute;
+  top: -100%;
+  left: -50%;
+  z-index: 3;
+  background-color: $color_three;
+  border: 1px solid $color_twelve;
+  border-radius: 4px;
+  padding: adapt(8px, 1440px);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, .12);
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    top: 0%;
+    left: -50%;
+    width: adapt(300px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    padding: adapt(28px, 1440px);
+    width: adapt(800px, 1440px);
+  }
+}
+
 .block__icons {
   display: flex;
   flex-wrap: wrap;
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    gap: adapt(20px, 1440px);
+  }
+  
+  @media (max-width: 767.98px) {
+    gap: adapt(20px, 1440px);
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .img__close {
   width: adapt(32px, 1440px);
   height: adapt(32px, 1440px);
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    width: adapt(55px, 1440px);
+    height: adapt(55px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    width: adapt(130px, 1440px);
+    height: adapt(130px, 1440px);
+  }
 }
 
 .button__colors {
@@ -24,5 +70,22 @@
     cursor: pointer;
     background-color: $color_two_light;
     color: $color_three;
+  }
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    margin: adapt(25px, 1440px) 0px;
+    font-size: 1.2rem;
+    width: adapt(217px, 1440px);
+    height: adapt(60px, 1440px);
+    padding: 0px adapt(16px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    margin: adapt(45px, 1440px) 0px;
+    font-size: 1.4rem;
+    width: adapt(417px, 1440px);
+    height: adapt(100px, 1440px);
+    padding: 0px adapt(46px, 1440px);
   }
 }

@@ -34,7 +34,7 @@ const ChoiceIcon: FC<IChoiceIcon> = ({setIsViewIcon, setListItems, option}) => {
           )
         }
       </div>
-      <button onClick={()=> setIsViewIcon(false)}>Закрыть</button>
+      <button className={styles.button__colors} onClick={()=> setIsViewIcon(false)}>Закрыть</button>
     </div>
   )
 }
