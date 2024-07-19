@@ -4,9 +4,9 @@ import SettingsApp from '@/components/settings-app/SettingsApp';
 import { SettingsMap } from '@/components/settings-map/SettingsMap';
 import { useInitRequest } from '@/hooks/useInitRequest';
 import useWindowDimensions from '@/hooks/useWindowDimensions';
+import { settingsService } from '@/services/settings.service';
 import { actions as dataFiltersAction } from '@/store/data-filters/dataFilters.slice';
 import { RootState } from '@/store/store';
-import { actions as userMapAction } from '@/store/user-map/userMap.slice';
 import { actions as viewSettingsActions } from '@/store/view-settings/viewSettings.slice';
 import Head from 'next/head';
 import { useSearchParams } from 'next/navigation';
@@ -29,9 +29,16 @@ export default function Home({data, dataFilters}:any) {
 	const { getObject } = useInitRequest();
 	const [initApp, setInitApp] = useState(false);
 
-	useEffect(() => {
-		dispatch(userMapAction.addNumMap(map));
-	}, []);
+	/////
+	const [dynamicData, setDynamicData] = useState(data);
+	const updateTitle = (newTitle: string) => {
+    setDynamicData((prevData:any) => ({
+      ...prevData,
+      title: newTitle,
+    }));
+  };
+
+/////
 
 	useEffect(() => {
 		if (adresFilterString.srcRequest !== '') {
@@ -44,6 +51,8 @@ export default function Home({data, dataFilters}:any) {
 		if (!map) {
 			push(`?map=7`);
 		} else {
+			//HELP: ТЕСТИРУЮ ИЗМЕНЕНИЕ РАЗМЕРОВ ЗНАЧКА
+			settingsService.getSettings(dispatch)
 			getObject();//HELP: НУЖЕН ДЛЯ ТОГО ЧТОБЫ ЗАПИСЬ С БЭКА НЕ ПЕРЕБИВАЛА ДАННЫЕ С РЕДАКСА И ПРОИСХОДИЛА ФИЛЬТРАЦИЯ СПИСКА
 			// dispatch( dataObjectsInMapAction.addDataObjectsInMap(data));
 			dispatch(dataFiltersAction.addFilters(dataFilters));
@@ -76,42 +85,58 @@ export default function Home({data, dataFilters}:any) {
 	);
 }
 
-export const getServerSideProps = async ({ query }:any) => {
+// export const getServerSideProps = async ({ query }:any) => {
 
-if (query.map) {
-	const response = await fetch(`https://app.mosmap.ru/api/get_objects.php?map=${query.map}`);
-	const data = await response.json()
+// if (query.map) {
+// 	const response = await fetch(`https://app.mosmap.ru/api/get_objects.php?map=${query.map}`);
+// 	const data = await response.json()
 
-	const filters = await fetch(
-		`https://mosmap.ru/api/filters.php?map=${query.map}`,
-	);
+// 	const filters = await fetch(
+// 		`https://mosmap.ru/api/filters.php?map=${query.map}`,
+// 	);
 
-	const dataFilters = await filters.json()
+// 	const dataFilters = await filters.json()
 	
-	return {
-		props: {
-			data,
-			dataFilters,
-			maps: query,
-		}
-	}
-} else {
-	const response = await fetch(`https://app.mosmap.ru/api/get_objects.php?map=7`);
-	const data = await response.json()
+// 	return {
+// 		props: {
+// 			data,
+// 			dataFilters,
+// 			maps: query,
+// 		}
+// 	}
+// } else {
+// 	const response = await fetch(`https://app.mosmap.ru/api/get_objects.php?map=7`);
+// 	const data = await response.json()
 
-	const filters = await fetch(
-		`https://mosmap.ru/api/filters.php?map=7`,
-	);
+// 	const filters = await fetch(
+// 		`https://mosmap.ru/api/filters.php?map=7`,
+// 	);
 
-	const dataFilters = await filters.json()
+// 	const dataFilters = await filters.json()
 
-	return {
-		props: {
-			data,
-			dataFilters,
-			maps: query,
-		}
-	}
+// 	return {
+// 		props: {
+// 			data,
+// 			dataFilters,
+// 			maps: query,
+// 		}
+// 	}
 
-}
-}
+// }
+// }
+
+export const getServerSideProps = async ({ query }: any) => {
+  const response = await fetch(`https://app.mosmap.ru/api/get_objects.php?map=${query.map || 7}`);
+  const data = await response.json();
+
+  const filtersResponse = await fetch(`https://mosmap.ru/api/filters.php?map=${query.map || 7}`);
+  const dataFilters = await filtersResponse.json();
+
+  return {
+    props: {
+      data,
+      dataFilters,
+      maps: query,
+    },
+  };
+};

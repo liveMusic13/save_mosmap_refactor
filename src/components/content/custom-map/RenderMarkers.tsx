@@ -18,6 +18,7 @@ import { ARGBtoHEX } from '@/utils/convertColor';
 
 import { $axios } from '@/api';
 import { mapService } from '@/services/map.service';
+import { iconSizeDynamic } from '@/utils/iconSizeFunc';
 
 const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 	const dispatch = useDispatch();
@@ -31,7 +32,13 @@ const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 		(state: RootState) => state.viewSettings,
 	);
 
+	const {data} = useSelector(
+		(state: RootState) => state.dataMapSettings,
+	);
+
 	useEffect(() => {}, [dataObjectInfo.id]);
+
+
 
 	const eventHandlers = useMemo(
 			() => ({
@@ -98,15 +105,18 @@ const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 						if (dataObjectInfo.id === object.id) {
 							customMarkerIcon = L.icon({
 								iconUrl: '../images/icons/target.svg',
-								iconSize: [53, 53],
-								iconAnchor: [18.5, 19],
+								// iconSize: [53, 53],
+								iconSize: iconSizeDynamic(data.iconsize, true),
+								iconAnchor: [18.5, 19], //2.86, 2.78
 							});
 						} else {
+							// console.log(data.iconsize, dataObjectsInMap.points.icon_sizes, iconSizeDynamic(data.iconsize, dataObjectsInMap.points.icon_sizes, false))
 							customMarkerIcon = divIcon({
 								className: 'my-custom-icon',
-								iconSize: [23, 23],
+								// iconSize: [23, 23],
+								iconSize: iconSizeDynamic(data.iconsize, false),
 								html: renderToStaticMarkup(
-									<IconMarker key={object.id} object={object} />,
+									<IconMarker key={object.id} object={object} size={iconSizeDynamic(data.iconsize, false)} />,
 								),
 							});
 						}

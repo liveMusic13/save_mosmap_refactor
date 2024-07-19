@@ -1,5 +1,6 @@
 @import '../../../../../styles/variables';
 @import '../../../../../styles/functions';
+@import '../../../../../styles/mixins';
 
 .wrapper_settingsGroup {
   // overflow: hidden;
@@ -12,6 +13,13 @@
   background-color: $color_three;
   border-radius: adapt(4px, 1440px);
   box-shadow: 0px adapt(11px, 1440px) adapt(15px, 1440px) adapt(-7px, 1440px) rgba(0, 0, 0, .2), 0px adapt(24px, 1440px) adapt(38px, 1440px) adapt(3px, 1440px) rgba(0, 0, 0, .14), 0px adapt(9px, 1440px) adapt(46px, 1440px) adapt(8px, 1440px) rgba(0, 0, 0, .12);
+
+  @include aspect-ratio-query(17 / 9, 21 / 9) {
+    // стили для соотношения сторон от 16:9 до 21:9
+   
+    top: 0%; // обновляем позиционирование
+   
+  }
 
   /*TABLE*/
   @media (max-width: 991.98px) {
@@ -54,6 +62,10 @@
     padding: adapt(8px, 1440px) adapt(16px, 1440px);
     height: adapt(500px, 1440px);
     // height: 100%;
+
+    @include aspect-ratio-query(17 / 9, 21 / 9) {
+      height: adapt(450px, 1440px);
+    }
     
     @media (max-width: 767.98px) {
       height: adapt(1350px, 1440px);

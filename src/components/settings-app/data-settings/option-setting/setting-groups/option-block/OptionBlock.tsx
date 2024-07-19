@@ -128,13 +128,13 @@ import { useDispatch } from 'react-redux';
 import styles from './OptionBlock.module.scss';
 import ChoiceIcon from './choise-icon/ChoiceIcon';
 
-const OptionBlock: FC<IOptionBlock> = ({option, index, listItems, setListItems, handleChange, deleteOption}) => {
+const OptionBlock: FC<IOptionBlock> = ({option, index, listItems, setListItems, handleChange, deleteOption, viewColor, setViewColor, viewIcon, setViewIcon}) => {
   const dispatch = useDispatch();
   const {width} = useWindowDimensions()
   const [isMouseEnter, setIsMouseEnter] = useState<boolean>(false);
   const [color, setColor] = useState(option.color ? `${option.color}` : 'rgba(0, 0, 0, .6)');
-  const [isViewColor, setIsViewColor] = useState(false)
-  const [isViewIcon, setIsViewIcon] = useState(false)
+  // const [isViewColor, setIsViewColor] = useState(false)
+  // const [isViewIcon, setIsViewIcon] = useState(false)
   console.log(color)
   useEffect(() => {
     if (option.color || option.color === '') {
@@ -172,22 +172,37 @@ const OptionBlock: FC<IOptionBlock> = ({option, index, listItems, setListItems, 
           <>
             <input type="text" style={{width: objStyleField.two}} className={styles.field} value={listItems[index].name} onChange={(e) => handleChange(e.target.value, option.id)}/>
             <div className={styles.solo__block} style={{width: 'calc(186/1440*100vw)'}}>
-              <svg className={styles.img__close} style={{color: color}} onClick={()=> setIsViewIcon(true)}>
+              {/* <svg className={styles.img__close} style={{color: color}} onClick={()=> setIsViewIcon(true)}> */}
+              <svg className={styles.img__close} style={{color: color}} onClick={()=> setViewIcon({id: option.id, isView:true})}>
               {/* <svg className={styles.img__close} style={option.color ? {color: `#${option.color}`} : {color: 'rgba(0, 0, 0, .6)'}} onClick={()=> setIsViewIcon(true)}> */}
                 <use xlinkHref={`/images/svg/sprite.svg#${option.icon_name}`}></use>
               </svg>
-              {
+              {/* {
                 isViewIcon && <ChoiceIcon setIsViewIcon={setIsViewIcon} setListItems={setListItems} option={option} />
+              } */}
+              {
+                (viewIcon.id === option.id && viewIcon.isView) && <ChoiceIcon setViewIcon={setViewIcon} setListItems={setListItems} option={option} />
               }
             </div>
             
               <div className={styles.solo__block} style={{width: 'calc(186/1440*100vw)'}}>
-                <div className={styles.block} style={{backgroundColor: color, border: '1px solid rgba(0, 0, 0, 0.3)'}} onClick={() => setIsViewColor(true)}></div> 
-                { isViewColor &&
+              {/* <div className={styles.block} style={{backgroundColor: typeof color === 'string' ? color : 'rgba(0, 0, 0, .6)'}} onClick={() => setIsViewColor(true)}></div> */}
+                {/* { isViewColor &&
+                  <div className={styles.block__colors_parent}>
+                  <div className={styles.block__colors}>
+                  <HexColorPicker color={color} onChange={setColor} />
+                  <button className={styles.button__colors} onClick={()=> setIsViewColor(false)}>Закрыть</button>
+                  </div>
+                  </div>
+                  } */}
+
+                  <div className={styles.block} style={{backgroundColor: color, border: '1px solid rgba(0, 0, 0, 0.3)'}} onClick={() => setViewColor({id: option.id, isView:true})}></div> 
+                { (viewColor.id === option.id && viewColor.isView) &&
                   <div className={styles.block__colors_parent}>
                     <div className={styles.block__colors}>
                       <HexColorPicker color={color} onChange={setColor} />
-                      <button className={styles.button__colors} onClick={()=> setIsViewColor(false)}>Закрыть</button>
+                      {/* <button className={styles.button__colors} onClick={()=> setIsViewColor(false)}>Закрыть</button> */}
+                      <button className={styles.button__colors} onClick={()=> setViewColor({id: option.id, isView:false})}>Закрыть</button>
                     </div>
                   </div>
                 }
@@ -200,11 +215,15 @@ const OptionBlock: FC<IOptionBlock> = ({option, index, listItems, setListItems, 
             <input type="text" style={{width: objStyleField.one}} className={styles.field} value={listItems[index].name} onChange={(e) => handleChange(e.target.value, option.id)}/>
             <div className={styles.solo__block} style={{width: 'calc(279/1440*100vw)'}}>
               {/* <svg className={styles.img__close} style={option.color ? {color: `#${option.color}`} : {color: 'rgba(0, 0, 0, .6)'}} onClick={()=> setIsViewIcon(true)}> */}
-              <svg className={styles.img__close} style={{color: color}} onClick={()=> setIsViewIcon(true)}>
+              <svg className={styles.img__close} style={{color: color}} onClick={()=> setViewIcon({id: option.id, isView:true})}>
+              {/* <svg className={styles.img__close} style={{color: color}} onClick={()=> setIsViewIcon(true)}> */}
                 <use xlinkHref={`/images/svg/sprite.svg#${option.icon_name}`}></use>
               </svg>
-              {
+              {/* {
                 isViewIcon && <ChoiceIcon setIsViewIcon={setIsViewIcon} setListItems={setListItems} option={option} />
+              } */}
+              {
+                (viewIcon.id === option.id && viewIcon.isView) && <ChoiceIcon setViewIcon={setViewIcon} setListItems={setListItems} option={option} />
               }
             </div>          
           </>
@@ -215,15 +234,24 @@ const OptionBlock: FC<IOptionBlock> = ({option, index, listItems, setListItems, 
             <input type="text" style={{width: objStyleField.one}} className={styles.field} value={listItems[index].name} onChange={(e) => handleChange(e.target.value, option.id)}/>
 
             <div className={styles.solo__block} style={{width: 'calc(279/1440*100vw)'}}>
-              <div className={styles.block} style={{backgroundColor: typeof color === 'string' ? color : 'rgba(0, 0, 0, .6)'}} onClick={() => setIsViewColor(true)}></div>
-              { isViewColor &&
+            <div className={styles.block} style={{backgroundColor: color, border: '1px solid rgba(0, 0, 0, 0.3)'}} onClick={() => setViewColor({id: option.id, isView:true})}></div> 
+              {/* { isViewColor &&
                 <div className={styles.block__colors_parent}>
                   <div className={styles.block__colors}>
                     <HexColorPicker color={color} onChange={setColor} />
                     <button className={styles.button__colors} onClick={()=> setIsViewColor(false)}>Закрыть</button>
                   </div>
                 </div>
-              }
+              } */}
+              { (viewColor.id === option.id && viewColor.isView) &&
+                  <div className={styles.block__colors_parent}>
+                    <div className={styles.block__colors}>
+                      <HexColorPicker color={color} onChange={setColor} />
+                      {/* <button className={styles.button__colors} onClick={()=> setIsViewColor(false)}>Закрыть</button> */}
+                      <button className={styles.button__colors} onClick={()=> setViewColor({id: option.id, isView:false})}>Закрыть</button>
+                    </div>
+                  </div>
+                }
             </div>
           </>
         )

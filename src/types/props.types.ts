@@ -14,6 +14,7 @@ export interface IRenderMarkers {
 
 export interface IIconMarker {
 	object: IDataObjectInfo;
+	size: any
 }
 
 export interface IFlyToLocation {
@@ -110,10 +111,15 @@ export interface IOptionBlock {
 	handleChange: any;
 	deleteOption: any;
 	setListItems: any;
+	viewColor: any; 
+	setViewColor: Dispatch<SetStateAction<any>>
+	viewIcon:any; 
+	setViewIcon: Dispatch<SetStateAction<any>>
 }
 
 export interface IChoiceIcon {
 	option: {id: number, name: string, icon_name?: string, color?: string};
 	setListItems: any;
-	setIsViewIcon: Dispatch<SetStateAction<boolean>>;
+	// setIsViewIcon: Dispatch<SetStateAction<boolean>>;
+	setViewIcon:Dispatch<SetStateAction<any>>
 }

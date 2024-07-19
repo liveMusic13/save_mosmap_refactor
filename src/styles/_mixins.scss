@@ -1,0 +1,5 @@
+@mixin aspect-ratio-query($min-ratio, $max-ratio) {
+  @media screen and (min-aspect-ratio: $min-ratio) and (max-aspect-ratio: $max-ratio) {
+    @content;
+  }
+}

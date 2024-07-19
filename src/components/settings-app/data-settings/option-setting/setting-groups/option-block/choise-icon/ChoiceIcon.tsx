@@ -4,7 +4,7 @@ import { FC } from 'react'
 import { useSelector } from 'react-redux'
 import styles from './ChoiceIcon.module.scss'
 
-const ChoiceIcon: FC<IChoiceIcon> = ({setIsViewIcon, setListItems, option}) => {
+const ChoiceIcon: FC<IChoiceIcon> = ({ setListItems, option, setViewIcon}) => {
   const {getIcons} = useSelector((state: RootState) => state.dataSettings)
 
   const addIcon = (icon:string) => {
@@ -19,7 +19,8 @@ const ChoiceIcon: FC<IChoiceIcon> = ({setIsViewIcon, setListItems, option}) => {
       return updatedData;
     });
   
-    setIsViewIcon(false);
+    // setIsViewIcon(false);
+    setViewIcon({id: option.id, isView:false})
   }
 
   return (
@@ -34,7 +35,8 @@ const ChoiceIcon: FC<IChoiceIcon> = ({setIsViewIcon, setListItems, option}) => {
           )
         }
       </div>
-      <button className={styles.button__colors} onClick={()=> setIsViewIcon(false)}>Закрыть</button>
+      {/* <button className={styles.button__colors} onClick={()=> setIsViewIcon(false)}>Закрыть</button> */}
+      <button className={styles.button__colors} onClick={()=> setViewIcon({id: option.id, isView:false})}>Закрыть</button>
     </div>
   )
 }

@@ -54,7 +54,8 @@
 		}
 
 		&:hover {
-			cursor: pointer;
+			// cursor: pointer;
+      cursor: default;
 		}
   }
   
@@ -81,7 +82,8 @@
     }
 
 		&:hover {
-			cursor: pointer;
+			// cursor: pointer;
+      cursor: default;
 		}
   }
 }

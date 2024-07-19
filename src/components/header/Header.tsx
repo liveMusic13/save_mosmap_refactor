@@ -30,6 +30,10 @@ export function Header({data}:any) {
 	const { width } = useWindowDimensions();
 	const {isAuth} = useAuth()
 	const searchParams = new URLSearchParams(window.location.search);
+
+	/////
+  const title = useSelector((state:RootState) => state.dataMapSettings.data.title)
+	////
 	
 	const isEdit = accessiblyMap.some(elem => elem === map)
 
@@ -103,9 +107,14 @@ export function Header({data}:any) {
 				<div className={styles.block__title}>
 					<div className={styles.line}></div>
 					<div className={styles.line}></div>
-					<h1 className={styles.title}>
+					<h1 className={styles.title} style={{opacity: '0', position: 'absolute', top:'0', left: '0'}}>
 							{data.title
 							? data.title
+							: 'Тестовая карта'}
+					</h1>
+					<h1 className={styles.title}>
+							{title
+							? title
 							: 'Тестовая карта'}
 					</h1>
 				</div>

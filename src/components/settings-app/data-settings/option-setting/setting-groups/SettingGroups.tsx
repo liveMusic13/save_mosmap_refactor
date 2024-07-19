@@ -15,6 +15,9 @@ const SettingGroups: FC = () => {
   const {dataIdGroups} = useSelector((state: RootState) => state.dataMapSettings)
   const [listItems, setListItems] = useState<any>([])
   const optionsRef = useRef<any>(null);
+  const [viewColor, setViewColor] = useState({id: null, isView: false}) //HELP: ЧТОБЫ ЕСЛИ ОДИН ИЗ ЦВЕТОВ ОТКРЫТ И ТЫ НАЖАЛ НА ДРУГОЙ, ТО ПРЕДЫДУЩИЙ ЗАКРЫЛСЯ И ТАК ЖЕ ДЛЯ ИКОНОК
+  const [viewIcon, setViewIcon] = useState({id: null, isView: false})
+
 
   useEffect(()=> {
     const addData = async () => {
@@ -123,7 +126,7 @@ const SettingGroups: FC = () => {
     }
 
   }
-
+  console.log(window.innerWidth, window.innerHeight)
   return (
     <div className={styles.wrapper_settingsGroup}>
       <h2 className={styles.title}>Настроить группу</h2>
@@ -139,7 +142,7 @@ const SettingGroups: FC = () => {
         <div className={styles.block__options} ref={optionsRef}>
           {
             listItems.map((option:{id: number, name: string}, index:number)=> (
-              <OptionBlock key={option.id} option={option} index={index} listItems={listItems} handleChange={handleChange} deleteOption={deleteOption} setListItems={setListItems} />
+              <OptionBlock key={option.id} option={option} index={index} listItems={listItems} handleChange={handleChange} deleteOption={deleteOption} setListItems={setListItems} viewColor={viewColor} setViewColor={setViewColor} viewIcon={viewIcon} setViewIcon={setViewIcon} />
             ))
           }
         </div>
