@@ -6,6 +6,54 @@ import { actions as viewSettingsAction } from "@/store/view-settings/viewSetting
 import { IDataObjectInfo, IMarker } from "@/types/slice.types";
 import axios from "axios";
 
+
+
+// const cache = new Map();
+
+// const fetchWithCache = async (dispatch, adresFilterString, map) => {
+//   const cacheKey = adresFilterString.srcRequest === '' ? `map-${map}` : `request-${adresFilterString.srcRequest}`;
+//   const cacheData = cache.get(cacheKey);
+
+//   console.log(`Checking cache for key: ${cacheKey}`);
+//   if (cacheData) {
+//     console.log(`Cache data found for key: ${cacheKey}, checking timestamp...`);
+//     if (Date.now() - cacheData.timestamp < 7000) {
+//       console.log(`Returning data from cache for key: ${cacheKey}`);
+//       dispatch(dataObjectsInMapAction.addDataObjectsInMap(cacheData.data));
+//       return cacheData.data; // возвращаем данные из кэша
+//     } else {
+//       console.log(`Cache expired for key: ${cacheKey}, making new request...`);
+//     }
+//   } else {
+//     console.log(`No cache data found for key: ${cacheKey}, making new request...`);
+//   }
+
+//   try {
+//     dispatch(viewSettingsAction.activeLoading(''));
+//     let response;
+//     if (adresFilterString.srcRequest === '') {
+//       response = await $axios.get(`/api/get_objects.php?map=${map}`);
+//     } else {
+//       response = await $axios.get(`/api/get_objects.php${adresFilterString.srcRequest}`);
+//       console.log('map', adresFilterString.srcRequest);
+//     }
+//     dispatch(dataObjectsInMapAction.addDataObjectsInMap(response.data));
+
+//     // Сохраняем данные в кэш с текущим временем
+//     cache.set(cacheKey, { data: response.data, timestamp: Date.now() });
+//     console.log(`Cache updated for key: ${cacheKey}`);
+//     return response.data; // возвращаем свежие данные
+//   } catch (error) {
+//     console.log(error);
+//   } finally {
+//     dispatch(viewSettingsAction.defaultLoading(''));
+//   }
+// };
+
+// const fetchDebounced = debounce(fetchWithCache, 4000, {
+//   leading: true,
+//   trailing: false
+// });
 export const mapService = {
   getObjectFunc: async (dispatch:any, adresFilterString:any, map:string) => {
 		try {
@@ -26,6 +74,12 @@ export const mapService = {
 			dispatch(viewSettingsAction.defaultLoading(''));
 		}
 	},
+
+	// getObjectFunc: (dispatch:any, adresFilterString:any, map:any) => {
+  //   return fetchDebounced(dispatch, adresFilterString, map);
+  // },
+
+
   getInfoObject: (marker: IMarker | IDataObjectInfo, dispatch: any, isMobile:boolean) => async () => {
 		//HELP: ЗАПРОС НА ПОЛУЧЕНИЕ ИНФОРМАЦИИ ОБ ОБЪЕКТЕ
 		if (isMobile) dispatch(viewSettingsAction.activeSettingsMap(''));

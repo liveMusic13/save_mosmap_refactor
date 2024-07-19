@@ -107,7 +107,7 @@ export function Header({data}:any) {
 				<div className={styles.block__title}>
 					<div className={styles.line}></div>
 					<div className={styles.line}></div>
-					<h1 className={styles.title} style={{opacity: '0', position: 'absolute', top:'0', left: '0'}}>
+					<h1 className={styles.title} style={{opacity: '0', position: 'absolute', top:'0', left: '0', zIndex: '-20'}}>
 							{data.title
 							? data.title
 							: 'Тестовая карта'}

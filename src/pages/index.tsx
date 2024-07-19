@@ -29,17 +29,6 @@ export default function Home({data, dataFilters}:any) {
 	const { getObject } = useInitRequest();
 	const [initApp, setInitApp] = useState(false);
 
-	/////
-	const [dynamicData, setDynamicData] = useState(data);
-	const updateTitle = (newTitle: string) => {
-    setDynamicData((prevData:any) => ({
-      ...prevData,
-      title: newTitle,
-    }));
-  };
-
-/////
-
 	useEffect(() => {
 		if (adresFilterString.srcRequest !== '') {
 			setInitApp(true);

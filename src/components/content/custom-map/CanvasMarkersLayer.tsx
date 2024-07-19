@@ -13,6 +13,7 @@ import { mapService } from '@/services/map.service';
 import { actions as dataObjectsInMapAction } from '@/store/data-objects-in-map/dataObjectsInMap.slice';
 import { ARGBtoHEX } from '@/utils/convertColor';
 import { getIconForMarker } from '@/utils/iconForMarker';
+import { iconSizeDynamic } from '@/utils/iconSizeFunc';
 
 const CanvasMarkersLayer: FC<ICanvasMarkersLayer> = ({
 	markersData,
@@ -32,6 +33,10 @@ const CanvasMarkersLayer: FC<ICanvasMarkersLayer> = ({
 	const bounds = map.getBounds(); //HELP: ФУНКЦИЯ ПОЛУЧЕНИЯ КООРДИНАТ В ОБЛАСТИ ВИДИМОСТИ
 	const canvasLayerRef = useRef<Canvas | null>(null);
 	const targetMarker = useRef<L.Marker<any> | null>(null);
+
+	const {data} = useSelector(
+		(state: RootState) => state.dataMapSettings,
+	);
 
 	useEffect(() => {
 		if (canvasLayerRef.current) {
@@ -103,11 +108,13 @@ const CanvasMarkersLayer: FC<ICanvasMarkersLayer> = ({
 						mapObject.bindPopup(marker.name ? marker.name.toString() : 'No Name');
 					}
 				}
-	
+			
 				if (dataObjectInfo.id === marker.id && zoomLevelsForCircle < 16) {
 					const targetIcon = L.icon({
 						iconUrl: '../images/icons/target.svg',
-						iconSize: [60, 58],
+						// iconSize: [60, 58],
+						// iconAnchor: [22, 21],
+						iconSize: 	iconSizeDynamic(data.iconsize, true),
 						iconAnchor: [22, 21],
 					});
 	
@@ -158,11 +165,13 @@ const CanvasMarkersLayer: FC<ICanvasMarkersLayer> = ({
 					let svg = getIconForMarker(marker); //HELP: ПОЛУЧАЕМ МАРКЕР
 					let encodedSvg = encodeURIComponent(svg); //HELP: КОНВЕРТИРУЕМ В ССЫЛКУ
 					let dataUrl = 'data:image/svg+xml,' + encodedSvg; //HELP: ДОБАВЛЯЕМ К НЕМУ DATA И ТЕПЕРЬ ЭТО ССЫЛКА НА КАРТИНКУ
-
+					
 					const icon = L.icon({
 						//HELP: СОЗДАЕМ ИКОНКУ
 						iconUrl: dataUrl,
-						iconSize: [20, 18],
+						// iconSize: [20, 18],
+						// iconAnchor: [10, 9],
+						iconSize: iconSizeDynamic(data.iconsize, false),
 						iconAnchor: [10, 9],
 					});
 
@@ -173,11 +182,13 @@ const CanvasMarkersLayer: FC<ICanvasMarkersLayer> = ({
 					}).addTo(map);
 					// mapObject.options.title = marker.id ? String(marker.id) : ''
 					iconsRef.current.push(mapObject);
-
+				
 					if (dataObjectInfo.id === marker.id) {
 						const targetIcon = L.icon({
 							iconUrl: '../images/icons/target.svg',
-							iconSize: [60, 58],
+							// iconSize: [60, 58],
+							// iconAnchor: [22, 21],
+							iconSize: iconSizeDynamic(data.iconsize, true),
 							iconAnchor: [22, 21],
 						});
 

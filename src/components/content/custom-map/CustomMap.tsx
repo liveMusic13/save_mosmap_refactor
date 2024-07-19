@@ -15,6 +15,7 @@ import FlyToLocation from './FlyToLocation';
 import RenderMarkers from './RenderMarkers';
 import ZoomTracker from './ZoomTracker';
 
+import { useInitRequest } from '@/hooks/useInitRequest';
 import { actions as mapLayersAction } from '@/store/map-layers/mapLayers.slice';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import ClosePopup from './ClosePopup';
@@ -73,29 +74,44 @@ export function CustomMap() {
 		})
 	}
 
+
+	const data = useSelector((state:RootState) => state.dataMapSettings)
+	const { getObject } = useInitRequest();
+	useEffect(()=> {
+		getObject()
+	}, [data])
+
+	const maxBounds = (dataObjectsInMap.points.bounds && dataObjectsInMap.points.bounds !== "[[null, null], [null, null]]") 
+  ? JSON.parse(dataObjectsInMap.points.bounds) 
+  : undefined;
+
+	console.log(zoomLevel, dataObjectsInMap.points.zoom_min, dataObjectsInMap.points.zoom_max)
+
 	return (
 		<MapContainer
 			center={center}
 			zoom={13}
-			minZoom={10}
-			maxZoom={17}
+			minZoom={dataObjectsInMap.points.zoom_max}
+			maxZoom={dataObjectsInMap.points.zoom_min}
 			style={{ width: '100%', height: '98%' }}
-			maxBounds={[
-				[56.934709, 35.189603], //HELP: Северо-западные координаты
-				[54.294416, 40.128181], //HELP: Юго-восточные координаты
-			]}
-			// maxBounds={undefined}
+			// maxBounds={[
+			// 	[56.934709, 35.189603], //HELP: Северо-западные координаты
+			// 	[54.294416, 40.128181], //HELP: Юго-восточные координаты
+			// ]}
+			maxBounds={maxBounds}
 		>
-			<TileLayer url='https://www.moscowmap.ru/leaflet/tiles/{z}/{x}/{y}.png' />
+			{/* <TileLayer url='https://www.moscowmap.ru/leaflet/tiles/{z}/{x}/{y}.png' /> */}
+			{/* <TileLayer url={test} /> */}
+			<TileLayer url={dataObjectsInMap.points.tiles_url ? dataObjectsInMap.points.tiles_url : 'https://www.moscowmap.ru/leaflet/tiles/{z}/{x}/{y}.png'} />
 			<ZoomTracker setZoomLevel={setZoomLevel} />
 			{dataObjectsInMap.points.canvas_map === 0 ? (
 				dataObjectsInMap.points.clastering === 0 ? (
-					<RenderMarkers isMobile={isMobile} zoomLevel={zoomLevel} /> //TODO: СДЕЛАТЬ РАЗМЕРЫ МАРКЕРОВ ВЗЯТЫЕ ИЗ ДАННЫХ КАРТЫ
+					<RenderMarkers isMobile={isMobile} zoomLevel={zoomLevel} /> 
 				) : (
 					<MarkerClusterGroup chunkedLoading={true}>
 						<RenderMarkers isMobile={isMobile} zoomLevel={zoomLevel} />
 					</MarkerClusterGroup>
-				)//TODO: СДЕЛАТЬ РАЗМЕРЫ МАРКЕРОВ ВЗЯТЫЕ ИЗ ДАННЫХ КАРТЫ
+				)
 			) : (
 				<CanvasMarkersLayer
 					isMobile={isMobile}
