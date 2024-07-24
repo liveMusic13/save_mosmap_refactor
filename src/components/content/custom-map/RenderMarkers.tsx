@@ -17,7 +17,6 @@ import { actions as viewSettingsAction } from '@/store/view-settings/viewSetting
 import { ARGBtoHEX } from '@/utils/convertColor';
 
 import { $axios } from '@/api';
-import { mapService } from '@/services/map.service';
 import { iconSizeDynamic } from '@/utils/iconSizeFunc';
 
 const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
@@ -85,6 +84,7 @@ const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 
 					if (zoomLevel >= 16 && object.polygon && object.polygon.length > 0) {
 						//HELP: Если уровень зума 16 или больше и у объекта есть полигон, отображаем полигон
+						console.log('polygon')
 						return (
 							<Polygon
 								key={`${object.id}-${dataObjectInfo.id === object.id}`}
@@ -94,7 +94,8 @@ const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 										? 'black'
 										: ARGBtoHEX(object.color ? object.color : '000')
 								}
-								eventHandlers={{ click: !editingObjects.isActiveEditButton ? ()=> mapService.getInfoObject(object, dispatch, isMobile) : undefined, }}
+								// eventHandlers={{ click: !editingObjects.isActiveEditButton ? ()=> mapService.getInfoObject(object, dispatch, isMobile) : undefined, }}
+								eventHandlers={{ click: !editingObjects.isActiveEditButton ? getObjectInfo : undefined, }}
 								weight={dataObjectInfo.id === object.id ? 6 : 3}
 							>
 								{editingObjects.isActiveEditButton ? null : <Popup>{object.name}</Popup>}
@@ -102,6 +103,7 @@ const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 						);
 					} else {
 						//HELP: Иначе отображаем маркер
+						console.log('marker')
 						if (dataObjectInfo.id === object.id) {
 							customMarkerIcon = L.icon({
 								iconUrl: '../images/icons/target.svg',

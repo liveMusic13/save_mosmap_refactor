@@ -16,5 +16,7 @@ export function iconSizeDynamic(
   //   return [result1, result2];
   // }
 
-  return multiplyAndRound ? [round(inputNumber * 2.3, 1), round(inputNumber * 2.3, 1)] : [inputNumber, inputNumber]
+  // return multiplyAndRound ? [round(inputNumber * 2.3, 1), round(inputNumber * 2.3, 1)] : [inputNumber, inputNumber]
+  return multiplyAndRound ? [round(inputNumber * 2.3, 1), round(inputNumber * 2.3, 1)] : [23, 23]
+
 }

@@ -34,6 +34,7 @@
 		width: 100%;
 		overflow-y: auto;
 		overflow-x: hidden;
+		position: relative;
 
 		&::-webkit-scrollbar {
 			width: adapt(10px, 1440px);
@@ -53,6 +54,10 @@
 			height: adapt(53px, 1440px);
 			border-top: 1px solid $color_four;
 			border-bottom: 1px solid $color_four;
+			position: fixed;
+			bottom: 0.5%;
+			left: 0;
+			width: adapt(290px, 1440px);
 
 			@media (max-width: 767.98px) {
 				height: adapt(300px, 1440px);

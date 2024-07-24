@@ -38,8 +38,10 @@
   >.input__checkbox {
     position: absolute;
     left: 0;
-    top: 30%;
+    top: 20%;
     opacity: 0;
+    width: adapt(25px, 1440px);
+    height: adapt(25px, 1440px);
 
     &:hover {
       cursor: pointer;
@@ -59,6 +61,48 @@
     }
   }
 
+  // >.image__checkbox {
+  //   width: adapt(35px, 1440px);
+  //   height: adapt(35px, 1440px);
+
+  //   /*TABLE*/
+  //   @media (max-width: 991.98px) {
+  //     width: adapt(50px, 1440px);
+  //     height: adapt(50px, 1440px);
+  //   }
+
+  //   @media (max-width: 767.98px) {
+  //     width: adapt(70px, 1440px);
+  //     height: adapt(70px, 1440px);
+  //   }
+  // }
+
+  // >.input__checkbox {
+  //   position: absolute;
+  //   left: 0;
+  //   top: 20%;
+  //   opacity: 0;
+  //   width: adapt(35px, 1440px);
+  //   height: adapt(35px, 1440px);
+
+  //   &:hover {
+  //     cursor: pointer;
+  //   }
+
+  //   /*TABLE*/
+  //   @media (max-width: 991.98px) {
+  //     width: adapt(50px, 1440px);
+  //     height: adapt(50px, 1440px);
+  //     top: 0;
+  //   }
+
+  //   @media (max-width: 767.98px) {
+  //     width: adapt(70px, 1440px);
+  //     height: adapt(70px, 1440px);
+  //     top: 10%;
+  //   }
+  // }
+
   >span {
     font-size: 1rem;
     color: $color_eight;
@@ -66,6 +110,10 @@
     /*TABLE*/
     @media (max-width: 991.98px) {
       font-size: 1.25rem;
+    }
+
+    &:hover {
+      cursor: pointer;
     }
   }
 }
