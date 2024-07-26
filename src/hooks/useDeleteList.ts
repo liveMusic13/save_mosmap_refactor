@@ -3,12 +3,12 @@ import { actions as dataSettingsAction } from "@/store/data-settings/dataSetting
 import { RootState } from "@/store/store"
 import { useDispatch, useSelector } from "react-redux"
 
-export const useDeleteField = () => {
+export const useDeleteList = () => {
   const dispatch = useDispatch()
   const {deleteId} = useSelector((state:RootState)=> state.popupEdit)
 
-  const deleteFieldFunc = async () => {
-    const data = await settingsService.deleteField(deleteId) 
+  const deleteListFunc = async () => {
+    const data = await settingsService.deleteList(deleteId) 
 
     if (data?.delete) {
       console.log('data.id', )
@@ -16,5 +16,5 @@ export const useDeleteField = () => {
     }
   }
 
-  return {deleteFieldFunc}
+  return {deleteListFunc}
 }

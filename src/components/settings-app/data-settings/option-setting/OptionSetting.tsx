@@ -179,7 +179,7 @@ const OptionSetting: FC<IOptionSetting> = ({ title, data, index, length }) => {
               className={styles.checkbox}
               checked={checkedStates[idx]}
               onChange={handleCheckboxChange(idx, field)}
-              // disabled
+              disabled
             />
             {(field === 'mode' || field === 'address' || field === 'visible') ? (
               checkedStates[idx] ? (

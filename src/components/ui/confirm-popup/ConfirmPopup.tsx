@@ -1,4 +1,4 @@
-import { useDeleteField } from '@/hooks/useDeleteField'
+import { useDeleteList } from '@/hooks/useDeleteList'
 import { useDeleteMarker } from '@/hooks/useDeleteMarker'
 import { useDeleteObject } from '@/hooks/useDeleteObject'
 import { RootState } from '@/store/store'
@@ -14,11 +14,10 @@ const ConfirmPopup: FC<{popupFor?: string}> = ({popupFor}) => {
   const dispatch = useDispatch()
   const {deleteObject} = useDeleteObject()
   const {deleteMarker} = useDeleteMarker()
-  const { deleteFieldFunc } = useDeleteField()
+  const { deleteListFunc } = useDeleteList()
 
   const _onClick = async (buttonText: string) => {
     if (buttonText === 'Отмена') {
-      console.log('fsdfsdfs')
       dispatch(viewSettingsAction.defaultIsViewPopupMarker(''));
       dispatch(viewSettingsAction.defaultIsViewPopupObject(''));
     } else {
@@ -36,7 +35,7 @@ const ConfirmPopup: FC<{popupFor?: string}> = ({popupFor}) => {
     if (buttonText === 'Отмена') {
       dispatch(viewSettingsAction.defaultIsViewDeletePopup(''))
     } else {
-      await deleteFieldFunc()
+      await deleteListFunc()
       dispatch(viewSettingsAction.defaultIsViewDeletePopup(''))
     }
   }

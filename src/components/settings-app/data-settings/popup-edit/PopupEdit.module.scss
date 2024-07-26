@@ -145,6 +145,8 @@
   position: absolute;
   z-index: 1;
   opacity: 0;
+  width: adapt(20px, 1440px);
+  height: adapt(20px, 1440px);
 
   &:hover {
     cursor: pointer;

@@ -68,9 +68,17 @@ export const settingsService = {
       console.log(error);
     }
   },
-  deleteField: async (id:number) => {
+  // deleteField: async (id:number) => {
+  //   try {
+  //     const {data} = await $axiosAuth.get(`/api/delete_field.php?id=${id}`)
+  //     return data
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // },
+  deleteList: async (id:number) => {
     try {
-      const {data} = await $axiosAuth.get(`/api/delete_field.php?id=${id}`)
+      const {data} = await $axiosAuth.get(`/api/delete_list.php?id=${id}`)
       return data
     } catch (error) {
       console.log(error);
