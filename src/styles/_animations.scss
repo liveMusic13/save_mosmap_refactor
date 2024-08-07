@@ -1,6 +1,38 @@
 @import './variables';
 @import './functions';
 
+@keyframes auth-label-not-focus__import {
+	0% {
+		top: 0%;
+		color: $color_two;
+		font-size: 0.81rem;
+	}
+	100% {
+		top: 50%;
+		color: $color_eight;
+		font-size: 1rem;
+	}
+}
+
+@keyframes auth-label__import {
+	0% {
+		top:50%;
+
+		@media (max-width: 991.98px) {
+			top: 60%;
+		}
+	}
+	100% {
+		top: 0%;
+		color: $color_two;
+		font-size: 0.81rem;
+
+		@media (max-width: 991.98px) {
+			font-size: 1.4rem;
+		}
+	}
+}
+
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%;

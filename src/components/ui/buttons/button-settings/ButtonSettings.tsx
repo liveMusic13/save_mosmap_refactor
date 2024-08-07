@@ -8,6 +8,8 @@ const ButtonSettings: FC<IButtonEditing> = ({icon}) => {
   const dispatch = useDispatch()
 
   const _onClick = () => {
+    if (icon.id === 16) dispatch(viewSettingsAction.activeIsViewExport(''))
+    if (icon.id === 15) dispatch(viewSettingsAction.activeIsViewImport(''))
     if (icon.id === 14) dispatch(viewSettingsAction.activeSettingsApp(''))
     if (icon.id === 13) dispatch(viewSettingsAction.activeSettingsData(''))
   }

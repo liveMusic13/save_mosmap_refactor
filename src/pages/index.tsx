@@ -68,7 +68,7 @@ export default function Home({data, dataFilters}:any) {
 			<div style={{ height: '100%' }}>
 				<Content data={data} />
 				{viewSettings.isSettingsMap && <SettingsMap />}
-				{(viewSettings.isSettingsApp || viewSettings.isSettingsData) && <SettingsApp/> }
+				{(viewSettings.isSettingsApp || viewSettings.isSettingsData || viewSettings.isViewImport || viewSettings.isViewExport) && <SettingsApp/> }
 			</div>
 		</>
 	);

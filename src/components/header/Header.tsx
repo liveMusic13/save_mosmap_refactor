@@ -1,19 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux';
-
-import Button from '@/components/ui/buttons/button/Button';
-
-import { RootState } from '@/store/store';
-
 import { ACCESSIBLYMAP } from '@/app.constants';
+import Button from '@/components/ui/buttons/button/Button';
 import { useAuth } from '@/hooks/useAuth';
 import { useSaveObject } from '@/hooks/useSaveObject';
 import useWindowDimensions from '@/hooks/useWindowDimensions';
+import { RootState } from '@/store/store';
 import { actions as viewSettingsAction } from '@/store/view-settings/viewSettings.slice';
 import Cookies from 'js-cookie';
+import { useDispatch, useSelector } from 'react-redux';
 import ButtonEditing from '../ui/buttons/button-editing/ButtonEditing';
 import ButtonSettings from '../ui/buttons/button-settings/ButtonSettings';
 import styles from './Header.module.scss';
-import { arrayEditingObjects, arrayNumIcons, arrayNumMenuIcons, arrayNumSettingIcons } from './icons.data';
+import { arrayEditingObjects, arrayImportExport, arrayNumIcons, arrayNumMenuIcons, arrayNumSettingIcons } from './icons.data';
 
 export function Header({data}:any) {
 	const dispatch = useDispatch()
@@ -50,23 +47,29 @@ export function Header({data}:any) {
 					</div>
 					)
 				}
-				{ !(width && width <= 767.98) && <>
-				
-					{	(isAuth && isEdit1) && 
-						arrayEditingObjects.map(icon => {
-							return <ButtonEditing key={icon.id} icon={icon} />;
-						})
-					}
-					<div className={styles.line}></div>
-					{ arrayNumIcons.map(icon => {
-						return <Button key={icon.id} icon={icon} />;
-					})}
-					<div className={styles.line}></div>
-				{ (isAuth && isEdit1) && 
-					(arrayNumSettingIcons.map(icon => {
-						return <ButtonSettings key={icon.id} icon={icon} />
-					}))
-				}
+				{ !(width && width <= 767.98) && 
+					<>
+						{	(isAuth && isEdit1) && 
+							arrayEditingObjects.map(icon => {
+								return <ButtonEditing key={icon.id} icon={icon} />;
+							})
+						}
+						<div className={styles.line}></div>
+						{ arrayNumIcons.map(icon => {
+							return <Button key={icon.id} icon={icon} />;
+						})}
+						<div className={styles.line}></div>
+						{ (isAuth && isEdit1) && 
+							(arrayImportExport.map(icon => {
+								return <ButtonSettings key={icon.id} icon={icon} />
+							}))
+						}
+						<div className={styles.line}></div>
+						{ (isAuth && isEdit1) && 
+							(arrayNumSettingIcons.map(icon => {
+								return <ButtonSettings key={icon.id} icon={icon} />
+							}))
+						}
 					</>
 				}
 

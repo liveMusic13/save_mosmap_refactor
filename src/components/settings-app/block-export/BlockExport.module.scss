@@ -1,0 +1,404 @@
+@import '../../../styles/variables';
+@import '../../../styles/functions';
+@import '../../../styles/animations';
+
+.block__import {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 3px 1px -2px rgba(42, 70, 115, .2), 0 2px 2px 0 rgba(42, 70, 115, .14), 0 1px 5px 0 rgba(42, 70, 115, .12);
+  width: adapt(484px, 1440px);
+  height: adapt(480px, 1440px);
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    // width: adapt(884px, 1440px);
+    // height: adapt(650px, 1440px);
+    width: adapt(484px, 791px);
+    height: adapt(480px, 791px);
+  }
+
+  @media (max-width: 767.98px) {
+    width: adapt(484px, 580px);
+    height: adapt(440px, 580px);
+    top: 60%;
+  }
+
+  @media (max-width: 630.98px) {
+    top: 50%;
+  }
+}
+
+.title {
+  font-size: 1.12rem;
+  font-weight: bold;
+  padding: adapt(12px, 1440px);
+  border-bottom: 1px solid $color_seven;
+  background-color: $color_eleven;
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    padding: adapt(12px, 791px);
+  }
+
+  @media (max-width: 767.98px) {
+    padding: adapt(12px, 580px);
+  }
+}
+
+.block__form {
+  padding: adapt(16px, 1440px) adapt(12px, 1440px) adapt(24px, 1440px);
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    padding: adapt(16px, 791px) adapt(12px, 791px) adapt(24px, 791px);
+  }
+
+  @media (max-width: 767.98px) {
+    padding: adapt(16px, 580px) adapt(12px, 580px) adapt(24px, 580px);
+  }
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: adapt(10px, 1440px);
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid $color_twelve;
+  padding-bottom: adapt(16px, 1440px);
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    gap: adapt(10px, 791px);
+    padding-bottom: adapt(16px, 791px);
+  }
+
+  @media (max-width: 767.98px) {
+    gap: adapt(10px, 580px);
+    padding-bottom: adapt(16px, 580px);
+  }
+
+  >.input__file {
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    opacity: 0;
+    height: 100%;
+
+    &:hover + .button__input_file {
+      background-color: $color_two_light;
+      box-shadow:
+        0 3px 3px 0 rgba(0, 0, 0, 0.14),
+        0 1px 7px 0 rgba(0, 0, 0, 0.12),
+        0 3px 1px -1px rgba(0, 0, 0, 0.2);
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  >.name__file {
+    width: adapt(300px, 1440px);
+    height: adapt(48px, 1440px);
+    border-bottom: 1px solid $color_eight;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      width: adapt(300px, 791px);
+      height: adapt(48px, 791px);
+    }
+
+    @media (max-width: 767.98px) {
+      width: adapt(300px, 580px);
+      height: adapt(48px, 580px);
+    }
+  }
+
+  .isFile {
+    box-shadow: 0 1px 0 0 #4caf50;
+  }
+}
+
+.button__input_file {
+  width: adapt(148px, 1440px);
+  height: adapt(48px, 1440px);
+  text-transform: uppercase;
+  border-radius: 2px;
+  letter-spacing: 0.5px;
+  font-size: 0.81rem;
+  cursor: pointer;
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    // font-size: 0.7rem;
+    font-size: 0.9rem;
+    width: adapt(148px, 791px);
+    height: adapt(48px, 791px);
+  }
+
+  @media (max-width: 767.98px) {
+    width: adapt(148px, 570px);
+    height: adapt(48px, 570px);
+    font-size: 1rem;
+  }
+
+  color: $color_three;
+    background-color: $color_two;
+    box-shadow:
+      0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 3px 1px -2px rgba(0, 0, 0, 0.12),
+      0 1px 5px 0 rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      background-color: $color_two_light;
+      box-shadow:
+        0 3px 3px 0 rgba(0, 0, 0, 0.14),
+        0 1px 7px 0 rgba(0, 0, 0, 0.12),
+        0 3px 1px -1px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.row__two {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: adapt(30px, 1440px);
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid $color_twelve;
+  padding: adapt(16px, 1440px) 0px;
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    padding: adapt(16px, 791px) 0px;
+    gap: adapt(10px, 791px);
+  }
+
+  @media (max-width: 767.98px) {
+    padding: adapt(16px, 580px) 0px;
+    gap: adapt(10px, 580px);
+  }
+}
+
+.block__row_two {
+  width: 100%;
+  display: flex;
+  gap: adapt(10px, 1440px);
+}
+
+.block__input {
+  width: adapt(230px, 1440px);
+  height: adapt(79px, 1440px);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    width: adapt(230px, 791px);
+    height: adapt(79px, 791px);
+  }
+
+	@media (max-width: 767.98px) {
+    width: adapt(230px, 580px);
+    height: adapt(79px, 580px);
+	}
+
+  &:focus-within,
+  &.has_content {
+    .input__label{
+      animation: auth-label__import 1s ease 1 forwards;
+      
+      // /*TABLE*/
+      // @media (max-width: 991.98px) {
+      //   animation: auth-label_Table 1s ease 1 forwards;
+      // }
+
+			// @media (max-width: 767.98px) {
+			// 	animation: auth-label_adaptive 1s ease 1 forwards;
+			// }
+    }
+  }
+
+  >.input__label {
+    color: $color_eight;
+    // margin-left: adapt(12px, 1440px);
+    position: absolute;
+    z-index: 2;
+    animation: auth-label-not-focus__import 1s ease 1 forwards;
+
+    // /*TABLE*/
+    // @media (max-width: 991.98px) {
+    //   // margin-left: adapt(22px, 1440px);
+    //   animation: auth-label-not-focus_Table 1s ease 1 forwards;
+    // }
+
+		// @media (max-width: 767.98px) {
+    //   // margin-left: adapt(32px, 1440px);
+		//   animation: auth-label-not-focus_adaptive 1s ease 1 forwards;
+		// }
+
+		&:hover {
+			// cursor: pointer;
+      cursor: default;
+		}
+  }
+  
+  >.input__login{
+    // margin: adapt(16px, 1440px) adapt(12px, 1440px);
+    padding-top: adapt(10px, 1440px);
+    border-bottom: 1px solid $color_eight;
+    height: 80%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    // height: adapt(59px, 1440px);
+    outline: none;
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      padding-top: adapt(10px, 791px);
+    }
+
+		@media (max-width: 767.98px) {
+      padding-top: adapt(10px, 580px);
+		}
+
+    &:focus {
+      box-shadow: 0px 2px 2px $color_two;
+    }
+
+		&:hover {
+      cursor: text;
+		}
+  }
+}
+
+.block__select {
+  width: adapt(230px, 1440px);
+  height: adapt(79px, 1440px);
+  color: $color_two;
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    width: adapt(230px, 791px);
+    height: adapt(79px, 791px);
+  }
+
+  @media (max-width: 767.98px) {
+    width: adapt(230px, 580px);
+    height: adapt(79px, 580px);
+  }
+  
+  >.label__select {
+    padding-left: adapt(12px, 1440px);
+    font-size: 0.81rem;
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      padding-left: adapt(12px, 791px);
+    }
+
+    @media (max-width: 767.98px) {
+      padding-left: adapt(12px, 580px);
+		}
+  }
+}
+
+.download {
+  margin: adapt(20px, 1440px) 0px;
+  position: absolute;
+  // top: 50%;
+  bottom: 3%;
+  left: 100%;
+  transform: translateX(-113%);
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    margin: adapt(20px, 791px) 0px;
+  }
+
+  @media (max-width: 767.98px) {
+    margin: adapt(20px, 580px) 0px;
+  }
+}
+
+
+.block__checkbox {
+  display: flex;
+  align-items: center;
+  gap: adapt(15px, 1440px);
+  position: relative;
+  margin: 0px adapt(12px, 1440px);
+  
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    margin: 0px adapt(22px, 1440px);
+    gap: adapt(20px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    margin: 0px adapt(32px, 1440px);
+    gap: adapt(30px, 1440px);
+  }
+
+  >.image__checkbox {
+    width: adapt(25px, 1440px);
+    height: adapt(25px, 1440px);
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      width: adapt(40px, 1440px);
+      height: adapt(40px, 1440px);
+    }
+
+    @media (max-width: 767.98px) {
+      width: adapt(60px, 1440px);
+      height: adapt(60px, 1440px);
+    }
+  }
+
+  >.input__checkbox {
+    position: absolute;
+    left: 0;
+    top: 20%;
+    opacity: 0;
+    width: adapt(25px, 1440px);
+    height: adapt(25px, 1440px);
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      width: adapt(40px, 1440px);
+      height: adapt(40px, 1440px);
+      top: 0;
+    }
+
+    @media (max-width: 767.98px) {
+      width: adapt(60px, 1440px);
+      height: adapt(60px, 1440px);
+      top: 10%;
+    }
+  }
+  >span {
+    font-size: 1rem;
+    color: $color_eight;
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      font-size: 1.25rem;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

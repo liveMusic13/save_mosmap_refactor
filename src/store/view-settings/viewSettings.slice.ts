@@ -17,6 +17,8 @@ const initialState: IViewSettings = {
 	isViewDeletePopup: false,
 	isPopupSettingGroups: false,
 	isBurger: false,
+	isViewImport: false,
+	isViewExport: false,
 	editingObjects: {
 		isAddObject: true,
 		isEditObjects: false,
@@ -36,6 +38,18 @@ export const viewSettings = createSlice({
 	name: 'viewSettings',
 	initialState,
 	reducers: {
+		activeIsViewImport: (state, {payload}) => {
+			state.isViewImport = true;
+		},
+		defaultIsViewImport: (state, {payload}) => {
+			state.isViewImport = false;
+		},
+		activeIsViewExport: (state, {payload}) => {
+			state.isViewExport = true;
+		},
+		defaultIsViewExport: (state, {payload}) => {
+			state.isViewExport = false;
+		},
 		activeIsPopupSettingGroups: (state, {payload}) => {
 			state.isPopupSettingGroups = true;
 		},

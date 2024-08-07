@@ -29,6 +29,19 @@ export const arrayNumIcons: IIconsData[] = [
 	// },
 ];
 
+export const arrayImportExport: IIconsData[] = [
+	{
+		id: 15,
+		src: '/images/svg/sprite.svg#database-import',
+		hover_text: 'Импортировать данные'
+	},
+	{
+		id: 16,
+		src: '/images/svg/sprite.svg#database-export',
+		hover_text: 'Экспортировать данные'
+	},
+]
+
 export const arrayNumSettingIcons: IIconsData[] = [
 	{
 		id: 13,
