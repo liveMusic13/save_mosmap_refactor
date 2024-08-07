@@ -17,12 +17,13 @@
     // height: adapt(650px, 1440px);
     width: adapt(484px, 791px);
     height: adapt(480px, 791px);
+    top: 60%;
   }
 
   @media (max-width: 767.98px) {
     width: adapt(484px, 580px);
     height: adapt(440px, 580px);
-    top: 60%;
+   
   }
 
   @media (max-width: 630.98px) {
