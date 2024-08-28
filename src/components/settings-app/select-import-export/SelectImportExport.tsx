@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import styles from './SelectImportExport.module.scss';
 
-const SelectImportExport: FC<{data:string[]}> = ({data, targetOption, setTargetOption}) => {
+const SelectImportExport: FC<{data:string[], targetOption?: string, setTargetOption?: any}> = ({data, targetOption, setTargetOption}) => {
   const [isViewOptions, setIsViewOptions] = useState<boolean>(false);
   const [hoveredOption, setHoveredOption] = useState<string | null>(null);
   // const [targetOption, setTargetOption] = useState<string>('')
