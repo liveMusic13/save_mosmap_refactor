@@ -6,6 +6,7 @@ import { reducer as dataMapSettings } from './data-map-settings/dataMapSettings.
 import { reducer as dataObjectInfo } from './data-object-info/dataObjectInfo.slice';
 import { reducer as dataObjectsInMap } from './data-objects-in-map/dataObjectsInMap.slice';
 import { reducer as dataSettings } from './data-settings/dataSettings.slice';
+import { reducer as importExportData } from './import-export-data/ImportExportData.slice';
 import { reducer as mapLayers } from './map-layers/mapLayers.slice';
 import { reducer as popupEdit } from './popup-edit/popupEdit.slice';
 import { reducer as userMap } from './user-map/userMap.slice';
@@ -22,6 +23,7 @@ const reducers = combineReducers({
 	dataSettings: dataSettings,
 	popupEdit: popupEdit,
 	dataMapSettings: dataMapSettings,
+	importExportData,
 });
 
 export const store = configureStore({

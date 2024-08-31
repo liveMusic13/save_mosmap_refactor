@@ -51,17 +51,24 @@
 
 
 import { dataService } from '@/services/data.service'; // Импортируйте ваш сервис
+import { actions as importExportDataAction } from '@/store/import-export-data/ImportExportData.slice';
+import { actions as viewSettingsAction } from '@/store/view-settings/viewSettings.slice';
 import { truncateDescription } from '@/utils/descriptionLength';
+import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import SelectImportExport from '../select-import-export/SelectImportExport';
 import styles from './BlockImport.module.scss';
 
 const BlockImport: FC = () => {
+  const dispatch = useDispatch()
   const [nameFile, setNameFile] = useState<string>('');
   const [delimiter, setDelimiter] = useState<string>('');
   const [dataEncoding, setDataEncoding] = useState<string[]>(['Автоопределение', 'UTF-8', 'Windows-1251']);
   const [targetOption, setTargetOption] = useState<string>('')
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const {query} = useRouter()
+  
 
   const handleChangeRowTwo = (value: string) => {
     setDelimiter(value);
@@ -82,9 +89,10 @@ const BlockImport: FC = () => {
     }
 
     try {
-      const mapValue = 2; // Замените на реальное значение параметра map
-      await dataService.import(mapValue, selectedFile, delimiter, targetOption);
+      if (typeof query.map === 'string') dispatch(importExportDataAction.addImportOptions(await dataService.import(Number(query.map), selectedFile, delimiter, targetOption)))
+
       console.log('Файл успешно загружен');
+      dispatch(viewSettingsAction.activeIsImportSettingsData(''))
     } catch (error) {
       console.log('Ошибка при загрузке файла:', error);
     }

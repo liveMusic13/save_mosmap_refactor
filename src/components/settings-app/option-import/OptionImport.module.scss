@@ -1,0 +1,236 @@
+@import '../../../styles/variables';
+@import '../../../styles/functions';
+
+.wrapper_optionImport {
+  position: absolute;
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 3px 1px -2px rgba(42, 70, 115, .2), 0 2px 2px 0 rgba(42, 70, 115, .14), 0 1px 5px 0 rgba(42, 70, 115, .12);
+  width: adapt(824px, 1440px);
+  height: adapt(750px, 1440px);
+  overflow: hidden;
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    width: adapt(824px, 991px);
+    height: adapt(750px, 991px);
+  }
+
+  @media (max-width: 767.98px) {
+    height: adapt(1550px, 991px);
+  }
+}
+
+.block__title {
+  padding: adapt(12px, 1440px);
+  border-bottom: 1px solid $color_seven;
+  background-color: $color_eleven;
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    padding: adapt(12px, 791px);
+  }
+
+  @media (max-width: 767.98px) {
+    padding: adapt(12px, 580px);
+  }
+}
+
+.title {
+  font-size: 1.12rem;
+  font-weight: bold;
+}
+
+.block__content_wrapper {
+  overflow-y: scroll;
+  height: 93%;
+  padding-bottom: adapt(12px, 1440px);
+
+  @media (max-width: 767.98px) {
+    padding-bottom: adapt(64px, 1440px);
+  }
+}
+
+.block__content {
+  // height: 100%;
+  // height: adapt(650px, 1440px);
+  padding: adapt(24px, 1440px) adapt(12px, 1440px) 0px;
+  
+  display: flex;
+  flex-direction: column;
+  gap: adapt(20px, 1440px);
+}
+
+.block__one {
+  display: flex;
+  flex-wrap: wrap;
+  gap: adapt(24px, 1440px);
+  width: 100%;
+}
+
+.block__id {
+  padding-top: adapt(20px, 1440px);
+  border-top: 1px solid $color_twelve;
+  border-bottom: 1px solid $color_twelve;
+  padding-bottom: adapt(20px, 1440px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.block__coordinate {
+  border-bottom: 1px solid $color_twelve;
+  display: flex;
+  flex-wrap: wrap;
+  gap: adapt(24px, 1440px);
+  width: 100%;
+  padding-bottom: adapt(20px, 1440px);
+}
+
+.block__select {
+  width: adapt(230px, 1440px);
+  height: adapt(79px, 1440px);
+  color: $color_two;
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    width: adapt(230px, 791px);
+    height: adapt(79px, 791px);
+  }
+
+  @media (max-width: 767.98px) {
+    width: adapt(230px, 580px);
+    height: adapt(79px, 580px);
+  }
+  
+  >.label__select {
+    padding-left: adapt(12px, 1440px);
+    font-size: 0.81rem;
+    color: $color_eight;
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      padding-left: adapt(12px, 791px);
+    }
+
+    @media (max-width: 767.98px) {
+      padding-left: adapt(12px, 580px);
+		}
+  }
+}
+
+.button__send {
+  // margin: adapt(30px, 1440px) 0px adapt(20px, 1440px);
+  align-self: flex-end;
+
+  width: adapt(185px, 1440px);
+      height: adapt(45px, 1440px);
+      text-transform: uppercase;
+      border-radius: 2px;
+      letter-spacing: 0.5px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      /*TABLE*/
+      @media (max-width: 991.98px) {
+        // font-size: 0.7rem;
+        font-size: 0.9rem;
+        width: adapt(230px, 1440px);
+        height: adapt(75px, 1440px);
+      }
+
+      @media (max-width: 767.98px) {
+        width: adapt(365px, 1440px);
+        height: adapt(150px, 1440px);
+        font-size: 1rem;
+      }
+
+      color: $color_three;
+				background-color: $color_two;
+				box-shadow:
+					0 2px 2px 0 rgba(0, 0, 0, 0.14),
+					0 3px 1px -2px rgba(0, 0, 0, 0.12),
+					0 1px 5px 0 rgba(0, 0, 0, 0.2);
+
+				&:hover {
+					background-color: $color_two_light;
+					box-shadow:
+						0 3px 3px 0 rgba(0, 0, 0, 0.14),
+						0 1px 7px 0 rgba(0, 0, 0, 0.12),
+						0 3px 1px -1px rgba(0, 0, 0, 0.2);
+				}
+}
+
+.block__checkbox {
+  display: flex;
+  align-items: center;
+  gap: adapt(15px, 1440px);
+  position: relative;
+  margin: 0px adapt(12px, 1440px);
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    margin: 0px adapt(22px, 1440px);
+    gap: adapt(20px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    margin: 0px adapt(32px, 1440px);
+    gap: adapt(30px, 1440px);
+  }
+
+  >.image__checkbox {
+    width: adapt(25px, 1440px);
+    height: adapt(25px, 1440px);
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      width: adapt(40px, 1440px);
+      height: adapt(40px, 1440px);
+    }
+
+    @media (max-width: 767.98px) {
+      width: adapt(60px, 1440px);
+      height: adapt(60px, 1440px);
+    }
+  }
+
+  >.input__checkbox {
+    position: absolute;
+    left: 0;
+    top: 20%;
+    opacity: 0;
+    width: adapt(25px, 1440px);
+    height: adapt(25px, 1440px);
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      width: adapt(40px, 1440px);
+      height: adapt(40px, 1440px);
+      top: 0;
+    }
+
+    @media (max-width: 767.98px) {
+      width: adapt(60px, 1440px);
+      height: adapt(60px, 1440px);
+      top: 10%;
+    }
+  }
+
+  >span {
+    font-size: 1rem;
+    color: $color_eight;
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      font-size: 1.25rem;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

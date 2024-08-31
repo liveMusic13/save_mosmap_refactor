@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { IViewSettings } from '@/types/slice.types';
 
 const initialState: IViewSettings = {
+	isImportSettingsData: false,
 	isViewFilters: true,
 	isViewObjects: true,
 	isSettingsMap: false,
@@ -38,6 +39,12 @@ export const viewSettings = createSlice({
 	name: 'viewSettings',
 	initialState,
 	reducers: {
+		activeIsImportSettingsData: (state, {payload}) => {
+			state.isImportSettingsData = true;
+		},
+		defaultIsImportSettingsData: (state, {payload}) => {
+			state.isImportSettingsData = false;
+		},
 		activeIsViewImport: (state, {payload}) => {
 			state.isViewImport = true;
 		},

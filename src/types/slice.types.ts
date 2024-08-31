@@ -46,6 +46,7 @@ export interface IUserMap {
 }
 
 export interface IViewSettings {
+	isImportSettingsData: boolean;
 	isViewImport: boolean,
 	isViewExport: boolean,
 	isPopupSettingGroups: boolean;
