@@ -1,17 +1,5 @@
 import { $axiosAuth } from "@/api";
 
-// export const dataService = {
-//   import: async (map:number) => {
-//     try {
-//       const response = await $axiosAuth.get(`/api/import_load.php?map=${map}`)
-
-//       console.log(response.data)
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   },
-// }
-
 export const dataService = {
   import: async (map: number, file: File, separator: string, encoding: string) => {
     try {
@@ -26,6 +14,22 @@ export const dataService = {
           'Content-Type': 'multipart/form-data', // Указываем тип контента
         },
       });
+
+      console.log(response.data);
+
+      return response.data
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  import_done: async (map: number, separator: string, encoding: string, uploadfile: string) => {
+    try {
+      const formData = new FormData();
+      formData.append('uploadfile', uploadfile); // Добавляем uploadfile в FormData
+      formData.append('separator', separator); // Добавляем разделитель в FormData
+      formData.append('encoding', encoding); // Добавляем кодировку в FormData
+
+      const response = await $axiosAuth.post(`/api/import_done.php?map=${map}`, formData)
 
       console.log(response.data);
 

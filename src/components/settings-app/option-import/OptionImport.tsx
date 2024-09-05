@@ -1,4 +1,6 @@
+import { dataService } from '@/services/data.service'
 import { RootState } from '@/store/store'
+import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import SelectImportExport from '../select-import-export/SelectImportExport'
@@ -8,6 +10,7 @@ const OptionImport: FC = () => {
   const {option} = useSelector((state:RootState) => state.importExportData)
   const [targetOptions, setTargetOptions] = useState<{ [key: string]: string }>({});
   const [isCheckbox, setIsCheckbox] = useState(false)
+  const {query} = useRouter()
 
   useEffect(() => {
     const fields = { ...option.text_field, ...option.list_field };
@@ -72,6 +75,13 @@ const OptionImport: FC = () => {
     setIsCheckbox(!isCheckbox);
   };
 
+  const onClickSend = async () => {
+    if (typeof query.map === 'string') {
+      const response = await dataService.import_done(Number(query.map), option.separator, option.encoding, option.uploadfile)
+      console.log(response)
+    } 
+  }
+
   return (
     <div className={styles.wrapper_optionImport}>
       <div className={styles.block__title}>
@@ -102,7 +112,7 @@ const OptionImport: FC = () => {
           <div className={styles.block__coordinate}>
             {renderCoordinate()}
           </div>
-          <button className={styles.button__send}>отправить</button>
+          <button className={styles.button__send} onClick={onClickSend}>отправить</button>
         </div>
       </div>
     </div>
