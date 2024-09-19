@@ -16,12 +16,13 @@ import { arraySettingNames } from './settings.data'
 const SettingsApp: FC = () => {
   const dispatch = useDispatch()
   const {isSettingsApp, isSettingsData, isViewPopupSettings, isViewDeletePopup, isPopupSettingGroups, isViewImport, isViewExport, isImportSettingsData } = useSelector((state:RootState) => state.viewSettings)
-
+  
   const _onClick = () => {
     if (isSettingsApp) dispatch(viewSettingsAction.defaultSettingsApp(''))
     if (isSettingsData) dispatch(viewSettingsAction.defaultSettingsData(''))
     if (isViewImport) dispatch(viewSettingsAction.defaultIsViewImport(''))
     if (isViewExport) dispatch(viewSettingsAction.defaultIsViewExport(''))
+    if (isImportSettingsData) dispatch(viewSettingsAction.defaultIsImportSettingsData(''))
   }
 
   return (

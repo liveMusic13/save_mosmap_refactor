@@ -103,7 +103,7 @@ const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 						);
 					} else {
 						//HELP: Иначе отображаем маркер
-						console.log('marker')
+						// console.log('marker')
 						if (dataObjectInfo.id === object.id) {
 							customMarkerIcon = L.icon({
 								iconUrl: '../images/icons/target.svg',

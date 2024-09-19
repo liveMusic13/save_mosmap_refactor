@@ -63,9 +63,9 @@ import styles from './BlockImport.module.scss';
 const BlockImport: FC = () => {
   const dispatch = useDispatch()
   const [nameFile, setNameFile] = useState<string>('');
-  const [delimiter, setDelimiter] = useState<string>('');
+  const [delimiter, setDelimiter] = useState<string>(';');
   const [dataEncoding, setDataEncoding] = useState<string[]>(['Автоопределение', 'UTF-8', 'Windows-1251']);
-  const [targetOption, setTargetOption] = useState<string>('')
+  const [targetOption, setTargetOption] = useState<string>('UTF-8')
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const {query} = useRouter()
   

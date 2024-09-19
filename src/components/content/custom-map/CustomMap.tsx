@@ -85,7 +85,7 @@ export function CustomMap() {
   ? JSON.parse(dataObjectsInMap.points.bounds) 
   : undefined;
 
-	console.log(zoomLevel, dataObjectsInMap.points.zoom_min, dataObjectsInMap.points.zoom_max)
+	// console.log(zoomLevel, dataObjectsInMap.points.zoom_min, dataObjectsInMap.points.zoom_max)
 
 	return (
 		<MapContainer
