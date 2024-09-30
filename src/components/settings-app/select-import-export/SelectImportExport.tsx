@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import styles from './SelectImportExport.module.scss';
 
 // const SelectImportExport: FC<{data:string[], targetOption?: string, setTargetOption?: any}> = ({data, targetOption, setTargetOption}) => {
@@ -68,9 +68,26 @@ const SelectImportExport: FC<{ data: string[], targetOption?: string, setTargetO
   const handleMouseLeave = () => {
     setHoveredOption(null);
   };
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  // Эффект для обработки кликов вне компонента
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+        setIsViewOptions(false); // Закрываем список опций при клике вне компонента
+      }
+    };
+
+    // Добавляем слушатель клика на документ
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Удаляем слушатель при размонтировании компонента
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className={styles.wrapper_selectData} onClick={() => setIsViewOptions(!isViewOptions)}>
+    <div className={styles.wrapper_selectData} onClick={() => setIsViewOptions(!isViewOptions)} ref={wrapperRef}>
       <div className={styles.block__selectData}>
         <p>{targetOption}</p>
         <img src="/images/icons/arrow.svg" alt="arrow" />

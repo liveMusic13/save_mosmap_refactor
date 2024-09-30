@@ -1,9 +1,11 @@
 import { dataService } from '@/services/data.service'
+import { actions as ImportExportDataAction } from '@/store/import-export-data/ImportExportData.slice'
 import { RootState } from '@/store/store'
+import { actions as viewSettingsActions } from '@/store/view-settings/viewSettings.slice'
 import { convertImportDoneField } from '@/utils/convertFields'
 import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import SelectImportExport from '../select-import-export/SelectImportExport'
 import styles from './OptionImport.module.scss'
 
@@ -129,7 +131,9 @@ import styles from './OptionImport.module.scss'
 
 
 const OptionImport: FC = () => {
-  const { option } = useSelector((state: RootState) => state.importExportData);
+  const dispatch = useDispatch()
+  const { option, response_import } = useSelector((state: RootState) => state.importExportData);
+  const { isViewPopupImportDone } = useSelector((state: RootState) => state.viewSettings);
   const [targetOptions, setTargetOptions] = useState<{ [key: string]: { value: string, type: 'text' | 'list' } }>({});
   const [isCheckbox, setIsCheckbox] = useState(false);
   const { query } = useRouter();
@@ -184,23 +188,31 @@ const OptionImport: FC = () => {
 
   const renderCoordinate = () => {
     const fields = ['Широта', 'Долгота', 'ID дома mosmap'];
+    const data = ['Нет', ...(option.file_field || [])];
   
     return fields.map((key) => {
       return (
         <div key={key} className={styles.block__select}>
           <p className={styles.label__select}>{key}</p>
           <SelectImportExport
-            data={dataId}
+            // data={dataId}
+            data={data}
             targetOption={targetOptions[key]?.value}
-            setTargetOption={(selectedOption: string) => {
-              setTargetOptions((prev:any)=> {
-                const updatedOptions = {
-                  ...prev,
-                  [key]: { value: selectedOption, type: 'text' }
-                };
-                return updatedOptions;
-              });
-            }}
+            // setTargetOption={(selectedOption: string) => {
+            //   setTargetOptions((prev:any)=> {
+            //     const updatedOptions = {
+            //       ...prev,
+            //       [key]: { value: selectedOption, type: 'text' }
+            //     };
+            //     return updatedOptions;
+            //   });
+            // }}
+            setTargetOption={(selectedOption: string) => 
+              setTargetOptions(prev => ({ 
+                ...prev, 
+                [key]: { value: selectedOption, type: key in option.text_field ? 'text' : 'list' }
+              }))
+            }
           />
         </div>
       );
@@ -244,16 +256,34 @@ const OptionImport: FC = () => {
 
       // Проверь, что данные действительно в правильном формате
       console.log('Request Body: ', requestBody);
-  
-      // Если запрос отправляется как JSON, убедись, что requestBody содержит правильно сериализованные данные
-      const response = await dataService.import_done(Number(query.map), option, requestBody);
-  
-      console.log(response);
+      try {
+        // Если запрос отправляется как JSON, убедись, что requestBody содержит правильно сериализованные данные
+        const response = await dataService.import_done(Number(query.map), option, requestBody);
+        dispatch(ImportExportDataAction.addResponse(response))
+        dispatch(viewSettingsActions.activeIsViewPopupImportDone(''))
+        console.log(response);
+
+      } catch (error) {
+        console.log(error);
+
+      }
     }
   };
 
   return (
     <div className={styles.wrapper_optionImport}>
+      {isViewPopupImportDone && (
+        <div className={styles.block__popupCompleted}>
+          <p><span>Добавлено строк: </span>{response_import.add_rows}</p>
+          <p><span>Прочитано строк: </span>{response_import.read_rows}</p>
+          <p><span>Изменено строк: </span>{response_import.update_rows}</p>
+          <button className={`${styles.button__send} ${styles.popup}`} onClick={()=> {
+            dispatch(viewSettingsActions.defaultIsViewPopupImportDone(''))
+            dispatch(viewSettingsActions.defaultIsViewImport(''))
+          }
+            }>Ок</button>
+        </div>
+      )}
       <div className={styles.block__title}>
         <h3 className={styles.title}>Настройка данных для загрузки на сервер</h3>
       </div>

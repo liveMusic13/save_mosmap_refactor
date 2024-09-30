@@ -51,7 +51,10 @@ export const convertImportDoneField = (
     const fieldType = targetOptions[key].type;
 
     // Выбираем массив для поиска в зависимости от ключа
-    const dataArray = (key === 'Широта' || key === 'Долгота' || key === 'ID дома mosmap' || key === 'dataId')
+    // const dataArray = (key === 'Широта' || key === 'Долгота' || key === 'ID дома mosmap' || key === 'dataId')
+    //   ? dataIdData
+    //   : fileFieldData;
+    const dataArray = (key === 'dataId')
       ? dataIdData
       : fileFieldData;
 

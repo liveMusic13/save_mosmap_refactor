@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState:any = {
-	option:{}
+	option:{},
+	response_import: {}
 };
 
 export const importExportData = createSlice({
@@ -10,6 +11,9 @@ export const importExportData = createSlice({
 	reducers: {
 		addImportOptions: (state, { payload }) => {
 			state.option = payload;
+		},
+		addResponse: (state, { payload }) => {
+			state.response_import = payload;
 		},
 	},
 });

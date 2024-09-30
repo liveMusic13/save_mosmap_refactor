@@ -19,7 +19,6 @@ const ButtonOptionSettings: FC<PropsWithChildren<IButtonOptionSettings>> = ({chi
       dispatch(popupEditAction.addId(data?.id))
       dispatch(viewSettingsAction.activeIsViewDeletePopup(''))
     } else {
-      console.log(button, data)
       dispatch(dataMapSettingsAction.addDataIdGroups(data?.id))
       dispatch(viewSettingsAction.activeIsPopupSettingGroups(''))
     }

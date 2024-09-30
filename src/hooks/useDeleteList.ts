@@ -8,7 +8,9 @@ export const useDeleteList = () => {
   const {deleteId} = useSelector((state:RootState)=> state.popupEdit)
 
   const deleteListFunc = async () => {
-    const data = await settingsService.deleteList(deleteId) 
+    // const data = await settingsService.deleteList(deleteId) 
+    const data = await settingsService.deleteField(deleteId) 
+
 
     if (data?.delete) {
       console.log('data.id', )
