@@ -59,6 +59,7 @@
   display: flex;
   flex-direction: column;
   gap: adapt(20px, 1440px);
+  position: relative;
 }
 
 .block__one {
@@ -274,4 +275,10 @@
         font-size: 1rem;
       }
   }
+}
+
+.dop {
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
 }

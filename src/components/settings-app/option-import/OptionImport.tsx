@@ -307,7 +307,7 @@ const OptionImport: FC = () => {
           <div className={styles.block__coordinate}>
             {renderCoordinate()}
           </div>
-          <button className={styles.button__send} onClick={onClickSend}>отправить</button>
+          <button className={`${styles.button__send} ${styles.dop}`} onClick={onClickSend}>отправить</button>
         </div>
       </div>
     </div>
