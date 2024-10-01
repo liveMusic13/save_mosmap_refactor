@@ -14,7 +14,7 @@ const ConfirmPopup: FC<{popupFor?: string}> = ({popupFor}) => {
   const dispatch = useDispatch()
   const {deleteObject} = useDeleteObject()
   const {deleteMarker} = useDeleteMarker()
-  const { deleteListFunc } = useDeleteList()
+  const { deleteListFunc, deleteFieldFunc } = useDeleteList()
 
   const _onClick = async (buttonText: string) => {
     if (buttonText === 'Отмена') {
@@ -36,6 +36,7 @@ const ConfirmPopup: FC<{popupFor?: string}> = ({popupFor}) => {
       dispatch(viewSettingsAction.defaultIsViewDeletePopup(''))
     } else {
       await deleteListFunc()
+      await deleteFieldFunc()
       dispatch(viewSettingsAction.defaultIsViewDeletePopup(''))
     }
   }

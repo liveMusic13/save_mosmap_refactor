@@ -1,3 +1,4 @@
+import { useInitRequest } from '@/hooks/useInitRequest'
 import { dataService } from '@/services/data.service'
 import { actions as ImportExportDataAction } from '@/store/import-export-data/ImportExportData.slice'
 import { RootState } from '@/store/store'
@@ -161,7 +162,7 @@ const OptionImport: FC = () => {
   }, [option]);
 
   const renderFields = () => {
-    const fields = { ...option.text_field, ...option.list_field }; // Объединяем объекты
+    const fields = { ...option.list_field, ...option.text_field }; // Объединяем объекты
     const data = ['Не загружать', ...(option.file_field || [])];
 
     return Object.keys(fields).map((key) => {
@@ -240,7 +241,6 @@ const OptionImport: FC = () => {
     );
   };
   
-
   const handleCheckboxClick = () => {
     setIsCheckbox(!isCheckbox);
   };
@@ -270,6 +270,8 @@ const OptionImport: FC = () => {
     }
   };
 
+  const {getObject, getFilters} = useInitRequest()
+
   return (
     <div className={styles.wrapper_optionImport}>
       {isViewPopupImportDone && (
@@ -280,6 +282,8 @@ const OptionImport: FC = () => {
           <button className={`${styles.button__send} ${styles.popup}`} onClick={()=> {
             dispatch(viewSettingsActions.defaultIsViewPopupImportDone(''))
             dispatch(viewSettingsActions.defaultIsViewImport(''))
+            getObject()
+            getFilters()
           }
             }>Ок</button>
         </div>

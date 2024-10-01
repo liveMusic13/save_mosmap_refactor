@@ -7,7 +7,7 @@ export const useDeleteList = () => {
   const dispatch = useDispatch()
   const {deleteId} = useSelector((state:RootState)=> state.popupEdit)
 
-  const deleteListFunc = async () => {
+  const deleteFieldFunc = async () => {
     // const data = await settingsService.deleteList(deleteId) 
     const data = await settingsService.deleteField(deleteId) 
 
@@ -18,5 +18,16 @@ export const useDeleteList = () => {
     }
   }
 
-  return {deleteListFunc}
+  const deleteListFunc = async () => {
+    const data = await settingsService.deleteList(deleteId) 
+    // const data = await settingsService.deleteField(deleteId) 
+
+
+    if (data?.delete) {
+      console.log('data.id', )
+      dispatch(dataSettingsAction.removeFieldById({id: data.id}))
+    }
+  }
+
+  return {deleteListFunc, deleteFieldFunc}
 }

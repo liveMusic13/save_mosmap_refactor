@@ -1,24 +1,27 @@
-
-
-// export const convertImportDoneField = (targetOptions: { [key: string]: { value: string, type: 'text' | 'list' } }, data: string[]) => {
+// export const convertImportDoneField = (
+//   targetOptions: { [key: string]: { value: string, type: 'text' | 'list' } }, 
+//   fileFieldData: string[], 
+//   dataIdData: string[]
+// ) => {
 //   const result: { [key: string]: string } = {};
 
 //   Object.keys(targetOptions).forEach((key) => {
-//     const selectedOption = targetOptions[key]?.value || 'Нет';
-//     const fieldType = targetOptions[key]?.type || 'text';
+//     const selectedOption = targetOptions[key].value;
+//     const fieldType = targetOptions[key].type;
 
-//     // Выводим выбранное значение и массив данных для сравнения
-//     console.log(`Processing key: ${key}, selectedOption: ${selectedOption}, fieldType: ${fieldType}`);
-//     console.log(`Data array: `, data);
-//     // Найдём индекс значения в массиве данных
-//     const index = data.indexOf(selectedOption);
-//     const valueIndex = index !== -1 ? index : 0;
+//     // Выбираем массив для поиска в зависимости от ключа
+//     // const dataArray = (key === 'Широта' || key === 'Долгота' || key === 'ID дома mosmap' || key === 'dataId')
+//     //   ? dataIdData
+//     //   : fileFieldData;
+//     const dataArray = (key === 'dataId')
+//       ? dataIdData
+//       : fileFieldData;
+//       console.log(dataIdData, fileFieldData)
 
-//     console.log(`Key: ${key}, Value Index: ${valueIndex}`);
+//     const index = dataArray.indexOf(selectedOption);
+//     const valueIndex = index !== -1 ? index : -1;
 
-// //Проблема в том, что скорее всего оно ищет в массиве , который используется для опций в первом блоке. Поэтому всегда 0 возвращает
-
-//     // Проверяем и задаем значения для конкретных полей
+//     // Обрабатываем значения в зависимости от ключа
 //     if (key === 'ID дома mosmap') {
 //       result['house_id'] = valueIndex.toString();
 //     } else if (key === 'Широта') {
@@ -26,18 +29,16 @@
 //     } else if (key === 'Долгота') {
 //       result['lng'] = valueIndex.toString();
 //     } else if (key === 'dataId') {
-//       result['data_id'] = valueIndex.toString();
+//       result['identificator'] = valueIndex.toString();
 //     } else {
-//       result[`fill_${fieldType}[${key}]`] = valueIndex.toString(); // Например: fill_text[0] = "1" или "0"
+//       result[`fill_${fieldType}[${key}]`] = valueIndex.toString();
 //     }
-
-//     // // Логирование добавленных значений
-//     // console.log(`Result after processing ${key}:`, result);
 //   });
 
-//   // console.log('Final result: ', result);
+//   console.log(result);
 //   return result;
 // };
+
 
 export const convertImportDoneField = (
   targetOptions: { [key: string]: { value: string, type: 'text' | 'list' } }, 
@@ -49,17 +50,18 @@ export const convertImportDoneField = (
   Object.keys(targetOptions).forEach((key) => {
     const selectedOption = targetOptions[key].value;
     const fieldType = targetOptions[key].type;
+    
+    // Выбираем соответствующий массив данных
+    const dataArray = (key === 'dataId') ? dataIdData : fileFieldData;
 
-    // Выбираем массив для поиска в зависимости от ключа
-    // const dataArray = (key === 'Широта' || key === 'Долгота' || key === 'ID дома mosmap' || key === 'dataId')
-    //   ? dataIdData
-    //   : fileFieldData;
-    const dataArray = (key === 'dataId')
-      ? dataIdData
-      : fileFieldData;
-
-    const index = dataArray.indexOf(selectedOption);
-    const valueIndex = index !== -1 ? index : 0;
+    // Логика для dataIdData: индекс элемента минус 1
+    let valueIndex;
+    if (key === 'dataId') {
+      valueIndex = selectedOption === 'Нет' ? -1 : dataArray.indexOf(selectedOption) - 1;
+    } else {
+      // Логика для fileFieldData остаётся неизменной
+      valueIndex = dataArray.indexOf(selectedOption);
+    }
 
     // Обрабатываем значения в зависимости от ключа
     if (key === 'ID дома mosmap') {
@@ -78,4 +80,6 @@ export const convertImportDoneField = (
   console.log(result);
   return result;
 };
+
+
 

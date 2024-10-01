@@ -36,7 +36,6 @@ export default function Home({data, dataFilters}:any) {
 	}, [adresFilterString.srcRequest]);
 
 	useEffect(() => {
-		console.log(map)
 		if (!map) {
 			push(`?map=7`);
 		} else {
