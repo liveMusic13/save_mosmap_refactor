@@ -33,7 +33,7 @@ const SettingsApp: FC = () => {
       </header>
       <div className={styles.block__content}>
         {isViewImport && !isImportSettingsData && <BlockImport/>}
-        {isImportSettingsData && <OptionImport/> }
+        {isImportSettingsData && !isViewExport && <OptionImport/> }
         {isViewExport && <BlockExport/>}
         {isSettingsApp && <BlockSettings title='Настройка карты' />}
         {isSettingsData && arraySettingNames.map(setting => <DataSettings key={setting} title={setting} />)}

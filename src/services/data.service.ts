@@ -42,5 +42,27 @@ export const dataService = {
 
       return error
     }
+  },
+  export_done: async (map: number, filters: any, option:any, checkboxes:any) => {
+    const { separator, encoding, uploadfile } = option;
+    try {
+      const data = {
+        filters, 
+        'uploadfile': uploadfile,
+        'separator': separator,
+        'encoding': encoding,
+        ...checkboxes
+      }
+
+      const response = await $axiosAuth.post(`/api/export_done.php?map=${map}`, data);
+
+      console.log(response.data);
+  
+      return response.data;
+    } catch (error) {
+      console.log(error);
+
+      return error
+    }
   }
 }

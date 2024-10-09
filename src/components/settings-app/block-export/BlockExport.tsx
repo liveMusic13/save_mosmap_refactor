@@ -1,11 +1,16 @@
+import { dataService } from '@/services/data.service'
+import { RootState } from '@/store/store'
+import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import SelectImportExport from '../select-import-export/SelectImportExport'
 import styles from './BlockExport.module.scss'
 
 const BlockExport: FC = () => {
-  const [nameFile, setNameFile] = useState<string>('')
-  const [delimiter, setDelimiter] = useState<string>('')
+  const [nameFile, setNameFile] = useState<string>('test.csv')
+  const [delimiter, setDelimiter] = useState<string>(';')
   const [dataEncoding, setDataEncoding] = useState<string[]>(['UTF-8', 'Windows-1251'])
+  const [targetOption, setTargetOption] = useState<string>('UTF-8')
   const [checkboxData, setCheckboxData] = useState([
     {
       id: 1,
@@ -18,6 +23,8 @@ const BlockExport: FC = () => {
       isCheck: false
     },
   ])
+  const {query} = useRouter()
+  const dataFilters = useSelector((state: RootState)=> state.dataFilters)
 
   const handleChangeRowTwo = (value:string, forField:string) => {
     if (forField === 'Разделитель') {
@@ -39,6 +46,10 @@ const BlockExport: FC = () => {
 console.log(checkboxData)
   }, [checkboxData])
 
+  const onClick_export = ()=> {
+    if (typeof query.map === 'string') dataService.export_done(Number(query.map),dataFilters, {separator:delimiter, encoding:targetOption, uploadfile:nameFile}, {house_id: checkboxData[1].isCheck, addCoordinate: checkboxData[0].isCheck})
+  }
+
   return (
     <div className={styles.block__import}>
       <h2 className={styles.title}>
@@ -59,7 +70,7 @@ console.log(checkboxData)
             </div>
             <div className={styles.block__select}>
               <p className={styles.label__select}>Кодировка</p>
-              <SelectImportExport data={dataEncoding} />
+              <SelectImportExport data={dataEncoding} targetOption={targetOption} setTargetOption={setTargetOption} />
             </div>
           </div>
           <div className={styles.block__checkboxes}>
@@ -85,7 +96,7 @@ console.log(checkboxData)
             ))}
           </div>
         </div>
-        <button className={`${styles.button__input_file} ${styles.download}`}>Загрузить</button>
+        <button className={`${styles.button__input_file} ${styles.download}`} onClick={onClick_export}>Загрузить</button>
       </div>
     </div>
   )
