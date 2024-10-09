@@ -5,6 +5,7 @@ import { SettingsMap } from '@/components/settings-map/SettingsMap';
 import { useInitRequest } from '@/hooks/useInitRequest';
 import useWindowDimensions from '@/hooks/useWindowDimensions';
 import { settingsService } from '@/services/settings.service';
+// import { settingsService } from '@/services/settings.service';
 import { actions as dataFiltersAction } from '@/store/data-filters/dataFilters.slice';
 import { RootState } from '@/store/store';
 import { actions as viewSettingsActions } from '@/store/view-settings/viewSettings.slice';
@@ -117,7 +118,7 @@ export const getServerSideProps = async ({ query }: any) => {
   const response = await fetch(`https://app.mosmap.ru/api/get_objects.php?map=${query.map || 7}`);
   const data = await response.json();
 
-  const filtersResponse = await fetch(`https://mosmap.ru/api/filters.php?map=${query.map || 7}`);
+  const filtersResponse = await fetch(`https://app.mosmap.ru/api/filters.php?map=${query.map || 7}`);
   const dataFilters = await filtersResponse.json();
 
   return {

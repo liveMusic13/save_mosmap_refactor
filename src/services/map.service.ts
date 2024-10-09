@@ -140,7 +140,7 @@ export const mapService = {
   getFiltersFunc: async (map:string, dispatch:any) => {
 		try {
 			const responce = await axios.get(
-				`https://mosmap.ru/api/filters.php?map=${map}`,
+				`https://app.mosmap.ru/api/filters.php?map=${map}`,
 			);
 			dispatch(dataFiltersAction.addFilters(responce.data));
 		} catch (error) {
