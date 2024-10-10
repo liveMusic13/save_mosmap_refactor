@@ -1,12 +1,15 @@
 import { dataService } from '@/services/data.service'
 import { RootState } from '@/store/store'
+import { actions as viewSettingsAction } from '@/store/view-settings/viewSettings.slice'
 import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import SelectImportExport from '../select-import-export/SelectImportExport'
 import styles from './BlockExport.module.scss'
 
 const BlockExport: FC = () => {
+  const dispatch = useDispatch()
+  const {isSettingsApp, isViewExport} = useSelector((state:RootState) => state.viewSettings)
   const [nameFile, setNameFile] = useState<string>('test.csv')
   const [delimiter, setDelimiter] = useState<string>(';')
   const [dataEncoding, setDataEncoding] = useState<string[]>(['UTF-8', 'Windows-1251'])
@@ -25,6 +28,7 @@ const BlockExport: FC = () => {
   ])
   const {query} = useRouter()
   const dataFilters = useSelector((state: RootState)=> state.dataFilters)
+  const {srcRequest} = useSelector((state: RootState)=> state.adresFilterString)
 
   const handleChangeRowTwo = (value:string, forField:string) => {
     if (forField === 'Разделитель') {
@@ -43,11 +47,19 @@ const BlockExport: FC = () => {
   };
 
   useEffect(()=> {
-console.log(checkboxData)
+    console.log(checkboxData)
   }, [checkboxData])
 
-  const onClick_export = ()=> {
-    if (typeof query.map === 'string') dataService.export_done(Number(query.map),dataFilters, {separator:delimiter, encoding:targetOption, uploadfile:nameFile}, {house_id: checkboxData[1].isCheck, addCoordinate: checkboxData[0].isCheck})
+  const onClick_export = async ()=> {
+    if (typeof query.map === 'string') {
+      const response = await dataService.export_done(Number(query.map), srcRequest, {separator:delimiter, encoding:targetOption, uploadfile:nameFile}, {house_id: checkboxData[1].isCheck, addCoordinate: checkboxData[0].isCheck})
+
+      if (response.OK) {
+        await dataService.download_file(response.filename)
+        if (isSettingsApp) dispatch(viewSettingsAction.defaultSettingsApp(''))
+        if (isViewExport) dispatch(viewSettingsAction.defaultIsViewExport(''))
+      }
+    }
   }
 
   return (

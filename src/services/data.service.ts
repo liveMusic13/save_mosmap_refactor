@@ -43,19 +43,25 @@ export const dataService = {
       return error
     }
   },
-  export_done: async (map: number, filters: any, option:any, checkboxes:any) => {
+  export_done: async (map: number, adresFilterString:any, option:any, checkboxes:any) => {
     const { separator, encoding, uploadfile } = option;
     try {
       const data = {
-        filters, 
+        // 'map': map,
+        // ...{
+        //   adresFilterString
+        // },
         'uploadfile': uploadfile,
         'separator': separator,
         'encoding': encoding,
         ...checkboxes
       }
 
-      const response = await $axiosAuth.post(`/api/export_done.php?map=${map}`, data);
+      const params = new URLSearchParams(data);
+    
 
+      // const response = await $axiosAuth.get(`/api/export_done.php?map=${map}`);
+      const response = await $axiosAuth.get(`/api/export_done.php${adresFilterString}&${params.toString()}`);
       console.log(response.data);
   
       return response.data;
@@ -63,6 +69,16 @@ export const dataService = {
       console.log(error);
 
       return error
+    }
+  },
+  download_file: async(link:string) => {
+    const modifiedLink = link.slice(2);
+    
+    try {
+      const response = await $axiosAuth.get(modifiedLink)
+      return response
+    } catch (error) {
+      console.log(error);
     }
   }
 }
