@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import { TOKEN } from './app.constants';
 
 
-const API_URL = 'https://app.mosmap.ru';
+export const API_URL = 'https://app.mosmap.ru';
 
 export const $axios = axios.create({
 	baseURL: API_URL,

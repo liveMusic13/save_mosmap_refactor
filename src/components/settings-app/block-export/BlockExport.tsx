@@ -1,3 +1,4 @@
+import { API_URL } from '@/api'
 import { dataService } from '@/services/data.service'
 import { RootState } from '@/store/store'
 import { actions as viewSettingsAction } from '@/store/view-settings/viewSettings.slice'
@@ -55,7 +56,9 @@ const BlockExport: FC = () => {
       const response = await dataService.export_done(Number(query.map), srcRequest, {separator:delimiter, encoding:targetOption, uploadfile:nameFile}, {house_id: checkboxData[1].isCheck, addCoordinate: checkboxData[0].isCheck})
 
       if (response.OK) {
-        await dataService.download_file(response.filename)
+        const modifiedLink = response.filename.slice(2);
+        window.open(`${API_URL}${modifiedLink}`, '_blank')
+        // await dataService.download_file(response.filename)
         if (isSettingsApp) dispatch(viewSettingsAction.defaultSettingsApp(''))
         if (isViewExport) dispatch(viewSettingsAction.defaultIsViewExport(''))
       }
