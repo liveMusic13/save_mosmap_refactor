@@ -50,25 +50,51 @@ export const AllObjects: FC = () => {
 	const objectRefs = useRef(objects.map(() => createRef()));
 	const containerRef = useRef<null | HTMLDivElement>(null); // ссылка на контейнер
 
+	// useEffect(() => {
+	// 	if (targetObject) {
+	// 		// Находим индекс целевого объекта
+	// 		const targetIndex = objects.findIndex(
+	// 			(obj: IMarker) => obj.id === targetObject.id,
+	// 		);
+
+	// 		// Получаем ссылки на элемент и контейнер
+	// 		const element = objectRefs.current[targetIndex].current;
+	// 		const container: any = containerRef.current;
+
+	// 		// Вычисляем необходимые значения
+	// 		let offsetTop = element.offsetTop; // вертикальное расстояние от элемента до верхней границы контейнера
+	// 		let middleOffset = container.offsetHeight / 2; // половина высоты контейнера
+
+	// 		// Прокручиваем к целевому объекту
+	// 		container.scrollTop = offsetTop - middleOffset;
+	// 	}
+	// }, [targetObject, objects]);
+
 	useEffect(() => {
-		if (targetObject) {
-			// Находим индекс целевого объекта
-			const targetIndex = objects.findIndex(
-				(obj: IMarker) => obj.id === targetObject.id,
-			);
+    if (targetObject) {
+        // Находим индекс целевого объекта
+        const targetIndex = objects.findIndex(
+            (obj: IMarker) => obj.id === targetObject.id,
+        );
 
-			// Получаем ссылки на элемент и контейнер
-			const element = objectRefs.current[targetIndex].current;
-			const container: any = containerRef.current;
+        // Проверяем, что индекс найден и соответствующий реф существует
+        if (targetIndex !== -1 && objectRefs.current[targetIndex]?.current) {
+            // Получаем ссылки на элемент и контейнер
+            const element = objectRefs.current[targetIndex].current;
+            const container: any = containerRef.current;
 
-			// Вычисляем необходимые значения
-			let offsetTop = element.offsetTop; // вертикальное расстояние от элемента до верхней границы контейнера
-			let middleOffset = container.offsetHeight / 2; // половина высоты контейнера
+            // Проверяем, что элемент и контейнер существуют
+            if (element && container) {
+                // Вычисляем необходимые значения
+                let offsetTop = element.offsetTop; // вертикальное расстояние от элемента до верхней границы контейнера
+                let middleOffset = container.offsetHeight / 2; // половина высоты контейнера
 
-			// Прокручиваем к целевому объекту
-			container.scrollTop = offsetTop - middleOffset;
-		}
-	}, [targetObject, objects]);
+                // Прокручиваем к целевому объекту
+                container.scrollTop = offsetTop - middleOffset;
+            }
+        }
+    }
+}, [targetObject, objects]);
 
 	const mapIcon = {
 		id: 0,
@@ -81,7 +107,7 @@ export const AllObjects: FC = () => {
 	if (!(viewSettings.isObjectInfo || viewSettings.isViewFilters)) {
 		style.left = '0';
 	}
-console.log(mapLayers.arrayPolygons[mapLayers.indexTargetPolygon])
+
 	return (
 		<div className={styles.block__allObjects} style={style}>
 			<div className={styles.block__title}>
