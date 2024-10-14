@@ -88,6 +88,12 @@
 	display: flex;
 	align-items: center;
 
+	&:disabled {
+		cursor: default;
+		opacity: 0.5;
+		background-color: transparent;
+	}
+
 	.crd__marker {
 		width: adapt(100px, 1440px);
 		height: adapt(100px, 1440px);

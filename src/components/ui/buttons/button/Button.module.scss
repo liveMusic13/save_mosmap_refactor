@@ -17,6 +17,12 @@
 		}
 	}
 
+	&:disabled {
+		cursor: default;
+		opacity: 0.5;
+		background-color: transparent;
+	}
+
 	@media (max-width: 991.98px) {
 		width: adapt(42px, 1440px);
 		height: adapt(42px, 1440px);

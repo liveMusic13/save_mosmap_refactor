@@ -1,5 +1,5 @@
 import { ACCESSIBLYMAP } from '@/app.constants'
-import { arrayEditingObjects, arrayNumIcons, arrayNumSettingIcons } from '@/components/header/icons.data'
+import { arrayEditingObjects, arrayImportExport, arrayNumIcons, arrayNumSettingIcons } from '@/components/header/icons.data'
 import { useAuth } from '@/hooks/useAuth'
 import Cookies from 'js-cookie'
 import { FC } from 'react'
@@ -15,20 +15,29 @@ const BurgerMenu: FC = () => {
 
   return (
     <div className={styles.wrapper_burger}>
-      {	(isAuth && isEdit1) && 
+      {	
+			// (isAuth && isEdit1) && 
 					arrayEditingObjects.map(icon => {
-						return <ButtonEditing key={icon.id} icon={icon} />;
+						return <ButtonEditing key={icon.id} icon={icon} isDisabled={!(isAuth && isEdit1) } />;
 					})
 				}
 				<div className={styles.line}></div>
 				{ arrayNumIcons.map(icon => {
-					return <Button key={icon.id} icon={icon} />;
+					return <Button key={icon.id} icon={icon} isDisabled={!(isAuth && isEdit1) } />;
 				})
       }
+			<div className={styles.line}></div>
+						{ 
+						// (isAuth && isEdit1) && 
+							(arrayImportExport.map(icon => {
+								return <ButtonSettings key={icon.id} icon={icon} isDisabled={!(isAuth && isEdit1)} />
+							}))
+						}
       <div className={styles.line}></div>
-				{ (isAuth && isEdit1) && 
+				{ 
+				// (isAuth && isEdit1) && 
 					(arrayNumSettingIcons.map(icon => {
-						return <ButtonSettings key={icon.id} icon={icon} />
+						return <ButtonSettings key={icon.id} icon={icon} isDisabled={!(isAuth && isEdit1) } />
 					}))
 				}
     </div>

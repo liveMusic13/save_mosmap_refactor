@@ -32,10 +32,12 @@ export interface IButton {
 	icon: IIconsData;
 	newCenter?: (arr: number[]) => void;
 	elem?: IMarker;
+	isDisabled?: boolean;
 }
 
 export interface IButtonEditing {
 	icon: IIconsData;
+	isDisabled?: boolean;
 }
 
 export interface ILoading {

@@ -4,7 +4,7 @@ import { FC } from 'react'
 import { useDispatch } from 'react-redux'
 import styles from './ButtonSettings.module.scss'
 
-const ButtonSettings: FC<IButtonEditing> = ({icon}) => {
+const ButtonSettings: FC<IButtonEditing> = ({icon, isDisabled}) => {
   const dispatch = useDispatch()
 
   const _onClick = () => {
@@ -15,7 +15,7 @@ const ButtonSettings: FC<IButtonEditing> = ({icon}) => {
   }
 
   return (
-    <button className={styles.button_settings} onClick={_onClick}>
+    <button className={styles.button_settings} onClick={_onClick} disabled={isDisabled}>
       <svg className={styles.icon_svg}>
         <use
           xlinkHref={icon.src}
