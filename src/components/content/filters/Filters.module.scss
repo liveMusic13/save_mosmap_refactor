@@ -35,6 +35,7 @@
 		overflow-y: auto;
 		overflow-x: hidden;
 		position: relative;
+		padding-bottom: adapt(100px, 1440px);
 
 		&::-webkit-scrollbar {
 			width: adapt(10px, 1440px);
