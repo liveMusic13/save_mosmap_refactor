@@ -61,7 +61,9 @@
 
 			@media (max-width: 767.98px) {
 				height: adapt(300px, 1440px);
-				flex-direction: column;
+				// flex-direction: column;
+				width: 100%;
+				justify-content: space-around;
 			}
 
 			> button {
