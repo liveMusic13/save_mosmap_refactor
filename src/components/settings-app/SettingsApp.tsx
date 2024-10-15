@@ -1,3 +1,4 @@
+import { useInitRequest } from '@/hooks/useInitRequest'
 import { RootState } from '@/store/store'
 import { actions as viewSettingsAction } from '@/store/view-settings/viewSettings.slice'
 import { FC } from 'react'
@@ -17,12 +18,16 @@ const SettingsApp: FC = () => {
   const dispatch = useDispatch()
   const {isSettingsApp, isSettingsData, isViewPopupSettings, isViewDeletePopup, isPopupSettingGroups, isViewImport, isViewExport, isImportSettingsData } = useSelector((state:RootState) => state.viewSettings)
   
+  const {getObject, getFilters} = useInitRequest()
+
   const _onClick = () => {
     if (isSettingsApp) dispatch(viewSettingsAction.defaultSettingsApp(''))
     if (isSettingsData) dispatch(viewSettingsAction.defaultSettingsData(''))
     if (isViewImport) dispatch(viewSettingsAction.defaultIsViewImport(''))
     if (isViewExport) dispatch(viewSettingsAction.defaultIsViewExport(''))
     if (isImportSettingsData) dispatch(viewSettingsAction.defaultIsImportSettingsData(''))
+    getObject()
+    getFilters()
   }
 
   return (
