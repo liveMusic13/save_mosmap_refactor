@@ -330,7 +330,7 @@ useEffect(() => {
             }
           }}
 				>
-					<img src="./images/icons/ok.svg" alt="ok" />
+					<img src="/images/icons/ok.svg" alt="ok" />
 				</button>
 				<button
 					className={styles.button__close}

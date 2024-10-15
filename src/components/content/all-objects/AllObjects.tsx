@@ -107,8 +107,7 @@ export const AllObjects: FC = () => {
 	if (!(viewSettings.isObjectInfo || viewSettings.isViewFilters)) {
 		style.left = '0';
 	}
-	console.log('objects', objects)
-
+// console.log(objects)
 	return (
 		<div className={styles.block__allObjects} style={style}>
 			<div className={styles.block__title}>
@@ -154,6 +153,8 @@ export const AllObjects: FC = () => {
 					</>
 				) : (
 					objects.map((elem: IMarker, index: number) => {
+						// const search = elem.values ? elem.values.filter(objectRefs.)
+						if( elem.values) console.log(elem)
 						return (
 							<div
 								ref={objectRefs.current[index]}
@@ -166,7 +167,8 @@ export const AllObjects: FC = () => {
 								}
 								onClick={viewSettings.editingObjects.isActiveEditButton ? undefined : mapService.getInfoObject(elem, dispatch, isMobile)}
 							>
-								<p>{elem.values ? elem.values[0].value : elem.name}</p>
+								{/* <p>{elem.values ? elem.values[0].value : elem.name}</p> */}
+								<p>{elem.name}</p>
 								<Button icon={mapIcon} newCenter={newCenter} elem={elem} />
 							</div>
 						);

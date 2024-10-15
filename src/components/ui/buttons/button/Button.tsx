@@ -18,7 +18,7 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import styles from './Button.module.scss';
 
-const Button: FC<IButton> = ({ icon, newCenter, elem , isDisabled}) => {
+const Button: FC<IButton> = ({ icon, newCenter, elem }) => {
 	const {isSelectArea} = useSelector((state:RootState)=> state.viewSettings)
 	const [clickButton, setClickButton] = useState<boolean>(false);
 	const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const Button: FC<IButton> = ({ icon, newCenter, elem , isDisabled}) => {
 	return (
 		<button
 			className={styles.icon__button}
-			disabled={isDisabled ? true : elem?.crd === null}
+			disabled={elem?.crd === null}
 			onClick={() => {
 				if (icon.id === 2) {
 					dispatch(viewSettingsAction.toogleIsSelectArea(''))

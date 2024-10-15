@@ -57,7 +57,7 @@ export function Header({data}:any) {
 						}
 						<div className={styles.line}></div>
 						{ arrayNumIcons.map(icon => {
-							return <Button key={icon.id} icon={icon} isDisabled={!(isAuth && isEdit1)} />;
+							return <Button key={icon.id} icon={icon} />;
 						})}
 						<div className={styles.line}></div>
 						{ 
