@@ -153,8 +153,6 @@ export const AllObjects: FC = () => {
 					</>
 				) : (
 					objects.map((elem: IMarker, index: number) => {
-						// const search = elem.values ? elem.values.filter(objectRefs.)
-						if( elem.values) console.log(elem)
 						return (
 							<div
 								ref={objectRefs.current[index]}
@@ -167,8 +165,7 @@ export const AllObjects: FC = () => {
 								}
 								onClick={viewSettings.editingObjects.isActiveEditButton ? undefined : mapService.getInfoObject(elem, dispatch, isMobile)}
 							>
-								{/* <p>{elem.values ? elem.values[0].value : elem.name}</p> */}
-								<p>{elem.name}</p>
+								<p>{elem.values ? elem.values[+elem.name].value : elem.name}</p>
 								<Button icon={mapIcon} newCenter={newCenter} elem={elem} />
 							</div>
 						);
