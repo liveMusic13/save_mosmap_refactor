@@ -50,26 +50,6 @@ export const AllObjects: FC = () => {
 	const objectRefs = useRef(objects.map(() => createRef()));
 	const containerRef = useRef<null | HTMLDivElement>(null); // ссылка на контейнер
 
-	// useEffect(() => {
-	// 	if (targetObject) {
-	// 		// Находим индекс целевого объекта
-	// 		const targetIndex = objects.findIndex(
-	// 			(obj: IMarker) => obj.id === targetObject.id,
-	// 		);
-
-	// 		// Получаем ссылки на элемент и контейнер
-	// 		const element = objectRefs.current[targetIndex].current;
-	// 		const container: any = containerRef.current;
-
-	// 		// Вычисляем необходимые значения
-	// 		let offsetTop = element.offsetTop; // вертикальное расстояние от элемента до верхней границы контейнера
-	// 		let middleOffset = container.offsetHeight / 2; // половина высоты контейнера
-
-	// 		// Прокручиваем к целевому объекту
-	// 		container.scrollTop = offsetTop - middleOffset;
-	// 	}
-	// }, [targetObject, objects]);
-
 	useEffect(() => {
     if (targetObject) {
         // Находим индекс целевого объекта
@@ -107,7 +87,7 @@ export const AllObjects: FC = () => {
 	if (!(viewSettings.isObjectInfo || viewSettings.isViewFilters)) {
 		style.left = '0';
 	}
-// console.log(objects)
+console.log('objects: ', objects)
 	return (
 		<div className={styles.block__allObjects} style={style}>
 			<div className={styles.block__title}>
@@ -155,7 +135,7 @@ export const AllObjects: FC = () => {
 					objects.map((elem: IMarker, index: number) => {
 						return (
 							<div
-								ref={objectRefs.current[index]}
+								ref={objectRefs.current[elem.id]}
 								key={elem.id}
 								className={styles.object}
 								style={

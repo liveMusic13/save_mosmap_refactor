@@ -212,6 +212,7 @@
 
 
 import { useDebounce } from '@/hooks/useDebounce';
+import { useInitRequest } from '@/hooks/useInitRequest';
 import { useSaveObject } from '@/hooks/useSaveObject';
 import useWindowDimensions from '@/hooks/useWindowDimensions';
 import { actions as dataObjectInfoAction } from '@/store/data-object-info/dataObjectInfo.slice';
@@ -233,6 +234,7 @@ const AddAndEditObject: FC = () => {
   const {debounce} = useDebounce()
   const { width } = useWindowDimensions();
   const {saveObject} = useSaveObject()
+  const {getObject} = useInitRequest()
   
   // const debouncedDispatch = debounceCustom((name, value, id) => {
   //   dispatch(dataObjectInfoAction.updateField({ name, value, id }));
@@ -327,6 +329,9 @@ useEffect(() => {
             } else if (viewSettings.editingObjects.isActiveEditButton) {
               dispatch(viewSettingsAction.toggleIsActiveEditButton(''))
               saveObject()
+              
+              const timeoutId = setTimeout(()=>getObject(), 100)
+              return ()=> clearTimeout(timeoutId)
             }
           }}
 				>
