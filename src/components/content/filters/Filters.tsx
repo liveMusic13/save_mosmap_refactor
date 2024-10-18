@@ -19,20 +19,20 @@ const DynamicInput = dynamic(
 );
 
 const Filters: FC = () => {
-	const dataFilters: IDataFilters[] = useSelector(
+	const dataFilters: IDataFilters[] | any = useSelector(
 		(state: RootState) => state.dataFilters,
 	);
 	const [clearFilter, setClearFilter] = useState<boolean>(false);
 	const clearRequestData = useClearRequestData()
 	const getFiltersObject = useGetFiltersObject()
-
+console.log('dataFilters', dataFilters)
 	return (
 		<div
 			className={styles.block__filters}
 		>
 			<h2 className={styles.title}>Фильтры</h2>
 			<div className={styles.wrapper_block__filters}>
-				{dataFilters?.map((field: IDataFilters) => {
+				{(dataFilters.error || dataFilters === undefined|| dataFilters === null) ? [] : dataFilters.map((field: IDataFilters) => {
 					if (field.type === 'number') {
 						return (
 							<BlockInput

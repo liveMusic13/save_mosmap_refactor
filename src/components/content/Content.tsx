@@ -67,7 +67,7 @@ export function Content({data}:any) {
 					<AllObjects />
 				)}
 				<div style={{opacity:'0', position: 'absolute', zIndex: '-1'}}>
-				{data.points.map((elem: IMarker) => {
+				{(!data.points || data.points === undefined|| data.points === null) ? [] : data.points.map((elem: IMarker) => {
 						return (
 							<div
 								key={elem.id}

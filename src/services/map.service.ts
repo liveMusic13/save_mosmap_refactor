@@ -4,7 +4,6 @@ import { actions as dataObjectInfoAction } from "@/store/data-object-info/dataOb
 import { actions as dataObjectsInMapAction } from "@/store/data-objects-in-map/dataObjectsInMap.slice";
 import { actions as viewSettingsAction } from "@/store/view-settings/viewSettings.slice";
 import { IDataObjectInfo, IMarker } from "@/types/slice.types";
-import axios from "axios";
 
 export const mapService = {
   getObjectFunc: async (dispatch:any, adresFilterString:any, map:string) => {
@@ -86,8 +85,11 @@ export const mapService = {
 	},
   getFiltersFunc: async (map:string, dispatch:any) => {
 		try {
-			const responce = await axios.get(
-				`https://app.mosmap.ru/api/filters.php?map=${map}`,
+			// const responce = await axios.get(
+			// 	`https://app.mosmap.ru/api/filters.php?map=${map}`,
+			// );
+			const responce = await $axios.get(
+				`/api/filters.php?map=${map}`,
 			);
 			dispatch(dataFiltersAction.addFilters(responce.data));
 		} catch (error) {

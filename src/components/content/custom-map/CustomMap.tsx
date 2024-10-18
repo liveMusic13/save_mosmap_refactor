@@ -115,7 +115,7 @@ export function CustomMap() {
 			) : (
 				<CanvasMarkersLayer
 					isMobile={isMobile}
-					markersData={dataObjectsInMap.points.points}
+					markersData={dataObjectsInMap.points.points ? dataObjectsInMap.points.points : []}
 				/>//TODO: СДЕЛАТЬ РАЗМЕРЫ МАРКЕРОВ ВЗЯТЫЕ ИЗ ДАННЫХ КАРТЫ
 			)}
 			<FlyToLocation
