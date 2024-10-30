@@ -39,6 +39,7 @@ export default function Home({data, dataFilters}:any) {
 	useEffect(() => {
 		if (!map) {
 			push(`?map=7`);
+			// push(`/map/?map=7`);
 		} else {
 			//HELP: ТЕСТИРУЮ ИЗМЕНЕНИЕ РАЗМЕРОВ ЗНАЧКА
 			settingsService.getSettings(dispatch)
@@ -73,46 +74,6 @@ export default function Home({data, dataFilters}:any) {
 		</>
 	);
 }
-
-// export const getServerSideProps = async ({ query }:any) => {
-
-// if (query.map) {
-// 	const response = await fetch(`https://app.mosmap.ru/api/get_objects.php?map=${query.map}`);
-// 	const data = await response.json()
-
-// 	const filters = await fetch(
-// 		`https://mosmap.ru/api/filters.php?map=${query.map}`,
-// 	);
-
-// 	const dataFilters = await filters.json()
-	
-// 	return {
-// 		props: {
-// 			data,
-// 			dataFilters,
-// 			maps: query,
-// 		}
-// 	}
-// } else {
-// 	const response = await fetch(`https://app.mosmap.ru/api/get_objects.php?map=7`);
-// 	const data = await response.json()
-
-// 	const filters = await fetch(
-// 		`https://mosmap.ru/api/filters.php?map=7`,
-// 	);
-
-// 	const dataFilters = await filters.json()
-
-// 	return {
-// 		props: {
-// 			data,
-// 			dataFilters,
-// 			maps: query,
-// 		}
-// 	}
-
-// }
-// }
 
 export const getServerSideProps = async ({ query }: any) => {
   const response = await fetch(`https://app.mosmap.ru/api/get_objects.php?map=${query.map || 7}`);

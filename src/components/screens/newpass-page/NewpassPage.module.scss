@@ -1,0 +1,195 @@
+@import '../../../styles/variables';
+@import '../../../styles/functions';
+@import '../../../styles/animations';
+
+.wrapper_restore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.block__restore {
+  width: adapt(500px, 1440px);
+  box-shadow: 0 3px 1px -2px rgba(42, 70, 115, .2), 0 2px 2px 0 rgba(42, 70, 115, .14), 0 1px 5px 0 rgba(42, 70, 115, .12);
+  border-radius: adapt(4px, 1440px);
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    width: adapt(500px, 991px);
+  }
+
+  @media (max-width: 767.98px) {
+    width: adapt(600px, 767px);
+    display: flex;
+    flex-direction: column;
+    gap: adapt(35px, 767px);
+  }
+}
+
+.block__title_rest {
+  width: 50%;
+}
+
+.title {
+  font-size: 1.12rem;
+  font-weight: bold;
+  padding: adapt(12px, 1440px);
+  border-bottom: 1px solid $color_seven;
+  background-color: $color_eleven;
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    padding: adapt(12px, 791px);
+  }
+
+  @media (max-width: 767.98px) {
+    padding: adapt(12px, 580px);
+  }
+}
+
+.block__title {
+  font-size: 1.12rem;
+  font-weight: bold;
+  padding: adapt(12px, 1440px);
+  border-bottom: 1px solid $color_seven;
+  background-color: $color_eleven;
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    padding: adapt(12px, 791px);
+  }
+
+  @media (max-width: 767.98px) {
+    padding: adapt(12px, 580px);
+  }
+}
+
+.block__input {
+  height: adapt(79px, 1440px);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 0 adapt(12px, 1440px);
+
+  // &:last-of-type {
+  //   margin-bottom: adapt(24px, 1440px);
+  // }
+
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    height: adapt(79px, 791px);
+  }
+
+  @media (max-width: 767.98px) {
+    height: adapt(79px, 580px);
+  }
+
+  &:focus-within,
+  &.has_content {
+    .input__label{
+      animation: auth-label__import 1s ease 1 forwards;
+    }
+  }
+
+  >.input__label {
+    color: $color_eight;
+    position: absolute;
+    z-index: 2;
+    animation: auth-label-not-focus__import 1s ease 1 forwards;
+
+    &:hover {
+      cursor: default;
+    }
+  }
+  
+  >.input__login{
+    padding-top: adapt(10px, 1440px);
+    border-bottom: 1px solid $color_eight;
+    height: 80%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    outline: none;
+
+    /*TABLE*/
+    @media (max-width: 991.98px) {
+      padding-top: adapt(10px, 791px);
+    }
+
+    @media (max-width: 767.98px) {
+      padding-top: adapt(10px, 580px);
+    }
+
+    &:focus {
+      box-shadow: 0px 2px 2px $color_two;
+    }
+
+    &:hover {
+      cursor: text;
+    }
+  }
+}
+
+.button__restore {
+  width: adapt(476px, 1440px);
+  height: adapt(36px, 1440px);
+  margin: adapt(24px, 1440px) adapt(12px, 1440px) adapt(8px, 1440px);
+  border-radius: 2px;
+  color: $color_three;
+  animation: button-auth-reverse 0.8s ease 1 forwards;
+  text-transform: uppercase;
+
+  @media (max-width: 991.98px) {
+    width: adapt(476px, 991px);
+    height: 20%;
+    font-size: 1.5rem;
+    padding: adapt(10px, 991px) 0;
+    margin: adapt(24px, 1440px) adapt(12px, 1440px) adapt(8px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    font-size: 1rem;
+    width: adapt(576px, 767px);
+    padding: adapt(20px, 767px) 0;
+  }
+
+  &:hover {
+    cursor: pointer;
+    animation: button-auth 0.8s ease 1 forwards;
+  }
+
+  &:disabled {
+    cursor: default;
+    background-color: rgba($color: $color_two, $alpha: .5) !important;
+  }
+}
+
+.block__all {
+  display: flex;
+  justify-content: space-between;
+  padding: adapt(8px, 1440px) adapt(12px, 1440px);
+
+  >button {
+    color: $color_ten;
+    background-color: transparent;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  >.button__register{
+    color: $color_ten;
+
+    @media (max-width: 991.98px) {
+      font-size: 1.4rem;
+    }
+  }
+
+  >.button__restore-password{
+    color: $color_ten;
+
+    @media (max-width: 991.98px) {
+      font-size: 1.4rem;
+    }
+  }
+}

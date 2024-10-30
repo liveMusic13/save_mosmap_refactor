@@ -87,7 +87,7 @@ export const AllObjects: FC = () => {
 	if (!(viewSettings.isObjectInfo || viewSettings.isViewFilters)) {
 		style.left = '0';
 	}
-console.log('objects: ', objects)
+	
 	return (
 		<div className={styles.block__allObjects} style={style}>
 			<div className={styles.block__title}>

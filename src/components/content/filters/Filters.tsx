@@ -25,7 +25,7 @@ const Filters: FC = () => {
 	const [clearFilter, setClearFilter] = useState<boolean>(false);
 	const clearRequestData = useClearRequestData()
 	const getFiltersObject = useGetFiltersObject()
-console.log('dataFilters', dataFilters)
+
 	return (
 		<div
 			className={styles.block__filters}

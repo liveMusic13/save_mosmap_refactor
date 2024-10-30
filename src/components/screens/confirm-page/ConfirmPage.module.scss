@@ -1,0 +1,29 @@
+@import '../../../styles/variables';
+@import '../../../styles/functions';
+
+.wrapper_restore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.block__title_rest {
+  width: 50%;
+}
+
+.title {
+  font-size: 1.12rem;
+  font-weight: bold;
+  padding: adapt(12px, 1440px);
+  border-bottom: 1px solid $color_seven;
+  background-color: $color_eleven;
+  /*TABLE*/
+  @media (max-width: 991.98px) {
+    padding: adapt(12px, 791px);
+  }
+
+  @media (max-width: 767.98px) {
+    padding: adapt(12px, 580px);
+  }
+}

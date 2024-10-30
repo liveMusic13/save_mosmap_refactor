@@ -13,3 +13,26 @@ export interface IColumnData {
 export interface ICheckedStates {
 	[key: string]: boolean
 }
+
+export interface IRegistrationData {
+	login: string;
+	password: string;
+	email: string;
+	mapname?: string;
+	descr?: string;
+}
+
+export interface IRestoreData {
+	login?: string;
+	email?: string;
+}
+
+export interface IDataResponse {
+	message: string;
+	status: string
+}
+
+export interface IDataNewpass {
+	password: string;
+	oldpassword: string
+}
