@@ -1,13 +1,24 @@
 import { authService } from '@/services/auth.service'
 import { IDataNewpass, IDataResponse } from '@/types/data.types'
 import Link from 'next/link'
-import { Dispatch, FC, SetStateAction, useMemo, useState } from 'react'
+import { useRouter } from 'next/router'
+import { Dispatch, FC, SetStateAction, useEffect, useMemo, useState } from 'react'
 import styles from './NewpassPage.module.scss'
 
 const NewpassPage: FC = () => {
   const [newPass, setNewPass] = useState<string>('')
   const [oldPass, setOldPass] = useState<string>('')
   const [dataResponse, setDataResponse] = useState<IDataResponse>({message: '', status: ''})
+
+  const router = useRouter();
+
+  useEffect(() => {
+    // Получаем токен из query параметров
+    const token = router.query.token as string;
+    if (token) {
+      console.log('Token from URL:', token);
+    }
+  }, [router.query]);
 
   const handleChange = (value: string, setValue:Dispatch<SetStateAction<string>>) => {
     setValue(value);
