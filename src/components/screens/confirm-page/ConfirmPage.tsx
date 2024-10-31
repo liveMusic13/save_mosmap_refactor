@@ -1,19 +1,19 @@
-import { FC, useEffect } from 'react'
-import styles from './ConfirmPage.module.scss'
+// import { FC, useEffect } from 'react'
+// import styles from './ConfirmPage.module.scss'
 
-const ConfirmPage: FC = () => {
+// const ConfirmPage: FC = () => {
 
-  useEffect(()=> {
+//   useEffect(()=> {
 
-  }, [])
+//   }, [])
 
-  return (
-    <div className={styles.wrapper_confirm}>
-      <div className={styles.block__title}>
-        <div className={styles.title}>{dataResponse.message}</div>
-      </div>
-    </div>
-  )
-}
+//   return (
+//     <div className={styles.wrapper_confirm}>
+//       <div className={styles.block__title}>
+//         <div className={styles.title}>{dataResponse.message}</div>
+//       </div>
+//     </div>
+//   )
+// }
 
-export default ConfirmPage
+// export default ConfirmPage
