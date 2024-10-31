@@ -29,7 +29,7 @@ const NewpassPage: FC = () => {
 
   const dataNewpass: IDataNewpass = useMemo(() => ({
     password:newPass,
-    oldpassword:oldPass,
+    // oldpassword:oldPass,
     token: token
   }), [newPass, oldPass, token]);
   
