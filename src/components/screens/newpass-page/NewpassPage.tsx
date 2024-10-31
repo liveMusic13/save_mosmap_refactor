@@ -9,17 +9,18 @@ const NewpassPage: FC = () => {
   const [newPass, setNewPass] = useState<string>('')
   const [oldPass, setOldPass] = useState<string>('')
   const [dataResponse, setDataResponse] = useState<IDataResponse>({message: '', status: ''})
-
+  const [token, setToken] = useState('')
   const router = useRouter();
 
   useEffect(() => {
     const queryValues = Object.keys(router.query);
-  if (queryValues.length > 0) {
-    const token = queryValues[0]; // Забираем значение токена
-    console.log('Token from URL:', token);
-  } else {
-    console.log('No Token found');
-  }
+    if (queryValues.length > 0) {
+      const token = queryValues[0]; // Забираем значение токена
+      console.log('Token from URL:', token);
+      setToken(token)
+    } else {
+      console.log('No Token found');
+    }
   }, [router.query]);
 
   const handleChange = (value: string, setValue:Dispatch<SetStateAction<string>>) => {
@@ -28,8 +29,9 @@ const NewpassPage: FC = () => {
 
   const dataNewpass: IDataNewpass = useMemo(() => ({
     password:newPass,
-    oldpassword:oldPass
-  }), [newPass, oldPass]);
+    oldpassword:oldPass,
+    token: token
+  }), [newPass, oldPass, token]);
   
   const isDisabled = newPass === '' || oldPass === '' || newPass !== oldPass;
 
