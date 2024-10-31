@@ -21,7 +21,8 @@ const ConfirmPage: FC = () => {
   }, [router.query]);
 
   useEffect(()=> {
-    if (token !== '') authService.confirm({token})
+    // if (token !== '') authService.confirm({token})
+    authService.confirm({token})
   }, [token])
 
   useEffect(()=> {

@@ -60,7 +60,7 @@ export const authService = {
   },
   confirm: async (data: {token:string}) => {
     try {
-      const {data:dataResponse} = await $axiosAuth.post(`/api/newpass.php`, data)
+      const {data:dataResponse} = await $axiosAuth.post(`/api/confirm.php`, data)
       console.log('dataResponse', dataResponse)
       return dataResponse
     } catch (error) {
