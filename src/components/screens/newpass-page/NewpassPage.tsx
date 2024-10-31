@@ -17,6 +17,8 @@ const NewpassPage: FC = () => {
     const token = router.query.token as string;
     if (token) {
       console.log('Token from URL:', token);
+    } else {
+      console.log('No Token:', router.query, router.query.token, router.query.token as string);
     }
   }, [router.query]);
 
