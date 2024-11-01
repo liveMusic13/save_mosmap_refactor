@@ -32,7 +32,6 @@ const ConfirmPage: FC = () => {
       // router.push(`/${dataResponse.map}`)
       router.push({
         pathname: `/${dataResponse.map}`,
-        query: { map: dataResponse.map },
       });
       console.log('OK', dataResponse)
     } else if (dataResponse.status === 'error') {
