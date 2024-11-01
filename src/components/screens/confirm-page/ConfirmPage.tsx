@@ -13,7 +13,6 @@ const ConfirmPage: FC = () => {
 
   useEffect(()=> {
     if (token !== '') addResponse()
-    // authService.confirm({token})
   }, [token])
 
   useEffect(() => {
@@ -32,8 +31,8 @@ const ConfirmPage: FC = () => {
     if (dataResponse.status === 'OK') {
       router.push('/')
       console.log('OK', dataResponse)
-    } else {
-      // router.push('/auth')
+    } else if (dataResponse.status === 'error') {
+      router.push('/auth')
       console.log('dataResponse.status', dataResponse.status)
     }
   }, [dataResponse])
@@ -41,7 +40,11 @@ const ConfirmPage: FC = () => {
   return (
     <div className={styles.wrapper_confirm}>
       <div className={styles.block__title}>
-        <div className={styles.title}>{dataResponse.message}</div>
+        {/* <div className={styles.title}>{dataResponse.message}</div> */}
+        <div
+      className={styles.title}
+      dangerouslySetInnerHTML={{ __html: dataResponse.message }}
+    />
       </div>
     </div>
   )
