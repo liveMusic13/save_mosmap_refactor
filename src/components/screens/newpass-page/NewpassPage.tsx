@@ -16,7 +16,7 @@ const NewpassPage: FC = () => {
     const queryValues = Object.keys(router.query);
     if (queryValues.length > 0) {
       const token = queryValues[0]; // Забираем значение токена
-      console.log('Token from URL:', token);
+      // console.log('Token from URL:', token);
       setToken(token)
     } else {
       console.log('No Token found');

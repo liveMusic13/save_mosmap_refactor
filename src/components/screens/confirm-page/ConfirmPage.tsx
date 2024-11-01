@@ -9,8 +9,10 @@ const ConfirmPage: FC = () => {
   const router = useRouter()
   const [token, setToken] = useState('')
   
+  const addResponse = async() => setDataResponse(await authService.confirm({token}))
+
   useEffect(()=> {
-    if (token !== '') authService.confirm({token})
+    if (token !== '') addResponse()
     // authService.confirm({token})
   }, [token])
 
