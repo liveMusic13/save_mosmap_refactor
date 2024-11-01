@@ -36,5 +36,6 @@ export interface IDataResponse {
 export interface IDataNewpass {
 	password: string;
 	token: string;
-	// oldpassword: string
+	oldpassword?: string;
+	map?:string;
 }

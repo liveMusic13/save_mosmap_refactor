@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './BlockSettings.module.scss';
+import ChangePassword from './change-password/ChangePassword';
 import CheckboxSettings from './checkbox-settings/CheckboxSettings';
 import InputSettings from './input-settings/InputSettings';
 import { arrayCheckboxName, arrayInputsName } from './inputs.data';
@@ -103,6 +104,7 @@ const BlockSettings: FC<IBlockSettings> = ({title}) => {
         }
         <InputSettings formState={formState} field={'Радиус зоны в метрах для анализа местности:'} handleChange={handleChange} />
         {/* <CheckboxSettings formStateCheck={formStateCheck} checkbox={'Показывать пешеходный траффик'} handleChangeCheckbox={handleChangeCheckbox} /> */}
+        <ChangePassword/>
         <SelectTailes formState={formState} setFormState={setFormState}/>
         <button type='button' className={styles.button__saveForm} onClick={saveData}>Сохранить</button>
       </div>

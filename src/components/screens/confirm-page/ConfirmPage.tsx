@@ -18,27 +18,21 @@ const ConfirmPage: FC = () => {
   useEffect(() => {
     const queryValues = Object.keys(router.query);
     if (queryValues.length > 0) {
-      const token = queryValues[0]; // Забираем значение токена
-      console.log('Token from URL:', token);
+      const token = queryValues[0];
       setToken(token)
     } else {
-      console.log('No Token found');
     }
   }, [router.query]);
 
   useEffect(()=> {
     console.log('Проверка содержимого ответа', dataResponse)
     if (dataResponse.status === 'OK') {
-      // router.push(`/${dataResponse.map}`)
       router.push({
         pathname: `/`,
         query: { map: dataResponse.map },
       });
-      ///dsdsdsd
-      console.log('OK', dataResponse)
     } else if (dataResponse.status === 'error') {
       router.push('/auth')
-      console.log('dataResponse.status', dataResponse.status)
     }
   }, [dataResponse])
 
