@@ -29,7 +29,8 @@ export interface IRestoreData {
 
 export interface IDataResponse {
 	message: string;
-	status: string
+	status: string;
+	map?: string | number
 }
 
 export interface IDataNewpass {

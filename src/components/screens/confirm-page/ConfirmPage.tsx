@@ -5,7 +5,7 @@ import { FC, useEffect, useState } from 'react'
 import styles from './ConfirmPage.module.scss'
 
 const ConfirmPage: FC = () => {
-  const [dataResponse, setDataResponse] = useState<IDataResponse>({message: '', status: ''})
+  const [dataResponse, setDataResponse] = useState<IDataResponse>({message: '', status: '', map: ''})
   const router = useRouter()
   const [token, setToken] = useState('')
   
@@ -29,7 +29,11 @@ const ConfirmPage: FC = () => {
   useEffect(()=> {
     console.log('Проверка содержимого ответа', dataResponse)
     if (dataResponse.status === 'OK') {
-      router.push('/')
+      // router.push(`/${dataResponse.map}`)
+      router.push({
+        pathname: `/${dataResponse.map}`,
+        query: { map: dataResponse.map },
+      });
       console.log('OK', dataResponse)
     } else if (dataResponse.status === 'error') {
       router.push('/auth')
@@ -41,10 +45,16 @@ const ConfirmPage: FC = () => {
     <div className={styles.wrapper_confirm}>
       <div className={styles.block__title}>
         {/* <div className={styles.title}>{dataResponse.message}</div> */}
-        <div
-      className={styles.title}
-      dangerouslySetInnerHTML={{ __html: dataResponse.message }}
-    />
+        {/* <div
+          className={styles.title}
+          dangerouslySetInnerHTML={{ __html: dataResponse.message }}
+        /> */}
+        {
+          dataResponse.status !== 'OK' ? <></> : <div
+          className={styles.title}
+          dangerouslySetInnerHTML={{ __html: dataResponse.message }}
+        /> 
+        }
       </div>
     </div>
   )
