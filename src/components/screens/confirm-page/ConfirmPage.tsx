@@ -9,6 +9,11 @@ const ConfirmPage: FC = () => {
   const router = useRouter()
   const [token, setToken] = useState('')
   
+  useEffect(()=> {
+    if (token !== '') authService.confirm({token})
+    // authService.confirm({token})
+  }, [token])
+
   useEffect(() => {
     const queryValues = Object.keys(router.query);
     if (queryValues.length > 0) {
@@ -19,11 +24,6 @@ const ConfirmPage: FC = () => {
       console.log('No Token found');
     }
   }, [router.query]);
-
-  useEffect(()=> {
-    if (token !== '') authService.confirm({token})
-    // authService.confirm({token})
-  }, [token])
 
   useEffect(()=> {
     console.log('Проверка содержимого ответа', dataResponse)
