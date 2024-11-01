@@ -33,6 +33,7 @@ const ConfirmPage: FC = () => {
       router.push({
         pathname: `/?${dataResponse.map}`,
       });
+      ///dsdsdsd
       console.log('OK', dataResponse)
     } else if (dataResponse.status === 'error') {
       router.push('/auth')
