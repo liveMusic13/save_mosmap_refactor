@@ -26,8 +26,10 @@ const ConfirmPage: FC = () => {
   }, [token])
 
   useEffect(()=> {
+    console.log('Проверка содержимого ответа', dataResponse)
     if (dataResponse.status === 'OK') {
       router.push('/')
+      console.log('OK', dataResponse)
     } else {
       // router.push('/auth')
       console.log('dataResponse.status', dataResponse.status)
