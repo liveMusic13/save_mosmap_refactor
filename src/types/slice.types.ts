@@ -27,7 +27,7 @@ export interface IValues {
 }
 
 export interface IDataObjectInfo {
-	area?: number[]; //TODO: УЗНАТЬ ПРО ДАННЫЕ ЧТО ТУТ БУДУТ
+	area?: number[] | any;
 	color?: string;
 	crd?: [number, number];
 	cuts?: number[]; //TODO: УЗНАТЬ ПРО ДАННЫЕ ЧТО ТУТ БУДУТ
@@ -46,6 +46,7 @@ export interface IUserMap {
 }
 
 export interface IViewSettings {
+	isSearchAddress: boolean;
 	isViewPopupImportDone: boolean;
 	isImportSettingsData: boolean;
 	isViewImport: boolean,

@@ -35,7 +35,18 @@ export interface IDataResponse {
 
 export interface IDataNewpass {
 	password: string;
-	token: string;
+	token?: string;
 	oldpassword?: string;
 	map?:string;
+}
+
+export interface IDataSearchAddress {
+	
+	list: {
+		id: string;
+		name: string;
+		subname:string;
+		coords?: [number, number]
+	}[];
+	url: string;
 }

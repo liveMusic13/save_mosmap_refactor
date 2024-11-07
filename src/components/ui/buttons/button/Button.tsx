@@ -19,7 +19,7 @@ import { useRouter } from 'next/router';
 import styles from './Button.module.scss';
 
 const Button: FC<IButton> = ({ icon, newCenter, elem }) => {
-	const {isSelectArea} = useSelector((state:RootState)=> state.viewSettings)
+	const {isSelectArea, isSearchAddress} = useSelector((state:RootState)=> state.viewSettings)
 	const [clickButton, setClickButton] = useState<boolean>(false);
 	const dispatch = useDispatch();
 	const { width } = useWindowDimensions();
@@ -31,6 +31,9 @@ const Button: FC<IButton> = ({ icon, newCenter, elem }) => {
 			className={styles.icon__button}
 			disabled={elem?.crd === null}
 			onClick={() => {
+				if (icon.id === 1) {
+					dispatch(viewSettingsAction.toggleSearchAddress(''))
+				}
 				if (icon.id === 2) {
 					dispatch(viewSettingsAction.toogleIsSelectArea(''))
 					dispatch(mapLayersAction.clearPolygon(''))
@@ -69,7 +72,7 @@ const Button: FC<IButton> = ({ icon, newCenter, elem }) => {
 					></path>
 				</svg>
 			) : (
-				<svg className={icon.id === 0 ? styles.icon_svg_home : styles.icon_svg} style={icon.id === 2 && isSelectArea ? {color: 'red'} : {}}>
+				<svg className={icon.id === 0 ? styles.icon_svg_home : styles.icon_svg} style={icon.id === 2 && isSelectArea || icon.id === 1 && isSearchAddress ? {color: 'red'} : {}}>
 					<use
 						xlinkHref={
 							clickButton

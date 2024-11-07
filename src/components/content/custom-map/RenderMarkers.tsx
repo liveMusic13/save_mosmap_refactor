@@ -59,6 +59,9 @@ const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 
 	return (
 		<>
+		{
+			dataObjectInfo && dataObjectInfo.area && dataObjectInfo.area.length > 0 && <Polygon positions={dataObjectInfo.area} color='red' fillOpacity={0.4} />
+		}
 			{dataObjectsInMap?.points?.points?.map((object: IDataObjectInfo) => {
 				if (object && object.crd) {
 					const getObjectInfo = async () => {

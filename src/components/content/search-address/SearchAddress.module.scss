@@ -1,0 +1,61 @@
+@import '../../../styles/variables';
+@import '../../../styles/functions';
+
+.block__searchAddress {
+  position: absolute;
+  top: adapt(80px, 1440px);
+  right: adapt(80px, 1440px);
+  z-index: 500;
+  width: adapt(390px, 1440px);
+  display: flex;
+  flex-direction: column;
+  gap: adapt(10px, 1440px);
+
+  @media (max-width: 767.98px) {
+    top: adapt(180px, 767px);
+    width: adapt(490px, 767px);
+  }
+}
+
+.input {
+  width: 100%;
+  outline: none;
+  border-radius: adapt(4px, 1440px);
+  box-shadow: 0 0 2px rgba(0, 0, 0, .2);
+  height: adapt(48px, 1440px);
+  font-size: 1rem;
+  padding: 0px adapt(8px, 1440px);
+  background-color: $color_three;
+
+  &::placeholder {
+    color: rgba($color: $color_one, $alpha: .3);
+  }
+
+  @media (max-width: 767.98px) {
+    height: adapt(88px, 767px);
+    font-size: 1.4rem;
+  }
+}
+
+.block__variables {
+  box-shadow: 0 0 2px rgba(0, 0, 0, .2);
+  max-height: adapt(217px, 1440px);
+  border-radius: adapt(4px, 1440px);
+  overflow-y: auto;
+
+  @media (max-width: 767.98px) {
+    max-height: adapt(330px, 767px);
+  }
+}
+
+.variables {
+  background-color: $color_three;
+  font-size: 0.75rem;
+  border-bottom: 1px solid $color_four;
+  padding: adapt(10px, 1440px) adapt(20px, 1440px);
+
+  @media (max-width: 767.98px) {
+    font-size: 1.2rem;
+    padding: adapt(10px, 767px) adapt(20px, 767px);
+  }
+}

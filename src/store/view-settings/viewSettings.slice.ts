@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { IViewSettings } from '@/types/slice.types';
 
 const initialState: IViewSettings = {
+	isSearchAddress: false,
 	isImportSettingsData: false,
 	isViewFilters: true,
 	isViewObjects: true,
@@ -40,6 +41,9 @@ export const viewSettings = createSlice({
 	name: 'viewSettings',
 	initialState,
 	reducers: {
+		toggleSearchAddress: (state, {payload}) => {
+			state.isSearchAddress = !state.isSearchAddress
+		},
 		activeIsViewPopupImportDone: (state, {payload}) => {
 			state.isViewPopupImportDone = true;
 		},

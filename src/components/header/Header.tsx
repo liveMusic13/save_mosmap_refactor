@@ -40,7 +40,6 @@ export function Header({data}:any) {
 	return (
 		<header className={styles.header}>
 			<div className={styles.map__buttons}>
-
 				{
 					(width && width <= 767.98) && ( <div className={viewSettings.isBurger ? `${styles.block__burger} ${styles.close}` : styles.block__burger} onClick={()=> dispatch(viewSettingsAction.toggleBurger(''))}>
 						<button></button> 

@@ -22,16 +22,11 @@ const ChangePassword: FC = () => {
   const dataNewpass: IDataNewpass = useMemo(() => ({
     password:newPass,
     oldpassword:confirmOldPass,
-    token: token && typeof token === 'string' ? token : '',
     map: query.map && typeof query.map === 'string' ? query.map : ''
   }), [newPass, oldPass, token]);
 
-  const onClick = () => {
-    // const response = await authService.newpass(dataNewpass)
-    // setDataResponse(response)
-    authService.newpass(dataNewpass)
-  }
-
+  const onClick = () => authService.newpass(dataNewpass)
+  
   return (
     <div className={styles.block__changePassword}>
       <div className={`${styles.block__input} ${confirmOldPass !== '' && styles.has_content}`}>

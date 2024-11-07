@@ -3,7 +3,9 @@ import { actions as dataFiltersAction } from "@/store/data-filters/dataFilters.s
 import { actions as dataObjectInfoAction } from "@/store/data-object-info/dataObjectInfo.slice";
 import { actions as dataObjectsInMapAction } from "@/store/data-objects-in-map/dataObjectsInMap.slice";
 import { actions as viewSettingsAction } from "@/store/view-settings/viewSettings.slice";
+import { IDataSearchAddress } from "@/types/data.types";
 import { IDataObjectInfo, IMarker } from "@/types/slice.types";
+import axios from "axios";
 
 export const mapService = {
   getObjectFunc: async (dispatch:any, adresFilterString:any, map:string) => {
@@ -25,7 +27,6 @@ export const mapService = {
 			dispatch(viewSettingsAction.defaultLoading(''));
 		}
 	},
-
   getInfoObject: (marker: IMarker | IDataObjectInfo, dispatch: any, isMobile:boolean) => async () => {
 		//HELP: ЗАПРОС НА ПОЛУЧЕНИЕ ИНФОРМАЦИИ ОБ ОБЪЕКТЕ
 		if (isMobile) dispatch(viewSettingsAction.activeSettingsMap(''));
@@ -106,6 +107,20 @@ export const mapService = {
 			console.log(error);
 		} finally {
 			dispatch(viewSettingsAction.defaultLoading(''));
+		}
+	},
+	getHelpSearchAddress: async (dispatch:any, query:any): Promise<IDataSearchAddress | any> => {
+		try {
+			// dispatch(viewSettingsAction.activeLoading(''));
+			const encodedQuery = encodeURIComponent(query)
+			const response = await axios.get(`https://flatinfo.ru/services/adres_response.php?term=${encodedQuery}`);
+			console.log('response', response.data)
+			return response.data
+		} catch (error) {
+			console.log(error);
+			return error
+		} finally {
+			// dispatch(viewSettingsAction.defaultLoading(''));
 		}
 	}
 }

@@ -15,6 +15,7 @@ import { AllObjects } from './all-objects/AllObjects';
 import Filters from './filters/Filters';
 import AddAndEditObject from './filters/add-and-edit-object/AddAndEditObject';
 import ObjectInfo from './object-info/ObjectInfo';
+import SearchAddress from './search-address/SearchAddress';
 
 const DynamicMapCustom = dynamic(
 	() => import('./custom-map/CustomMap').then(mod => mod.CustomMap),
@@ -79,6 +80,7 @@ export function Content({data}:any) {
 					})}</div>
 			<div className={styles.block__map}>
 				<DynamicMapCustom />
+				{viewSettings.isSearchAddress && <SearchAddress />}
 				<div className={styles.logo__image}>
 					<a href='https://mosmap.ru'></a>
 				</div>

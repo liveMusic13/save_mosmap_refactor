@@ -1,11 +1,11 @@
 import { IIconsData } from '@/types/data.types';
 
 export const arrayNumIcons: IIconsData[] = [
-	// {
-	// 	id: 1,
-	// 	src: '/images/svg/sprite.svg#home-search-outline',
-	// 	hover_text: 'Поиск адреса',
-	// },
+	{
+		id: 1,
+		src: '/images/svg/sprite.svg#home-search-outline',
+		hover_text: 'Поиск адреса',
+	},
 	{
 		id: 2,
 		src_active: '/images/svg/sprite.svg#selection-drag', //HELP: ПОМЕНЯЛ МЕСТАМИ АКТИВНЫЕ КАРТИНКИ, ЧТОБЫ ВСЕ РАБОТАЛО ПРАВИЛЬНО
