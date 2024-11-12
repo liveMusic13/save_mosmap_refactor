@@ -34,14 +34,24 @@ const RestorePage: FC = () => {
 
   const [showError, setShowError] = useState(false); 
   useEffect(() => { 
+    console.log('dataResponsedataResponsedataResponse', dataResponse)
     if (dataResponse.status === 'error') { 
       setShowError(true); 
       const timer = setTimeout(() => { 
         setShowError(false); 
       }, 5000); 
-      return () => clearTimeout(timer); 
+      return () => {
+        // setDataResponse(prev => ({...prev, status: ''}))
+        clearTimeout(timer);
+      } 
     } 
   }, [dataResponse.status])
+
+  useEffect(() => { 
+    if (!showError) { 
+      setDataResponse(prev => ({ ...prev, status: '' })); 
+    } 
+  },[showError])
 
   return (
     <div className={styles.wrapper_restore}>

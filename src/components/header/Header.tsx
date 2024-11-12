@@ -117,9 +117,14 @@ export function Header({data}:any) {
 							? data.title
 							: 'Тестовая карта'}
 					</h1>
-					<h1 className={styles.title}>
+					{/* <h1 className={styles.title}>
 							{title
 							? title
+							: 'Тестовая карта'}
+					</h1> */}
+					<h1 className={styles.title}>
+							{dataObjectsInMap.points.title
+							? dataObjectsInMap.points.title
 							: 'Тестовая карта'}
 					</h1>
 				</div>

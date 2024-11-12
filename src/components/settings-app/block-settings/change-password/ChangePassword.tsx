@@ -42,6 +42,12 @@ const ChangePassword: FC = () => {
     } 
   }, [dataResponse.status])
 
+  useEffect(() => { 
+    if (!showError) { 
+      setDataResponse(prev => ({ ...prev, status: '' })); 
+    } 
+  },[showError])
+
   return (
     <div className={styles.block__changePassword}>
       {

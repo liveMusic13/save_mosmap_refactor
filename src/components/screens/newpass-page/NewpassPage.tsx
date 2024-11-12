@@ -13,6 +13,7 @@ const NewpassPage: FC = () => {
   const [dataResponse, setDataResponse] = useState<IDataResponse>({message: '', status: ''})
   const [token, setToken] = useState('')
   const router = useRouter();
+  // const [checkError, setCheckError] = useState(false)
 
   useEffect(() => {
     const queryValues = Object.keys(router.query);
@@ -71,9 +72,18 @@ const NewpassPage: FC = () => {
       const timer = setTimeout(() => { 
         setShowError(false); 
       }, 5000); 
-      return () => clearTimeout(timer); 
+      return () => {
+        setDataResponse(prev => ({...prev, status: ''}))
+        clearTimeout(timer)
+      }; 
     } 
   }, [dataResponse.status])
+
+  useEffect(() => { 
+    if (!showError) { 
+      setDataResponse(prev => ({ ...prev, status: '' })); 
+    } 
+  },[showError])
 
   return (
     <div className={styles.wrapper_restore}>
