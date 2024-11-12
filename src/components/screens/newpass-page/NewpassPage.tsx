@@ -1,5 +1,7 @@
+import { ACCESSIBLYMAP, TOKEN } from '@/app.constants'
 import { authService } from '@/services/auth.service'
 import { IDataNewpass, IDataResponse } from '@/types/data.types'
+import Cookies from 'js-cookie'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Dispatch, FC, SetStateAction, useEffect, useMemo, useState } from 'react'
@@ -40,6 +42,27 @@ const NewpassPage: FC = () => {
     setDataResponse(response)
   }
 
+  useEffect(()=> {
+    console.log('Проверка содержимого ответа', dataResponse)
+    if (dataResponse.status === 'OK') {
+      Cookies.set(ACCESSIBLYMAP, String(dataResponse.map))
+
+      if (dataResponse.token) {
+        Cookies.set(TOKEN, dataResponse.token);
+        console.log('dataResponse true', dataResponse)
+      } else {
+        console.log('dataResponse false', dataResponse)
+      }
+
+      router.push({
+        pathname: `/`,
+        query: { map: dataResponse.map },
+      });
+    } else if (dataResponse.status === 'error') {
+      router.push('/auth')
+    }
+  }, [dataResponse])
+
   return (
     <div className={styles.wrapper_restore}>
       {/* {
@@ -56,7 +79,7 @@ const NewpassPage: FC = () => {
             <div className={`${styles.block__input} ${newPass !== '' && styles.has_content}`}>
               <label htmlFor='login' className={styles.input__label}>Новый пароль:</label>
               <input
-                type="text"
+                type="password"
                 className={styles.input__login}
                 id='newPass'
                 value={newPass}
@@ -67,7 +90,7 @@ const NewpassPage: FC = () => {
               <label htmlFor='oldPass' className={styles.input__label}>
               Подтверждение пароля:</label>
               <input
-                type="text"
+                type="password"
                 className={styles.input__login}
                 id='oldPass'
                 value={oldPass}
