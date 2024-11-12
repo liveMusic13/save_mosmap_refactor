@@ -1,9 +1,9 @@
 import { TOKEN } from '@/app.constants';
 import { authService } from '@/services/auth.service';
-import { IDataNewpass } from '@/types/data.types';
+import { IDataNewpass, IDataResponse } from '@/types/data.types';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
-import { Dispatch, FC, SetStateAction, useMemo, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useEffect, useMemo, useState } from 'react';
 import styles from './ChangePassword.module.scss';
 
 const ChangePassword: FC = () => {
@@ -11,6 +11,7 @@ const ChangePassword: FC = () => {
   const [oldPass, setOldPass] = useState<string>('')
   const [confirmOldPass, setConfirmOldPass] = useState<string>('')
   const {query} = useRouter();
+  const [dataResponse, setDataResponse] = useState<IDataResponse>({message: '', status: ''})
 
   const isDisabled = newPass === '' || oldPass === '' || newPass !== oldPass || confirmOldPass === '';
 
@@ -25,10 +26,34 @@ const ChangePassword: FC = () => {
     map: query.map && typeof query.map === 'string' ? query.map : ''
   }), [newPass, oldPass, token]);
 
-  const onClick = () => authService.newpass(dataNewpass)
+  const onClick = async () => {
+    const response = await authService.newpass(dataNewpass)
+    setDataResponse(response)
+  }
   
+  const [showError, setShowError] = useState(false); 
+  useEffect(() => { 
+    if (dataResponse.status === 'error') { 
+      setShowError(true); 
+      const timer = setTimeout(() => { 
+        setShowError(false); 
+      }, 5000); 
+      return () => clearTimeout(timer); 
+    } 
+  }, [dataResponse.status])
+
   return (
     <div className={styles.block__changePassword}>
+      {
+        showError && 
+          <div className={`${styles.block__title} ${styles.error}`}>
+            <div
+              className={styles.title}
+              dangerouslySetInnerHTML={{ __html: dataResponse.message }}
+            />
+          </div>
+      }
+
       <div className={`${styles.block__input} ${confirmOldPass !== '' && styles.has_content}`}>
         <label htmlFor='confirmOldPass' className={styles.input__label}>
         Старый пароль:</label>
