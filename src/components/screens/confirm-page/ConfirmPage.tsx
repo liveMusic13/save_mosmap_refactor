@@ -21,7 +21,7 @@ const ConfirmPage: FC = () => {
     const queryValues = Object.keys(router.query);
     if (queryValues.length > 0) {
       const token = queryValues[0];
-      Cookies.set(TOKEN, token);
+      if (dataResponse.token) Cookies.set(TOKEN, dataResponse.token);
       setToken(token)
     } else {
     }

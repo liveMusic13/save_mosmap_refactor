@@ -30,7 +30,8 @@ export interface IRestoreData {
 export interface IDataResponse {
 	message: string;
 	status: string;
-	map?: string | number
+	map?: string | number;
+	token?: string;
 }
 
 export interface IDataNewpass {
