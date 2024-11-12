@@ -21,12 +21,6 @@ const ConfirmPage: FC = () => {
     const queryValues = Object.keys(router.query);
     if (queryValues.length > 0) {
       const token = queryValues[0];
-      if (dataResponse.token) {
-        Cookies.set(TOKEN, dataResponse.token);
-        console.log('dataResponse true', dataResponse)
-      } else {
-        console.log('dataResponse false', dataResponse)
-      }
       setToken(token)
     } else {
     }
@@ -36,6 +30,13 @@ const ConfirmPage: FC = () => {
     console.log('Проверка содержимого ответа', dataResponse)
     if (dataResponse.status === 'OK') {
       Cookies.set(ACCESSIBLYMAP, String(dataResponse.map))
+
+      if (dataResponse.token) {
+        Cookies.set(TOKEN, dataResponse.token);
+        console.log('dataResponse true', dataResponse)
+      } else {
+        console.log('dataResponse false', dataResponse)
+      }
 
       router.push({
         pathname: `/`,
