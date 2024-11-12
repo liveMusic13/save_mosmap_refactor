@@ -1,7 +1,7 @@
 import { authService } from '@/services/auth.service'
 import { IDataResponse, IRestoreData } from '@/types/data.types'
 import Link from 'next/link'
-import { Dispatch, FC, SetStateAction, useMemo, useState } from 'react'
+import { Dispatch, FC, SetStateAction, useEffect, useMemo, useState } from 'react'
 import styles from './RestorePage.module.scss'
 
 const RestorePage: FC = () => {
@@ -32,8 +32,29 @@ const RestorePage: FC = () => {
     setDataResponse(response)
   }
 
+  const [showError, setShowError] = useState(false); 
+  useEffect(() => { 
+    if (dataResponse.status === 'error') { 
+      setShowError(true); 
+      const timer = setTimeout(() => { 
+        setShowError(false); 
+      }, 5000); 
+      return () => clearTimeout(timer); 
+    } 
+  }, [dataResponse.status])
+
   return (
     <div className={styles.wrapper_restore}>
+
+      {
+        showError && 
+          <div className={`${styles.block__title} ${styles.error}`}>
+            <div
+              className={styles.title}
+              dangerouslySetInnerHTML={{ __html: dataResponse.message }}
+            />
+          </div>
+      }
 
       {
         dataResponse.status === 'OK' ? (
