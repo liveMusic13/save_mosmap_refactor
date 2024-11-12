@@ -58,10 +58,22 @@ const NewpassPage: FC = () => {
         pathname: `/`,
         query: { map: dataResponse.map },
       });
-    } else if (dataResponse.status === 'error') {
-      router.push('/auth')
-    }
+    } 
+    // else if (dataResponse.status === 'error') {
+    //   router.push('/auth')
+    // }
   }, [dataResponse])
+
+  const [showError, setShowError] = useState(false); 
+  useEffect(() => { 
+    if (dataResponse.status === 'error') { 
+      setShowError(true); 
+      const timer = setTimeout(() => { 
+        setShowError(false); 
+      }, 5000); 
+      return () => clearTimeout(timer); 
+    } 
+  }, [dataResponse.status])
 
   return (
     <div className={styles.wrapper_restore}>
@@ -71,6 +83,17 @@ const NewpassPage: FC = () => {
             <div className={styles.title}>{dataResponse.message}</div>
           </div>
         ) : ( */}
+
+        {
+          showError && 
+            <div className={`${styles.block__title} ${styles.error}`}>
+              {/* <div className={styles.title}>{dataResponse.message}</div> */}
+              <div
+                className={styles.title}
+                dangerouslySetInnerHTML={{ __html: dataResponse.message }}
+              />
+            </div>
+        }
           <div className={styles.block__restore}>
             <div className={styles.block__title}>
               <h1>Восстановление пароля</h1>

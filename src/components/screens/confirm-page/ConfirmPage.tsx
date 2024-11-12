@@ -43,7 +43,10 @@ const ConfirmPage: FC = () => {
         query: { map: dataResponse.map },
       });
     } else if (dataResponse.status === 'error') {
-      router.push('/auth')
+      const timer = setTimeout(() => { 
+        router.push('/auth') 
+      }, 5000); 
+      return () => clearTimeout(timer); 
     }
   }, [dataResponse])
 
@@ -56,10 +59,11 @@ const ConfirmPage: FC = () => {
           dangerouslySetInnerHTML={{ __html: dataResponse.message }}
         /> */}
         {
-          dataResponse.status !== 'OK' ? <></> : <div
+          dataResponse.status === 'OK' ? <></> : 
+          <div
           className={styles.title}
           dangerouslySetInnerHTML={{ __html: dataResponse.message }}
-        /> 
+          />
         }
       </div>
     </div>
