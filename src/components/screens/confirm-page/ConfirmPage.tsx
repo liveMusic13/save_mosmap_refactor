@@ -1,5 +1,7 @@
+import { ACCESSIBLYMAP, TOKEN } from '@/app.constants'
 import { authService } from '@/services/auth.service'
 import { IDataResponse } from '@/types/data.types'
+import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 import styles from './ConfirmPage.module.scss'
@@ -19,6 +21,7 @@ const ConfirmPage: FC = () => {
     const queryValues = Object.keys(router.query);
     if (queryValues.length > 0) {
       const token = queryValues[0];
+      Cookies.set(TOKEN, token);
       setToken(token)
     } else {
     }
@@ -27,6 +30,8 @@ const ConfirmPage: FC = () => {
   useEffect(()=> {
     console.log('Проверка содержимого ответа', dataResponse)
     if (dataResponse.status === 'OK') {
+      Cookies.set(ACCESSIBLYMAP, String(dataResponse.map))
+
       router.push({
         pathname: `/`,
         query: { map: dataResponse.map },
