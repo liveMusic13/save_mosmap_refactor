@@ -54,6 +54,10 @@
   border-bottom: 1px solid $color_four;
   padding: adapt(10px, 1440px) adapt(20px, 1440px);
 
+  &:hover {
+    cursor: pointer;
+  }
+
   @media (max-width: 767.98px) {
     font-size: 1.2rem;
     padding: adapt(10px, 767px) adapt(20px, 767px);
