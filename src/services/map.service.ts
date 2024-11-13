@@ -113,7 +113,7 @@ export const mapService = {
 		try {
 			// dispatch(viewSettingsAction.activeLoading(''));
 			const encodedQuery = encodeURIComponent(query)
-			const response = await axios.get(`https://flatinfo.ru/services/adres_response.php?term=${encodedQuery}`);
+			const response = await axios.get(`https://mosmap.ru/api/adres_response.php?term=${encodedQuery}`);
 			console.log('response', response.data)
 			return response.data
 		} catch (error) {
