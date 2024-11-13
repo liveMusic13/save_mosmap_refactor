@@ -115,7 +115,7 @@ export function Header({data}:any) {
 					<h1 className={styles.title} style={{opacity: '0', position: 'absolute', top:'0', left: '0', zIndex: '-20'}}>
 							{data.title
 							? data.title
-							: 'Тестовая карта'}
+							: ''}
 					</h1>
 					{/* <h1 className={styles.title}>
 							{title
@@ -125,7 +125,7 @@ export function Header({data}:any) {
 					<h1 className={styles.title}>
 							{dataObjectsInMap.points.title
 							? dataObjectsInMap.points.title
-							: 'Тестовая карта'}
+							: ''}
 					</h1>
 				</div>
 			</div>

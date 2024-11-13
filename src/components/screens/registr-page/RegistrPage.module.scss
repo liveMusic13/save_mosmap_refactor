@@ -162,3 +162,15 @@
     color: $color_ten;
   }
 }
+
+.error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 300;
+  transform: translate(-50%, -50%);
+  
+  > div {
+    border-bottom: 0px solid transparent;
+  }
+}

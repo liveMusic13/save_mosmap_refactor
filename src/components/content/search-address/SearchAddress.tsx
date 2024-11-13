@@ -20,14 +20,22 @@ const SearchAddress: FC = () => {
     if (value.length > 2) getData()
   }, [value])
 
+  const extractCityAndStreet = (address: string): string => { // Разбиваем строку на части по запятой 
+    const parts = address.split(', '); // Получаем первое слово и первые два слова после запятой 
+    const city = parts[0]; const streetParts = parts[1].split(' ').slice(0, 2).join(' '); // Формируем и возвращаем новую строку 
+    return `${city}, ${streetParts}`;
+  }
+
   const onClick = async (e:any) => {
     const response = await mapService.getHelpSearchAddress(dispatch, e.target.innerText)
     setDataResponse(response)
     console.log('response.list[0].length: ', response.list.length)
+  
     if (response.list.length === 1) {
-      console.log(response.list[0].coords, 'dataResponse: ', dataResponse.list[0].coords)
       dispatch(dataObjectsInMapAction.addNewCenter(response.list[0].coords))
       dispatch(viewSettingsAction.toggleSearchAddress(''))
+    } else if (response.list.length > 0) {
+      setValue(extractCityAndStreet(response.list[0].name))
     }
   }
 

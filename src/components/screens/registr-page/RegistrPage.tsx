@@ -1,7 +1,7 @@
 import { authService } from '@/services/auth.service'
 import { IDataResponse, IRegistrationData } from '@/types/data.types'
 import Link from 'next/link'
-import { Dispatch, FC, SetStateAction, useMemo, useState } from 'react'
+import { Dispatch, FC, SetStateAction, useEffect, useMemo, useState } from 'react'
 import styles from './RegistrPage.module.scss'
 
 const RegistrPage: FC = () => {
@@ -32,8 +32,38 @@ const RegistrPage: FC = () => {
     setDataResponse(response)
   }
 
+  const [showError, setShowError] = useState(false); 
+  useEffect(() => { 
+    if (dataResponse.status === 'error') { 
+      setShowError(true); 
+      const timer = setTimeout(() => { 
+        setShowError(false); 
+      }, 5000); 
+      return () => {
+        setDataResponse(prev => ({...prev, status: ''}))
+        clearTimeout(timer)
+      }; 
+    } 
+  }, [dataResponse.status])
+
+  useEffect(() => { 
+    if (!showError) { 
+      setDataResponse(prev => ({ ...prev, status: '' })); 
+    } 
+  },[showError])
+
   return (
     <div className={styles.wrapper_registr}>
+      {
+        showError && 
+          <div className={`${styles.block__title} ${styles.error}`}>
+            <div
+              className={styles.title}
+              dangerouslySetInnerHTML={{ __html: dataResponse.message }}
+            />
+          </div>
+      }   
+
       {
         dataResponse.status === 'OK' ? (
           <div className={styles.block__title}>
