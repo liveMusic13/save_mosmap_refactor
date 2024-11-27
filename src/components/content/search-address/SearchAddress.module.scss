@@ -37,6 +37,7 @@
   @media (max-width: 767.98px) {
     height: adapt(88px, 767px);
     font-size: 1.4rem;
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
   }
 }
 
