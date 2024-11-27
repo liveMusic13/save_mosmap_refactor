@@ -1,13 +1,17 @@
-import { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, FC, useEffect, useMemo, useRef, useState } from 'react'
 
+import useWindowDimensions from '@/hooks/useWindowDimensions'
 import { mapService } from '@/services/map.service'
 import { actions as dataObjectsInMapAction } from '@/store/data-objects-in-map/dataObjectsInMap.slice'
+import { RootState } from '@/store/store'
 import { actions as viewSettingsAction } from '@/store/view-settings/viewSettings.slice'
 import { IDataSearchAddress } from '@/types/data.types'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import styles from './SearchAddress.module.scss'
 
 const SearchAddress: FC = () => {
+  const {width} = useWindowDimensions()
+  const viewSettings = useSelector((state: RootState) => state.viewSettings);
   const dispatch = useDispatch();
   const [value, setValue] = useState<string>('');
   const [dataResponse, setDataResponse] = useState<IDataSearchAddress | any>({
@@ -61,8 +65,25 @@ const SearchAddress: FC = () => {
     }
   };
 
+  const transformStyle = () => { 
+    const { isViewFilters, isObjectInfo, isViewObjects } = viewSettings; 
+    if (isViewFilters || isObjectInfo || isViewObjects) { 
+      if (isViewFilters && isObjectInfo) { 
+        return 'translateX(-50%)'; 
+      } else if ((isViewFilters || isObjectInfo) && isViewObjects) { 
+        return undefined; 
+      } 
+      return 'translateX(-50%)'; 
+    } 
+    return 'translateX(-65%)'; 
+  }
+  
+  const style = useMemo(()=> ({
+    transform: width && width > 767.98 ? transformStyle() : undefined
+  }), [width, viewSettings.isViewFilters, viewSettings.isObjectInfo, viewSettings.isViewObjects])  
+
   return (
-    <div className={styles.block__searchAddress}>
+    <div className={styles.block__searchAddress} style={style}>
       <input
         ref={inputRef}
         type="text"
