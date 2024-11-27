@@ -4,7 +4,9 @@
 .block__searchAddress {
   position: absolute;
   top: adapt(80px, 1440px);
-  right: adapt(80px, 1440px);
+  // right: adapt(80px, 1440px);
+  left: 50%;
+  transform: translateX(-30%);
   z-index: 500;
   width: adapt(390px, 1440px);
   display: flex;
@@ -14,6 +16,7 @@
   @media (max-width: 767.98px) {
     top: adapt(180px, 767px);
     width: adapt(490px, 767px);
+    transform: translateX(-50%);
   }
 }
 

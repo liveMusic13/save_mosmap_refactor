@@ -61,7 +61,8 @@ export default function Home({data, dataFilters}:any) {
 			<Head>
 				<title>{data.title}</title>
 				<meta name='description' content={data.description} />
-				<meta name='viewport' content='width=device-width, initial-scale=1' />
+				{/* <meta name='viewport' content='width=device-width, initial-scale=1' /> */}
+				<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			{(viewSettings.editingObjects.isViewPopup.isMarker || viewSettings.editingObjects.isViewPopup.isObject) && <div className='background__opacity'></div>}
