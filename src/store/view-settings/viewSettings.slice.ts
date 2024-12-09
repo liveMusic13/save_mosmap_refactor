@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { IViewSettings } from '@/types/slice.types';
 
 const initialState: IViewSettings = {
+	isDotInfo: false,
 	isSearchAddress: false,
 	isImportSettingsData: false,
 	isViewFilters: true,
@@ -41,6 +42,9 @@ export const viewSettings = createSlice({
 	name: 'viewSettings',
 	initialState,
 	reducers: {
+		SetIsDotInfo: (state, {payload}) => {
+			state.isDotInfo = payload;
+		},
 		toggleSearchAddress: (state, {payload}) => {
 			state.isSearchAddress = !state.isSearchAddress
 		},

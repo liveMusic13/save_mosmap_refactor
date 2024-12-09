@@ -24,6 +24,7 @@ export interface IValues {
 	type?: string;
 	id?: string;
 	value: string | number;
+	href?: string;
 }
 
 export interface IDataObjectInfo {
@@ -46,6 +47,7 @@ export interface IUserMap {
 }
 
 export interface IViewSettings {
+	isDotInfo: boolean;
 	isSearchAddress: boolean;
 	isViewPopupImportDone: boolean;
 	isImportSettingsData: boolean;

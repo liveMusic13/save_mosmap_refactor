@@ -20,6 +20,7 @@ import { actions as mapLayersAction } from '@/store/map-layers/mapLayers.slice';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import ClosePopup from './ClosePopup';
 import LocationMarker from './LocationMarker';
+import MapClickHandler from './MapClickHandler';
 
 export function CustomMap() {
 	const dataObjectsInMap: IDataObjectsInMap = useSelector(
@@ -84,9 +85,7 @@ export function CustomMap() {
 	const maxBounds = (dataObjectsInMap.points.bounds && dataObjectsInMap.points.bounds !== "[[null, null], [null, null]]") 
   ? JSON.parse(dataObjectsInMap.points.bounds) 
   : undefined;
-
-	// console.log(zoomLevel, dataObjectsInMap.points.zoom_min, dataObjectsInMap.points.zoom_max)
-
+	
 	return (
 		<MapContainer
 			center={center}
@@ -100,10 +99,9 @@ export function CustomMap() {
 			// ]}
 			maxBounds={maxBounds}
 		>
-			{/* <TileLayer url='https://www.moscowmap.ru/leaflet/tiles/{z}/{x}/{y}.png' /> */}
-			{/* <TileLayer url={test} /> */}
 			<TileLayer url={dataObjectsInMap.points.tiles_url ? dataObjectsInMap.points.tiles_url : 'https://www.moscowmap.ru/leaflet/tiles/{z}/{x}/{y}.png'} />
 			<ZoomTracker setZoomLevel={setZoomLevel} />
+			<MapClickHandler />
 			{dataObjectsInMap.points.canvas_map === 0 ? (
 				dataObjectsInMap.points.clastering === 0 ? (
 					<RenderMarkers isMobile={isMobile} zoomLevel={zoomLevel} /> 
@@ -116,7 +114,7 @@ export function CustomMap() {
 				<CanvasMarkersLayer
 					isMobile={isMobile}
 					markersData={dataObjectsInMap.points.points ? dataObjectsInMap.points.points : []}
-				/>//TODO: СДЕЛАТЬ РАЗМЕРЫ МАРКЕРОВ ВЗЯТЫЕ ИЗ ДАННЫХ КАРТЫ
+				/>
 			)}
 			<FlyToLocation
 				centerMapObject={dataObjectsInMap.centerMapObject}

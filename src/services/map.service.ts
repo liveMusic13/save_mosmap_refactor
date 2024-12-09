@@ -5,6 +5,7 @@ import { actions as dataObjectsInMapAction } from "@/store/data-objects-in-map/d
 import { actions as viewSettingsAction } from "@/store/view-settings/viewSettings.slice";
 import { IDataSearchAddress } from "@/types/data.types";
 import { IDataObjectInfo, IMarker } from "@/types/slice.types";
+import { renameField } from "@/utils/renameField";
 import axios from "axios";
 
 export const mapService = {
@@ -121,6 +122,26 @@ export const mapService = {
 			return error
 		} finally {
 			// dispatch(viewSettingsAction.defaultLoading(''));
+		}
+	},
+	dotInfo: async (coords: {lat:number, lng: number}, dispatch: any, isMobile:boolean) => {
+		if (isMobile) dispatch(viewSettingsAction.activeSettingsMap(''));
+		dispatch(viewSettingsAction.toggleObjectInfo(''));
+
+		try {
+			dispatch(viewSettingsAction.activeLoadingObject(''));
+
+			const response = await $axios.get(`/api/dot_info.php?lat=${coords.lat}&lng=${coords.lng}`);
+			console.log('response', response.data)
+
+			dispatch(viewSettingsAction.SetIsDotInfo(true));
+			dispatch(dataObjectInfoAction.addObjectInfo({values: renameField(response.data)}));
+			return response.data
+		} catch (error) {
+			console.log(error);
+			return error
+		} finally {
+			dispatch(viewSettingsAction.defaultLoadingObject(''));
 		}
 	}
 }

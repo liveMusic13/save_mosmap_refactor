@@ -34,5 +34,15 @@ export const editObjectService = {
     } catch (error) {
       console.log(error);
     }
-  }
+  },
+  saveDataInfo: async (coords: {lat:number, lng: number},idMap:string) => {
+    try {
+      const response = await $axiosAuth.post(`/api/save_object.php?map=${idMap}`, coords)
+      // const response = await $axiosAuth.get(`/api/save_object.php?lat=${coords.lat}&lng=${coords.lng}`)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };

@@ -12,12 +12,20 @@ import { actions as viewSettingsAction } from '@/store/view-settings/viewSetting
 
 import useWindowDimensions from '@/hooks/useWindowDimensions';
 
+import { editObjectService } from '@/services/editObject.servece';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import styles from './ObjectInfo.module.scss';
 
 const ObjectInfo: FC<IAllObjects> = ({ isDisplay }) => {
+	const searchParams = useSearchParams();
+	const map = searchParams.get('map');
 	const viewSettings = useSelector((state: RootState) => state.viewSettings);
 	const dataObjectInfo = useSelector(
 		(state: RootState) => state.dataObjectInfo,
+	);
+	const dotInfo = useSelector(
+		(state: RootState) => state.dotInfo,
 	);
 	const dispatch = useDispatch();
 	const { width } = useWindowDimensions();
@@ -36,6 +44,7 @@ const ObjectInfo: FC<IAllObjects> = ({ isDisplay }) => {
 							dispatch(viewSettingsAction.toggleFilters(''));
 
 						dispatch(deleteObjectInfoAction.deleteObjectInfo(''));
+						dispatch(viewSettingsAction.SetIsDotInfo(false));
 					}}
 				>
 					<span></span>
@@ -69,13 +78,26 @@ const ObjectInfo: FC<IAllObjects> = ({ isDisplay }) => {
 									className={styles.block__descriptionInfo}
 								>
 									<h2 className={styles.title__info}>{elem.label}</h2>
-									<p className={styles.description__info}>{elem.value}</p>
+									
+									{
+										elem.href ? (
+											<Link className={styles.description__info} href={elem.href} target='_blank' >{elem.value}</Link> 
+										) : ( 
+											<p className={styles.description__info}>{elem.value}</p>
+										)
+									}
 								</div>
 							);
 						})}
 					</>
 				)}
 			</div>
+			{
+				viewSettings.isDotInfo && <button className={styles.button} onClick={async ()=> {
+					await editObjectService.saveDataInfo({lat: dotInfo.lat, lng: dotInfo.lng}, map ? map : '')
+					dispatch(viewSettingsAction.toggleIsActiveAddButton(''))
+				}}>Добавить объект</button>
+			}
 		</div>
 	);
 };
