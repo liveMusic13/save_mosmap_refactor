@@ -16,7 +16,7 @@
 	overflow-y: auto;
 
 	>.block__buttons{
-		position: fixed;
+		position: absolute;
 		top: 0;
 		z-index: 5555;
 		width: 100%;
@@ -28,7 +28,7 @@
 			width: adapt(102px, 1440px);
 			height: adapt(102px, 1440px);
 			background-color: transparent;
-			position: fixed;
+			position: absolute;
 			top: 0;
 			z-index: 5555;
 	
@@ -63,7 +63,7 @@
 
 
 .buttonEditing {
-	position: relative;
+	position: absolute;
 	width: adapt(32px, 1440px);
 	height: adapt(32px, 1440px);
 	background-color: transparent;
@@ -130,5 +130,6 @@
 .button__save {
 	position: relative;
 	z-index: 999999;
-	top: -5.5%;
+	top: -3.5%;
+	height: adapt(180px, 1440px);
 }

@@ -33,17 +33,19 @@ export function SettingsMap() {
 
 	const editIcon = arrayEditingObjects.filter(icon => icon.id === 10)[0]
 	
+	console.log('!viewSettings.isDotInfo', !viewSettings.isDotInfo)
+
 	return (
 		<div className={styles.wrapper_settings}>
 			{
-				viewSettings.editingObjects.isActiveAddButton &&
-					<div className={styles.block__buttons} style={viewSettings.editingObjects.isActiveAddButton ? {marginTop: 'calc(102 / 1440 * 100vw)'}:{}}>
+				viewSettings.editingObjects.isActiveAddButton && !viewSettings.isDotInfo &&
+					<div className={styles.block__buttons} style={viewSettings.editingObjects.isActiveAddButton ? {marginTop: 'calc(202 / 1440 * 100vw)'}:{}}>
 						<ButtonEditing icon={arrayEditingObjects.filter(icon => icon.id === 9)[0]}/>
 					</div>
 			}
 				{
-					(viewSettings.editingObjects.isActiveEditButton || viewSettings.isObjectInfo) && 
-						<div className={styles.block__buttons} datatype='dsds' style={viewSettings.editingObjects.isActiveEditButton ? {marginTop: 'calc(102 / 1440 * 100vw)'}:{}}>
+					(viewSettings.editingObjects.isActiveEditButton || viewSettings.isObjectInfo)  && !viewSettings.isDotInfo && 
+						<div className={styles.block__buttons} datatype='dsds' style={viewSettings.editingObjects.isActiveEditButton ? {marginTop: 'calc(202 / 1440 * 100vw)'}:{}}>
 							<button className={styles.buttonEditing} onClick={()=> {
 								if (width && width <= 767.98 && viewSettings.isObjectInfo) dispatch(viewSettingsAction.defaultObjectInfo(''))
 								if (width && width <= 767.98 && editIcon.id === 10) {
@@ -68,24 +70,32 @@ export function SettingsMap() {
 
 				{ (viewSettings.editingObjects.isActiveAddButton || viewSettings.editingObjects.isActiveEditButton) && <button
 					className={styles.button__save}
+					// style={(viewSettings.editingObjects.isActiveAddButton || viewSettings.editingObjects.isActiveEditButton) ? {marginTop: 'calc(102 / 1440 * 100vw)'}:{}}
           onClick={()=> {
-						if (width && width <= 767.98) dispatch(viewSettingsAction.toggleSettingsMap(''))
+						if (viewSettings.isDotInfo && width && width <= 767.98) {
+							dispatch(viewSettingsAction.toggleSettingsMap(''));
+							dispatch(viewSettingsAction.defaultObjectInfo(''));
+							dispatch(viewSettingsAction.toggleIsActiveAddButton(''))
+							saveObject()
+						} else {
+							if (width && width <= 767.98) dispatch(viewSettingsAction.toggleSettingsMap(''))
 
-            if (viewSettings.editingObjects.isActiveAddButton) {
-              dispatch(viewSettingsAction.toggleIsActiveAddButton(''))
-              saveObject()
-            } else if (viewSettings.editingObjects.isActiveEditButton) {
-              dispatch(viewSettingsAction.toggleIsActiveEditButton(''))
-              saveObject()
-            }
+            	if (viewSettings.editingObjects.isActiveAddButton) {
+              	dispatch(viewSettingsAction.toggleIsActiveAddButton(''))
+              	saveObject()
+            	} else if (viewSettings.editingObjects.isActiveEditButton) {
+              	dispatch(viewSettingsAction.toggleIsActiveEditButton(''))
+              	saveObject()
+            	}
+						}
           }}
 				>
-					<img src="./images/icons/ok.svg" alt="ok" />
+					<img src="/images/icons/ok.svg" alt="ok" />
 				</button>}
 
 				<button
 					className={styles.settings__button}
-					style={(viewSettings.editingObjects.isActiveAddButton || viewSettings.editingObjects.isActiveEditButton) ? {marginTop: 'calc(102 / 1440 * 100vw)'}:{}}
+					style={(viewSettings.editingObjects.isActiveAddButton || viewSettings.editingObjects.isActiveEditButton) ? {marginTop: 'calc(202 / 1440 * 100vw)'}:{}}
 					onClick={() => {
 						dispatch(viewSettingsAction.toggleSettingsMap(''));
 						if (viewSettings.isViewFilters)

@@ -1,9 +1,12 @@
+import { ACCESSIBLYMAP } from '@/app.constants';
 import { useAddObject } from '@/hooks/useAddObject';
+import { useAuth } from '@/hooks/useAuth';
 import { useSaveObject } from '@/hooks/useSaveObject';
 import useWindowDimensions from '@/hooks/useWindowDimensions';
 import { RootState } from '@/store/store';
 import { actions as viewSettingsAction } from '@/store/view-settings/viewSettings.slice';
 import { IButtonEditing } from '@/types/props.types';
+import Cookies from 'js-cookie';
 import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './ButtonEditing.module.scss';
@@ -17,9 +20,12 @@ const ButtonEditing: FC<IButtonEditing> = ({icon}) => {
   const { width } = useWindowDimensions();
   const {getField} = useAddObject()
   const {saveObject} = useSaveObject()
+  const {isAuth} = useAuth()
+  const searchParams = new URLSearchParams(window.location.search);
+  const isEdit1 = Cookies.get(ACCESSIBLYMAP) === searchParams.get('map')
 
-  const checkDisabled = icon.id === 9 && editingObjects.isAddObject ? false : icon.id === 10 && editingObjects.isEditObjects ? false : icon.id === 11 && editingObjects.isDeleteObject ? false : icon.id === 12 && editingObjects.isDeleteMarker ? false : true
-
+  const checkDisabled = !(isAuth && isEdit1) ? true : icon.id === 9 && editingObjects.isAddObject ? false : icon.id === 10 && editingObjects.isEditObjects ? false : icon.id === 11 && editingObjects.isDeleteObject ? false : icon.id === 12 && editingObjects.isDeleteMarker ? false : true
+  
   useEffect(()=> {
     if (editingObjects.isActiveAddButton) { 
       dispatch(viewSettingsAction.defaultDeleteMarker(''))

@@ -35,7 +35,7 @@ export function Header({data}:any) {
 	const isEdit = accessiblyMap.some(elem => elem === map)
 
 	const isEdit1 = Cookies.get(ACCESSIBLYMAP) === searchParams.get('map')
-	// console.log('isEdit', isEdit1)
+	console.log('DISABLED', !(isAuth && isEdit1))
 
 	return (
 		<header className={styles.header}>
@@ -51,7 +51,7 @@ export function Header({data}:any) {
 						{	
 						// (isAuth && isEdit1) && 
 							arrayEditingObjects.map(icon => {
-								return <ButtonEditing key={icon.id} icon={icon} isDisabled={!(isAuth && isEdit1)} />;
+								return <ButtonEditing key={icon.id} icon={icon} />;
 							})
 						}
 						<div className={styles.line}></div>

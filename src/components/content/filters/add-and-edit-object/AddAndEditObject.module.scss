@@ -54,6 +54,7 @@
 			justify-content: center;
 			margin-right: adapt(20px, 1440px);
 			padding-bottom: adapt(5px, 1440px);
+			
 
 			&:hover {
 				cursor: pointer;
@@ -183,8 +184,9 @@
 }
 
 .button__save_text {
-	margin-left: 30%;
-	margin-top: adapt(10px, 1440px);
+	margin-left: 50%;
+	transform: translateX(-50%);
+	margin-top: adapt(20px, 1440px);
 	margin-bottom: adapt(50px, 1440px);
 	width: adapt(105px, 1440px);
 	height: adapt(36px, 1440px);

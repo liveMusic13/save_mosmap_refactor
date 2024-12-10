@@ -3,15 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Loading } from '@/components/ui/loading/Loading';
 
-import { IAllObjects } from '@/types/props.types';
-import { IValues } from '@/types/slice.types';
-
 import { actions as deleteObjectInfoAction } from '@/store/data-object-info/dataObjectInfo.slice';
 import { RootState } from '@/store/store';
 import { actions as viewSettingsAction } from '@/store/view-settings/viewSettings.slice';
+import { IAllObjects } from '@/types/props.types';
+import { IValues } from '@/types/slice.types';
+import Cookies from 'js-cookie';
 
 import useWindowDimensions from '@/hooks/useWindowDimensions';
 
+import { ACCESSIBLYMAP } from '@/app.constants';
+import { useAuth } from '@/hooks/useAuth';
 import { editObjectService } from '@/services/editObject.servece';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -20,6 +22,8 @@ import styles from './ObjectInfo.module.scss';
 const ObjectInfo: FC<IAllObjects> = ({ isDisplay }) => {
 	const searchParams = useSearchParams();
 	const map = searchParams.get('map');
+	const {isAuth} = useAuth()
+	const isEdit1 = Cookies.get(ACCESSIBLYMAP) === searchParams.get('map')
 	const viewSettings = useSelector((state: RootState) => state.viewSettings);
 	const dataObjectInfo = useSelector(
 		(state: RootState) => state.dataObjectInfo,
@@ -93,9 +97,11 @@ const ObjectInfo: FC<IAllObjects> = ({ isDisplay }) => {
 				)}
 			</div>
 			{
-				viewSettings.isDotInfo && <button className={styles.button} onClick={async ()=> {
-					await editObjectService.saveDataInfo({lat: dotInfo.lat, lng: dotInfo.lng}, map ? map : '')
+				viewSettings.isDotInfo && <button className={styles.button} disabled={!(isAuth && isEdit1)} onClick={async ()=> {
+					// await editObjectService.saveDataInfo({lat: dotInfo.lat, lng: dotInfo.lng}, map ? map : '')
+					await editObjectService.saveDataInfo([dotInfo.lat,dotInfo.lng], map ? map : '', dispatch)
 					dispatch(viewSettingsAction.toggleIsActiveAddButton(''))
+					// dispatch(viewSettingsAction.SetIsDotInfo(false));
 				}}>Добавить объект</button>
 			}
 		</div>

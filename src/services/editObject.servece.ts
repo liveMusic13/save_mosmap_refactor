@@ -1,4 +1,6 @@
 import { $axiosAuth } from "@/api";
+import { actions as dataObjectInfoAction } from "@/store/data-object-info/dataObjectInfo.slice";
+import { actions as dataObjectsInMapAction } from "@/store/data-objects-in-map/dataObjectsInMap.slice";
 
 export const editObjectService = {
   getFieldForAddObject: async () => {
@@ -35,11 +37,17 @@ export const editObjectService = {
       console.log(error);
     }
   },
-  saveDataInfo: async (coords: {lat:number, lng: number},idMap:string) => {
+  saveDataInfo: async (coords: [number, number],idMap:string, dispatch:any) => {
     try {
       const response = await $axiosAuth.post(`/api/save_object.php?map=${idMap}`, coords)
       // const response = await $axiosAuth.get(`/api/save_object.php?lat=${coords.lat}&lng=${coords.lng}`)
       console.log(response.data)
+
+      if (response.status === 200) {
+        dispatch(dataObjectsInMapAction.addNewObject(response.data))
+        dispatch(dataObjectInfoAction.addObjectInfo(response.data))
+      }
+
       return response.data
     } catch (error) {
       console.log(error);

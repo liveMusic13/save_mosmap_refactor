@@ -8,7 +8,7 @@ import { actions as viewSettingsAction } from '@/store/view-settings/viewSetting
 import useWindowDimensions from '@/hooks/useWindowDimensions';
 
 
-import { TOKEN } from '@/app.constants';
+import { ACCESSIBLYMAP, TOKEN } from '@/app.constants';
 import { useAuth } from '@/hooks/useAuth';
 import { mapService } from '@/services/map.service';
 import { actions as mapLayersAction } from '@/store/map-layers/mapLayers.slice';
@@ -40,6 +40,7 @@ const Button: FC<IButton> = ({ icon, newCenter, elem }) => {
 				}
 				if (icon.id === 8) {
 					Cookies.remove(TOKEN);
+					Cookies.remove(ACCESSIBLYMAP);
 					setIsAuth(false)
 					router.push('/auth')
 					dispatch(userMapAction.deleteAccessiblyMap(''));
