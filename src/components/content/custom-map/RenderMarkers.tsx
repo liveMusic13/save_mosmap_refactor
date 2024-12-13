@@ -38,7 +38,8 @@ const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 		(state: RootState) => state.dataMapSettings,
 	);
 
-	useEffect(() => {}, [dataObjectInfo.id, dotInfo, editingObjects]);
+	// useEffect(() => {}, [dataObjectInfo.id, dotInfo, editingObjects]);
+	useEffect(() => {}, [dataObjectInfo.id]);
 
 	const eventHandlers = useMemo(
 			() => ({

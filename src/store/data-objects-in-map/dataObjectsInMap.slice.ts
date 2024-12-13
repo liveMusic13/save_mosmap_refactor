@@ -19,10 +19,25 @@ export const dataObjectsInMap = createSlice({
 		addNewCenter: (state, { payload }) => {
 			state.centerMapObject = payload;
 		},
-		addNewObject: (state, {payload}) => {
-			console.log('addNewObject', payload)
-			state.points.points.unshift(payload)
+		// addNewObject: (state, {payload}) => {
+		// 	console.log('addNewObject', payload)
+		// 	state.points.points.unshift(payload)
+		// },
+		addNewObject: (state, { payload }) => {
+			console.log('addNewObject', payload);
+			
+			// Находим индекс объекта с тем же id
+			const existingObjectIndex = state.points.points.findIndex((point:any) => point.id === payload.id);
+			
+			// Если объект найден, удаляем его
+			if (existingObjectIndex !== -1) {
+				state.points.points.splice(existingObjectIndex, 1);
+			}
+			
+			// Добавляем новый объект в начало массива
+			state.points.points.unshift(payload);
 		},
+		
 		replacementNewObject: (state, {payload}) => {
       // Найдем индекс объекта с заданным id
       const index = state.points.points.findIndex((marker: any) => marker.id === payload.id);
