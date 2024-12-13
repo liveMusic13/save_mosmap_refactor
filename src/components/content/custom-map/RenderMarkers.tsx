@@ -63,13 +63,13 @@ const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 		{
 			dataObjectInfo && dataObjectInfo.area && dataObjectInfo.area.length > 0 && <Polygon positions={dataObjectInfo.area} color='red' fillOpacity={0.4} />
 		}
-		{
+		{/* {
 			!editingObjects.isActiveAddButton && !editingObjects.isActiveEditButton && dotInfo.lat !== 0 && dotInfo.lng !== 0 && !dataObjectInfo.id && <Marker position={[dotInfo.lat, dotInfo.lng]} icon={L.icon({
 				iconUrl: '/images/icons/marker.png',
 				iconSize: iconSizeDynamic(data.iconsize, true),
 				iconAnchor: [18.5, 19], 
 			})}></Marker>
-		}
+		} */}
 			{dataObjectsInMap?.points?.points?.map((object: IDataObjectInfo) => {
 				if (object && object.crd) {
 					const getObjectInfo = async () => {

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { FeatureGroup, MapContainer, TileLayer } from 'react-leaflet';
+import { FeatureGroup, MapContainer, Marker, TileLayer } from 'react-leaflet';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { IDataObjectsInMap } from '@/types/slice.types';
-
-import { RootState } from '@/store/store';
+import { IDataObjectInfo, IDataObjectsInMap } from '@/types/slice.types';
 
 import useWindowDimensions from '@/hooks/useWindowDimensions';
+import { RootState } from '@/store/store';
+import L from 'leaflet';
 
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import { EditControl } from 'react-leaflet-draw';
@@ -17,6 +17,7 @@ import ZoomTracker from './ZoomTracker';
 
 import { useInitRequest } from '@/hooks/useInitRequest';
 import { actions as mapLayersAction } from '@/store/map-layers/mapLayers.slice';
+import { iconSizeDynamic } from '@/utils/iconSizeFunc';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import ClosePopup from './ClosePopup';
 import LocationMarker from './LocationMarker';
@@ -75,6 +76,14 @@ export function CustomMap() {
 		})
 	}
 
+const dataObjectInfo: IDataObjectInfo = useSelector(
+		(state: RootState) => state.dataObjectInfo,
+	);
+	const dotInfo = useSelector(
+		(state: RootState) => state.dotInfo,
+	);
+	useEffect(() => {}, [dataObjectInfo.id, dotInfo, viewSettings.editingObjects]);
+
 
 	const data = useSelector((state:RootState) => state.dataMapSettings)
 	const { getObject } = useInitRequest();
@@ -102,6 +111,13 @@ export function CustomMap() {
 			<TileLayer url={dataObjectsInMap.points.tiles_url ? dataObjectsInMap.points.tiles_url : 'https://www.moscowmap.ru/leaflet/tiles/{z}/{x}/{y}.png'} />
 			<ZoomTracker setZoomLevel={setZoomLevel} />
 			<MapClickHandler />
+			{
+						!viewSettings.editingObjects.isActiveAddButton && !viewSettings.editingObjects.isActiveEditButton && dotInfo.lat !== 0 && dotInfo.lng !== 0 && !dataObjectInfo.id && <Marker position={[dotInfo.lat, dotInfo.lng]} icon={L.icon({
+							iconUrl: '/images/icons/marker.png',
+							iconSize: iconSizeDynamic(data.iconsize, true),
+							iconAnchor: [18.5, 19], 
+						})}></Marker>
+					}
 			{dataObjectsInMap.points.canvas_map === 0 ? (
 				dataObjectsInMap.points.clastering === 0 ? (
 					<RenderMarkers isMobile={isMobile} zoomLevel={zoomLevel} /> 
