@@ -12,6 +12,7 @@ const MapClickHandler: FC = () => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const viewSettings = useSelector((state: RootState) => state.viewSettings);
 
+
   useEffect(() => {
 		if (width) {
 			if (width <= 767.98) {

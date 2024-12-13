@@ -10,6 +10,7 @@ export const useAddObject = () => {
       const data = await editObjectService.getFieldForAddObject()
       dispatch(dataObjectInfoAction.addObjectInfo(data))
       dispatch(dataObjectsInMapAction.addNewObject(data))
+      console.log('zdes', data)
   }
   
   return {getField}

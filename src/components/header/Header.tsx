@@ -35,7 +35,6 @@ export function Header({data}:any) {
 	const isEdit = accessiblyMap.some(elem => elem === map)
 
 	const isEdit1 = Cookies.get(ACCESSIBLYMAP) === searchParams.get('map')
-	console.log('DISABLED', !(isAuth && isEdit1))
 
 	return (
 		<header className={styles.header}>

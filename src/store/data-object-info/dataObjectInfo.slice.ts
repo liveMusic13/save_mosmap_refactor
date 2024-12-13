@@ -23,6 +23,7 @@ export const dataObjectInfo = createSlice({
 			}
 		},
 		addCrd: (state, {payload})=> {
+			console.log('addCrd', payload)
 			state.crd = payload
 		},
 		deleteCrd: (state, {payload})=> {

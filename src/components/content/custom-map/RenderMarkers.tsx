@@ -30,14 +30,15 @@ const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 	const {editingObjects} = useSelector(
 		(state: RootState) => state.viewSettings,
 	);
+	const dotInfo = useSelector(
+		(state: RootState) => state.dotInfo,
+	);
 
 	const {data} = useSelector(
 		(state: RootState) => state.dataMapSettings,
 	);
 
-	useEffect(() => {}, [dataObjectInfo.id]);
-
-
+	useEffect(() => {}, [dataObjectInfo.id, dotInfo, editingObjects]);
 
 	const eventHandlers = useMemo(
 			() => ({
@@ -62,6 +63,13 @@ const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 		{
 			dataObjectInfo && dataObjectInfo.area && dataObjectInfo.area.length > 0 && <Polygon positions={dataObjectInfo.area} color='red' fillOpacity={0.4} />
 		}
+		{
+			!editingObjects.isActiveAddButton && !editingObjects.isActiveEditButton && dotInfo.lat !== 0 && dotInfo.lng !== 0 && !dataObjectInfo.id && <Marker position={[dotInfo.lat, dotInfo.lng]} icon={L.icon({
+				iconUrl: '/images/icons/marker.png',
+				iconSize: iconSizeDynamic(data.iconsize, true),
+				iconAnchor: [18.5, 19], 
+			})}></Marker>
+		}
 			{dataObjectsInMap?.points?.points?.map((object: IDataObjectInfo) => {
 				if (object && object.crd) {
 					const getObjectInfo = async () => {
@@ -74,7 +82,7 @@ const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 							const responce = await $axios.get(
 								`/api/object_info.php?id=${object.id}`,
 							);
-							console.log('test request click', responce.data)
+						
 							dispatch(dataObjectInfoAction.addObjectInfo(responce.data));
 							dispatch(viewSettingsAction.SetIsDotInfo(false));
 						} catch (error) {
@@ -102,7 +110,8 @@ const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 								eventHandlers={{ click: !editingObjects.isActiveEditButton ? getObjectInfo : undefined, }}
 								weight={dataObjectInfo.id === object.id ? 6 : 3}
 							>
-								{editingObjects.isActiveEditButton ? null : <Popup>{object.name}</Popup>}
+								{/* {editingObjects.isActiveEditButton ? null : <Popup>{object.name}</Popup>} */}
+								<Popup>{object.values ? object.values?.filter(el => el.label === 'Наименование')[0].value : object.name}</Popup>
 							</Polygon>
 						);
 					} else {
@@ -136,7 +145,8 @@ const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 							draggable={(editingObjects.isActiveEditButton && dataObjectInfo.id === object.id) || (editingObjects.isMobileEditCrd && dataObjectInfo.id === object.id)}
 							eventHandlers={{ ...eventHandlers, click: !editingObjects.isActiveEditButton ? getObjectInfo : undefined }}
 						>
-							{editingObjects.isActiveEditButton ? null : <Popup>{object.name}</Popup>}
+							{/* {editingObjects.isActiveEditButton ? null : <Popup>{object.values ? object.values?.filter(el => el.label === 'Наименование')[0].value : object.name}</Popup>} */}
+							<Popup>{object.values ? object.values?.filter(el => el.label === 'Наименование')[0].value : object.name}</Popup>
 						</Marker>
 					);
 				}

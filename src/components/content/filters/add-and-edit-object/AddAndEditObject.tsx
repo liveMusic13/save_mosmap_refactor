@@ -221,6 +221,7 @@ useEffect(() => {
               saveObject()
             }
           }
+          dispatch(viewSettingsAction.SetIsDotInfo(false));
           }}>Сохранить</button>
       </div>
       }

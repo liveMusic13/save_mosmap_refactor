@@ -41,13 +41,15 @@ export const AllObjects: FC = () => {
 	}, [width]);
 
 	const objects = mapLayers.arrayPolygons.length === 0 ? dataObjectsInMap?.points?.points : dataObjectsInMap?.points?.points.filter((marker:IMarker) => isMarkerInsidePolygon(marker, mapLayers.arrayPolygons[mapLayers.indexTargetPolygon]));
-	
+
 	const targetObject = useMemo(
 		() => objects.find((elem: IMarker) => elem.id === dataObjectInfo.id),
 		[objects, dataObjectInfo.id],
 	);
 
 	const objectRefs = useRef(objects.map(() => createRef()));
+	useEffect(() => { objectRefs.current = objects.map((_:any, i:any) => objectRefs.current[i] ?? createRef()); }, [objects]);
+
 	const containerRef = useRef<null | HTMLDivElement>(null); // ссылка на контейнер
 
 	useEffect(() => {
@@ -56,7 +58,6 @@ export const AllObjects: FC = () => {
         const targetIndex = objects.findIndex(
             (obj: IMarker) => obj.id === targetObject.id,
         );
-
         // Проверяем, что индекс найден и соответствующий реф существует
         if (targetIndex !== -1 && objectRefs.current[targetIndex]?.current) {
             // Получаем ссылки на элемент и контейнер
@@ -135,7 +136,7 @@ export const AllObjects: FC = () => {
 					objects.map((elem: IMarker, index: number) => {
 						return (
 							<div
-								ref={objectRefs.current[elem.id]}
+								ref={objectRefs.current[index]}
 								key={elem.id}
 								className={styles.object}
 								style={

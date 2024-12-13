@@ -20,6 +20,7 @@ export const dataObjectsInMap = createSlice({
 			state.centerMapObject = payload;
 		},
 		addNewObject: (state, {payload}) => {
+			console.log('addNewObject', payload)
 			state.points.points.unshift(payload)
 		},
 		replacementNewObject: (state, {payload}) => {
@@ -38,6 +39,7 @@ export const dataObjectsInMap = createSlice({
 			state.points.points = state.points.points.filter((marker:any) => marker.id !== payload)
 		},
 		updateCrdObjectById: (state, {payload}) => {
+			console.log('updateCrdObjectById', payload)
 			// Преобразование id из строки в число
 			const id = Number(payload.id);
 		

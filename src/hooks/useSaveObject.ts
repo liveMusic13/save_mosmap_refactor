@@ -24,13 +24,13 @@ export const useSaveObject = () => {
       // const data = await editObjectService.saveFieldForAddObject(query.map, {crd: dataObjectInfo.crd, id: dataObjectInfo.id, values: dataObjectInfo.values})
       if (editingObjects.isActiveEditButton) {
         const data = await editObjectService.saveFieldForAddObject(query.map, isDotInfo ? dataInfoSave : dataObjectInfo)
-        await dispatch(dataObjectsInMapAction.deleteNewObject(''))
-        // await dispatch(dataObjectInfoAction.addObjectInfo(data))
+        // await dispatch(dataObjectsInMapAction.deleteNewObject(''))
+         await dispatch(dataObjectsInMapAction.deleteObjectById(0))
         await dispatch(dataObjectsInMapAction.replacementNewObject(data))
       } else {
         const data = await editObjectService.saveFieldForAddObject(query.map, isDotInfo ? dataInfoSave : dataObjectInfo)
-        await dispatch(dataObjectsInMapAction.deleteNewObject(''))
-        // await dispatch(dataObjectInfoAction.addObjectInfo(data))
+        // await dispatch(dataObjectsInMapAction.deleteNewObject(''))
+         await dispatch(dataObjectsInMapAction.deleteObjectById(0))
         await dispatch(dataObjectsInMapAction.addNewObject(data))
       }
     }
