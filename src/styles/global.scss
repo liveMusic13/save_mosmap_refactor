@@ -389,10 +389,14 @@ body {
 }
 
 .wrapper__inPage {
-	height: calc(100vh - #{adapt(51px, 1440px)});
-	position: absolute;
-	top: adapt(51px, 1440px);
-	bottom: 0;
-	left: 0;
-	right: 0;
+	height: 100%;
+	@media (min-width: 991.98px) {
+		height: calc(100vh - #{adapt(51px, 1440px)});
+		position: absolute;
+		top: adapt(51px, 1440px);
+		bottom: 0;
+		left: 0;
+		right: 0;
+
+	}
 }
