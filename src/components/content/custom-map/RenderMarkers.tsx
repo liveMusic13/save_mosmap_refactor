@@ -121,8 +121,8 @@ const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 						if (dataObjectInfo.id === object.id) {
 							customMarkerIcon = L.icon({
 								iconUrl: '../images/icons/target.svg',
-								// iconSize: [53, 53],
-								iconSize: iconSizeDynamic(data.iconsize, true),
+								iconSize: [53, 53],
+								// iconSize: iconSizeDynamic(data.iconsize, true),
 								iconAnchor: [18.5, 19], //2.86, 2.78
 							});
 						} else {

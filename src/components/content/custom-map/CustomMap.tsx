@@ -95,13 +95,21 @@ const dataObjectInfo: IDataObjectInfo = useSelector(
   ? JSON.parse(dataObjectsInMap.points.bounds) 
   : undefined;
 	
+	// const iconSize = iconSizeDynamic(data.iconsize, true); // [width, height]
+
+	// const iconAnchor = [
+	// 	iconSize[0] * 0.5, // 50% от ширины
+	// 	iconSize[1] * 2
+	// ];
+
 	return (
 		<MapContainer
 			center={center}
 			zoom={13}
 			minZoom={dataObjectsInMap.points.zoom_max}
 			maxZoom={dataObjectsInMap.points.zoom_min}
-			style={{ width: '100%', height: '98%' }}
+			style={{ width: '100%', height: '100vh' }}
+			// style={{ width: '100%', height: '98%' }}
 			// maxBounds={[
 			// 	[56.934709, 35.189603], //HELP: Северо-западные координаты
 			// 	[54.294416, 40.128181], //HELP: Юго-восточные координаты
@@ -112,12 +120,15 @@ const dataObjectInfo: IDataObjectInfo = useSelector(
 			<ZoomTracker setZoomLevel={setZoomLevel} />
 			<MapClickHandler />
 			{
-						!viewSettings.editingObjects.isActiveAddButton && !viewSettings.editingObjects.isActiveEditButton && dotInfo.lat !== 0 && dotInfo.lng !== 0 && !dataObjectInfo.id && <Marker position={[dotInfo.lat, dotInfo.lng]} icon={L.icon({
-							iconUrl: '/images/icons/marker.png',
-							iconSize: iconSizeDynamic(data.iconsize, true),
-							iconAnchor: [18.5, 19], 
-						})}></Marker>
-					}
+				!viewSettings.editingObjects.isActiveAddButton && !viewSettings.editingObjects.isActiveEditButton && dotInfo.lat !== 0 && dotInfo.lng !== 0 && !dataObjectInfo.id && <Marker position={[dotInfo.lat, dotInfo.lng]} icon={L.icon({
+					iconUrl: '/images/icons/marker.png',
+					iconSize: iconSizeDynamic(data.iconsize, true),
+					iconAnchor: [18.5, 34], 
+					// iconAnchor: [18.5, 19], 
+					// iconSize: iconSize,
+					// iconAnchor: iconAnchor as PointTuple, 
+				})}></Marker>
+			}
 			{dataObjectsInMap.points.canvas_map === 0 ? (
 				dataObjectsInMap.points.clastering === 0 ? (
 					<RenderMarkers isMobile={isMobile} zoomLevel={zoomLevel} /> 

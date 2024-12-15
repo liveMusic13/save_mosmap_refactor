@@ -2,7 +2,8 @@
 @import '../../../styles/functions';
 
 .block__info {
-	height: 100%;
+	// height: 100%;
+	height: calc(100vh - #{adapt(51px, 1440px)} );
 	width: adapt(300px, 1440px);
 	position: absolute;
 	z-index: 5490;
@@ -88,7 +89,8 @@
 	}
 
 	> .block__aboutObjects {
-		height: 100%;
+		// height: 100%;
+		height: calc(100vh - #{adapt(51px, 1440px)} - #{adapt(52px, 1440px)});
 		overflow-y: auto;
 		padding-bottom: adapt(70px, 1440px);
 

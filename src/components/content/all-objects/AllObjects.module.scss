@@ -10,7 +10,8 @@
 	z-index: 5490; //HELP: ПОСТАВИЛ МЕНЬШЕ ЧЕМ У SETTINGS MAP, ЧТОБЫ ОНО ПЕРЕКРЫЛО ВЕРСИЮ ИЗ ПК
 	left: adapt(300px, 1440px);
 	background-color: $color_three;
-	height: 100%;
+	// height: 100%;
+	height: calc(100vh - #{adapt(51px, 1440px)});
 
 	@media (max-width: 991.98px) {
 		min-width: adapt(300px, 1440px);
@@ -81,7 +82,8 @@
 	}
 
 	> .block__objects {
-		height: 100%;
+		// height: 100%;
+		height: calc(100vh - #{adapt(51px, 1440px)} - #{adapt(52px, 1440px)});
 		overflow: auto;
 		padding-bottom: adapt(70px, 1440px);
 

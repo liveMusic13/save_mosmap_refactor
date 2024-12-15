@@ -67,7 +67,8 @@ export default function Home({data, dataFilters}:any) {
 			</Head>
 			{(viewSettings.editingObjects.isViewPopup.isMarker || viewSettings.editingObjects.isViewPopup.isObject) && <div className='background__opacity'></div>}
 			<Header data={data}/>
-			<div style={{ height: '100%' }}>
+			{/* <div style={{ height: '100%' }}> */}
+			<div className='wrapper__inPage'>
 				<Content data={data} />
 				{viewSettings.isSettingsMap && <SettingsMap />}
 				{(viewSettings.isSettingsApp || viewSettings.isSettingsData || viewSettings.isViewImport || viewSettings.isViewExport) && <SettingsApp/> }

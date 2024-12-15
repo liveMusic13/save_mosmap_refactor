@@ -5,7 +5,8 @@
 	display: flex;
 	flex-direction: column;
 	width: adapt(300px, 1440px);
-	height: 100%;
+	// height: 100%;
+	height: calc(100vh - #{adapt(51px, 1440px)} );
 	position: absolute;
 	z-index: 5490;
 	left: 0;
@@ -30,7 +31,8 @@
 
 	> .wrapper_block__filters {
 		padding-top: adapt(20px, 1440px);
-		height: 100%;
+		// height: 100%;
+		height: calc(100vh - #{adapt(51px, 1440px)} - #{adapt(52px, 1440px)});
 		width: 100%;
 		overflow-y: auto;
 		overflow-x: hidden;
