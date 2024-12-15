@@ -390,6 +390,7 @@ body {
 
 .wrapper__inPage {
 	height: 100%;
+	
 	@media (min-width: 991.98px) {
 		height: calc(100vh - #{adapt(51px, 1440px)});
 		position: absolute;
