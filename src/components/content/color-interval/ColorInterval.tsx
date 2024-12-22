@@ -52,7 +52,7 @@ const ColorInterval: FC = () => {
 
     if (isMobile) {
       dispatch(viewSettingsAction.toggleSettingsMap(''));
-			dispatch(viewSettingsAction.SetIsColorInterval(true))
+			dispatch(viewSettingsAction.SetIsColorInterval(false))
     }
   }
 
