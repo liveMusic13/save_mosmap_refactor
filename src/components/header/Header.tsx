@@ -47,8 +47,7 @@ export function Header({data}:any) {
 				}
 				{ !(width && width <= 767.98) && 
 					<>
-						{	
-						// (isAuth && isEdit1) && 
+						{
 							arrayEditingObjects.map(icon => {
 								return <ButtonEditing key={icon.id} icon={icon} />;
 							})
@@ -58,15 +57,13 @@ export function Header({data}:any) {
 							return <Button key={icon.id} icon={icon} />;
 						})}
 						<div className={styles.line}></div>
-						{ 
-						// (isAuth && isEdit1) && 
+						{
 							(arrayImportExport.map(icon => {
 								return <ButtonSettings key={icon.id} icon={icon} isDisabled={!(isAuth && isEdit1)} />
 							}))
 						}
 						<div className={styles.line}></div>
-						{ 
-						// (isAuth && isEdit1) && 
+						{
 							(arrayNumSettingIcons.map(icon => {
 								return <ButtonSettings key={icon.id} icon={icon} isDisabled={!(isAuth && isEdit1)} />
 							}))

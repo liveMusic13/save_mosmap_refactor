@@ -10,6 +10,14 @@
 	left: adapt(583px, 1440px);
 	background-color: $color_three;
 	height: calc(100vh - #{adapt(51px, 1440px)});
+
+	@media (max-width: 991.98px) {
+		left: adapt(410px, 992px);
+	}
+
+	@media (max-width: 767.98px) {
+		width: 100%;
+	}
 }
 
 .title {

@@ -80,6 +80,9 @@ body {
 
 #__next {
 	height: 100vh;
+	// Этим решается проблема скрытия хедера на планшете
+	width: 100%;
+	position: absolute;
 }
 
 .background__opacity{
@@ -392,12 +395,12 @@ body {
 	height: 100%;
 	
 	@media (min-width: 991.98px) {
-		height: calc(100vh - #{adapt(51px, 1440px)});
-		position: absolute;
-		top: adapt(51px, 1440px);
-		bottom: 0;
-		left: 0;
-		right: 0;
+		// height: calc(100vh - #{adapt(51px, 1440px)});
+		// position: absolute;
+		// top: adapt(51px, 1440px);
+		// bottom: 0;
+		// left: 0;
+		// right: 0;
 
 	}
 }

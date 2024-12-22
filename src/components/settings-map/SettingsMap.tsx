@@ -11,6 +11,7 @@ import { actions as viewSettingsAction } from '@/store/view-settings/viewSetting
 import useWindowDimensions from '@/hooks/useWindowDimensions';
 
 import { useSaveObject } from '@/hooks/useSaveObject';
+import ColorInterval from '../content/color-interval/ColorInterval';
 import AddAndEditObject from '../content/filters/add-and-edit-object/AddAndEditObject';
 import { arrayEditingObjects } from '../header/icons.data';
 import ButtonEditing from '../ui/buttons/button-editing/ButtonEditing';
@@ -95,6 +96,7 @@ export function SettingsMap() {
 					style={(viewSettings.editingObjects.isActiveAddButton || viewSettings.editingObjects.isActiveEditButton) ? {marginTop: 'calc(202 / 1440 * 100vw)'}:{}}
 					onClick={() => {
 						dispatch(viewSettingsAction.toggleSettingsMap(''));
+						dispatch(viewSettingsAction.SetIsColorInterval(false))
 						if (viewSettings.isViewFilters)
 							dispatch(viewSettingsAction.toggleFilters(''));
 						if (viewSettings.isViewObjects)
@@ -110,6 +112,7 @@ export function SettingsMap() {
 			{viewSettings.isViewFilters && <Filters />}
 			{viewSettings.isObjectInfo && <ObjectInfo />}
 			{viewSettings.isViewObjects && <AllObjects />}
+			{viewSettings.isColorInterval && <ColorInterval/> }
 			{(viewSettings.editingObjects.isActiveAddButton || viewSettings.editingObjects.isActiveEditButton) && <AddAndEditObject/>}
 		</div>
 	);

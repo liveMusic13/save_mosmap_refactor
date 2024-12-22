@@ -46,10 +46,6 @@ const Button: FC<IButton> = ({ icon, newCenter, elem }) => {
 					dispatch(userMapAction.deleteAccessiblyMap(''));
 				}
 				
-				if (icon.id === 17) {
-					dispatch(viewSettingsAction.SetIsColorInterval(!isColorInterval))
-				}
-
 				if (width && width <= 767.98) {
 					if (icon.id === 6) {
 						dispatch(viewSettingsAction.toggleSettingsMap(''));
@@ -59,9 +55,14 @@ const Button: FC<IButton> = ({ icon, newCenter, elem }) => {
 						dispatch(viewSettingsAction.toggleSettingsMap(''));
 						dispatch(viewSettingsAction.toggleObjects(''));
 					}
+					if (icon.id === 17) {
+						dispatch(viewSettingsAction.toggleSettingsMap(''));
+						dispatch(viewSettingsAction.SetIsColorInterval(true))
+					}
 				} else {
 					if (icon.id === 6) dispatch(viewSettingsAction.toggleFilters(''));
 					if (icon.id === 7) dispatch(viewSettingsAction.toggleObjects(''));
+					if (icon.id === 17) dispatch(viewSettingsAction.SetIsColorInterval(!isColorInterval))
 				}
 
 				if (width && width >= 767.98) setClickButton(!clickButton);

@@ -116,6 +116,10 @@ export const useFuncRange = (ranges: any, setRanges: Dispatch<SetStateAction<any
     setDragging(index);
   };
 
+  const handleTouchStart = (index: number) => {
+    setDragging(index);
+  };
+
   const handleMouseMove = (event: MouseEvent) => {
     if (dragging !== null && sliderBarRef.current) {
       const rect = sliderBarRef.current.getBoundingClientRect();
@@ -212,7 +216,10 @@ export const useFuncRange = (ranges: any, setRanges: Dispatch<SetStateAction<any
     handleMouseDown,
     sliderBarRef,
     dragging,
-    handleColorChange
+    handleColorChange,
+    handleTouchStart,
+    setDragging,
+    handleSliderChange
   };
 };
 

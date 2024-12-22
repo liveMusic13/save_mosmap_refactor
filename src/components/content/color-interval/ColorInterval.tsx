@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import useWindowDimensions from '@/hooks/useWindowDimensions';
 import { RootState } from '@/store/store';
 import styles from './ColorInterval.module.scss';
 import Range from './range/Range';
@@ -14,6 +15,8 @@ const ColorInterval: FC = () => {
   const viewSettings = useSelector((state: RootState) => state.viewSettings);
   const [data, setData] = useState<any>({})
   const [targetEditObject, setTargetEditObject] = useState()
+  const { width } = useWindowDimensions();
+  const isTable = width && width < 992
 
   const getData = async () => setData(await mapService.color_interval(query, dispatch))
 
@@ -26,14 +29,12 @@ const ColorInterval: FC = () => {
   if (!viewSettings.isViewObjects && !viewSettings.isViewFilters && !viewSettings.isObjectInfo) {
     style.left = '0';
   } else if ((viewSettings.isObjectInfo || viewSettings.isViewFilters) && !viewSettings.isViewObjects) {
+    // style.left = isTable ? 'calc(300/992*100vw)' : 'calc(300/1440*100vw)';
     style.left = 'calc(300/1440*100vw)';
   } else if (viewSettings.isViewObjects && !viewSettings.isObjectInfo && !viewSettings.isViewFilters) {
-    style.left = 'calc(283/1440*100vw)';
+    style.left = isTable ? `calc(300/1440*100vw)` : 'calc(283/1440*100vw)';
+    // style.left = 'calc(283/1440*100vw)';
   }
-
-  useEffect(()=> {
-    console.log('targetEditObject', targetEditObject)
-  }, [targetEditObject])
 
   const saveIntervals = async () => {
     const obj:any = {
@@ -45,6 +46,7 @@ const ColorInterval: FC = () => {
   
     const test = await mapService.color_interval_save(query, dispatch, obj)
     console.log(test)
+    setData(test)
   }
 
   return (

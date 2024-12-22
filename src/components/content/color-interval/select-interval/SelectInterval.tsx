@@ -7,7 +7,7 @@ import styles from './SelectInterval.module.scss';
 interface ISelectIntervalProps {
   title: string;
   dataSelect: { id: number, name: string }[];
-  current_value: number | string; // Новый пропс для начального значения
+  current_value: number | string; 
 }
 
 const SelectInterval: FC<ISelectIntervalProps> = ({ title, dataSelect, current_value }) => {
@@ -51,23 +51,13 @@ const SelectInterval: FC<ISelectIntervalProps> = ({ title, dataSelect, current_v
     }
   };
 
-  // useEffect(() => {
-  //   const selectedValue = router.query[title] || current_value;
-  //   const selectedOption = dataSelect.find(option => option.id === Number(selectedValue));
-  //   if (selectedOption) {
-  //     setSelectedOption({ value: selectedOption.id, label: selectedOption.name });
-  //   }
-  // }, [router.query, dataSelect, title, current_value]);
-
   useEffect(() => {
     const queryValue = router.query[title];
     let selectedValue;
 
-    // Проверяем, есть ли уже значение в адресной строке
     if (queryValue) {
       selectedValue = Number(queryValue);
     } else {
-      // Если значения нет, используем `current_value`
       selectedValue = Number(current_value);
       const newQuery = { ...router.query, [title]: selectedValue };
       router.replace(
@@ -80,7 +70,6 @@ const SelectInterval: FC<ISelectIntervalProps> = ({ title, dataSelect, current_v
       );
     }
 
-    // Устанавливаем выбранное значение
     const selectedOption = dataSelect.find((option) => option.id === selectedValue);
     if (selectedOption) {
       setSelectedOption({ value: selectedOption.id, label: selectedOption.name });
