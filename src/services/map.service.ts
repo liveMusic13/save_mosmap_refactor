@@ -1,4 +1,4 @@
-import { $axios } from "@/api";
+import { $axios, $axiosAuth } from "@/api";
 import { actions as dataFiltersAction } from "@/store/data-filters/dataFilters.slice";
 import { actions as dataObjectInfoAction } from "@/store/data-object-info/dataObjectInfo.slice";
 import { actions as dataObjectsInMapAction } from "@/store/data-objects-in-map/dataObjectsInMap.slice";
@@ -147,7 +147,7 @@ export const mapService = {
 	color_interval: async (query:any, dispatch:any) => {
 		try {
 			dispatch(viewSettingsAction.activeLoading(''));
-			const response = await $axios.get(`/api/color_interval.php?map=${query.map}`);
+			const response = await $axiosAuth.get(`/api/color_interval.php?map=${query.map}`);
 			console.log(response.data)
 			return response.data
 		} catch (error) {
@@ -159,7 +159,7 @@ export const mapService = {
 	color_interval_save: async (query:any, dispatch:any, data:any) => {
 		try {
 			dispatch(viewSettingsAction.activeLoading(''));
-			const response = await $axios.post(`/api/color_interval.php?map=${query.map}`, data);
+			const response = await $axiosAuth.post(`/api/color_interval.php?map=${query.map}`, data);
 			console.log(response.data)
 			return response.data
 		} catch (error) {
