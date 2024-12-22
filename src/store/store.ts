@@ -2,6 +2,7 @@ import { combineReducers, configureStore, } from '@reduxjs/toolkit';
 
 import { reducer as adresFilterString } from './adres-filter-string/adresFilterString.slice';
 import { reducer as dataFilters } from './data-filters/dataFilters.slice';
+import { reducer as dataInterval } from './data-intervals/dataInterval.slice';
 import { reducer as dataMapSettings } from './data-map-settings/dataMapSettings.slice';
 import { reducer as dataObjectInfo } from './data-object-info/dataObjectInfo.slice';
 import { reducer as dataObjectsInMap } from './data-objects-in-map/dataObjectsInMap.slice';
@@ -26,6 +27,7 @@ const reducers = combineReducers({
 	dataMapSettings: dataMapSettings,
 	importExportData,
 	dotInfo,
+	dataInterval,
 });
 
 export const store = configureStore({

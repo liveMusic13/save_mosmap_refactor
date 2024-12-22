@@ -12,6 +12,7 @@ import BurgerMenu from '../ui/burger-menu/BurgerMenu';
 import ConfirmPopup from '../ui/confirm-popup/ConfirmPopup';
 import styles from './Content.module.scss';
 import { AllObjects } from './all-objects/AllObjects';
+import ColorInterval from './color-interval/ColorInterval';
 import Filters from './filters/Filters';
 import AddAndEditObject from './filters/add-and-edit-object/AddAndEditObject';
 import ObjectInfo from './object-info/ObjectInfo';
@@ -58,6 +59,7 @@ export function Content({data}:any) {
 
 	return (
 		<div className={styles.wrapper } >
+			{viewSettings.isColorInterval && <ColorInterval/> }
 			{viewSettings.isBurger && <BurgerMenu/>}
 			{(viewSettings.editingObjects.isViewPopup.isObject || viewSettings.editingObjects.isViewPopup.isMarker) && <ConfirmPopup/>}
 			{(viewSettings.editingObjects.isActiveAddButton || viewSettings.editingObjects.isActiveEditButton) && <AddAndEditObject/>}

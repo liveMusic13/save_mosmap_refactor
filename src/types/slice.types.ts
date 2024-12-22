@@ -47,6 +47,7 @@ export interface IUserMap {
 }
 
 export interface IViewSettings {
+	isColorInterval: boolean;
 	isDotInfo: boolean;
 	isSearchAddress: boolean;
 	isViewPopupImportDone: boolean;

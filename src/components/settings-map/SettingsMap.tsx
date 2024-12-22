@@ -32,8 +32,6 @@ export function SettingsMap() {
 	}, [width]);
 
 	const editIcon = arrayEditingObjects.filter(icon => icon.id === 10)[0]
-	
-	console.log('!viewSettings.isDotInfo', !viewSettings.isDotInfo)
 
 	return (
 		<div className={styles.wrapper_settings}>
@@ -70,7 +68,6 @@ export function SettingsMap() {
 
 				{ (viewSettings.editingObjects.isActiveAddButton || viewSettings.editingObjects.isActiveEditButton) && <button
 					className={styles.button__save}
-					// style={(viewSettings.editingObjects.isActiveAddButton || viewSettings.editingObjects.isActiveEditButton) ? {marginTop: 'calc(102 / 1440 * 100vw)'}:{}}
           onClick={()=> {
 						if (viewSettings.isDotInfo && width && width <= 767.98) {
 							dispatch(viewSettingsAction.toggleSettingsMap(''));

@@ -73,22 +73,6 @@ export function Header({data}:any) {
 						}
 					</>
 				}
-
-{/* {	(isAuth && isEdit1) && 
-						arrayEditingObjects.map(icon => {
-							return <ButtonEditing key={icon.id} icon={icon} />;
-						})
-					}
-					<div className={styles.line}></div>
-					{ arrayNumIcons.map(icon => {
-						return <Button key={icon.id} icon={icon} />;
-					})} */}
-				{/* <div className={styles.line}></div>
-				{ (isAuth && isEdit1) && 
-					(arrayNumSettingIcons.map(icon => {
-						return <ButtonSettings key={icon.id} icon={icon} />
-					}))
-				} */}
 				
 				{((width && width <= 767.98)) && <button className={styles.crd__button} disabled={!(isAuth && isEdit1)} onClick={()=> {
 						if (viewSettings.editingObjects.isMobileEditCrd) {

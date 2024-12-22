@@ -1,0 +1,13 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/functions';
+
+.block__select {
+	padding: adapt(8px, 1440px);
+
+	> .title {
+		font-size: 1rem;
+		color: $color_eight;
+		// color: $color_one;
+		// font-weight: 500;
+	}
+}

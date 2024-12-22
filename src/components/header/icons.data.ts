@@ -69,6 +69,12 @@ export const arrayNumMenuIcons: IIconsData[] = [
 		hover_text: 'Показать/скрыть список',
 	},
 	{
+		id: 17,
+		src: '/images/svg/sprite.svg#palete-outline',
+		src_active: '/images/svg/sprite.svg#palete-outline',
+		hover_text: 'Закрасить районы',
+	},
+	{
 		id: 8,
 		src: '/images/svg/sprite.svg#logout',
 		hover_text: 'Выйти',

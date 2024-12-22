@@ -143,5 +143,29 @@ export const mapService = {
 		} finally {
 			dispatch(viewSettingsAction.defaultLoadingObject(''));
 		}
+	},
+	color_interval: async (query:any, dispatch:any) => {
+		try {
+			dispatch(viewSettingsAction.activeLoading(''));
+			const response = await $axios.get(`/api/color_interval.php?map=${query.map}`);
+			console.log(response.data)
+			return response.data
+		} catch (error) {
+			console.log(error);
+		} finally {
+			dispatch(viewSettingsAction.defaultLoading(''));
+		}
+	},
+	color_interval_save: async (query:any, dispatch:any, data:any) => {
+		try {
+			dispatch(viewSettingsAction.activeLoading(''));
+			const response = await $axios.post(`/api/color_interval.php?map=${query.map}`, data);
+			console.log(response.data)
+			return response.data
+		} catch (error) {
+			console.log(error);
+		} finally {
+			dispatch(viewSettingsAction.defaultLoading(''));
+		}
 	}
 }

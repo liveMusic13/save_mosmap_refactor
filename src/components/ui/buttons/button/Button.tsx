@@ -19,7 +19,7 @@ import { useRouter } from 'next/router';
 import styles from './Button.module.scss';
 
 const Button: FC<IButton> = ({ icon, newCenter, elem }) => {
-	const {isSelectArea, isSearchAddress} = useSelector((state:RootState)=> state.viewSettings)
+	const {isSelectArea, isSearchAddress, isColorInterval} = useSelector((state:RootState)=> state.viewSettings)
 	const [clickButton, setClickButton] = useState<boolean>(false);
 	const dispatch = useDispatch();
 	const { width } = useWindowDimensions();
@@ -45,6 +45,11 @@ const Button: FC<IButton> = ({ icon, newCenter, elem }) => {
 					router.push('/auth')
 					dispatch(userMapAction.deleteAccessiblyMap(''));
 				}
+				
+				if (icon.id === 17) {
+					dispatch(viewSettingsAction.SetIsColorInterval(!isColorInterval))
+				}
+
 				if (width && width <= 767.98) {
 					if (icon.id === 6) {
 						dispatch(viewSettingsAction.toggleSettingsMap(''));

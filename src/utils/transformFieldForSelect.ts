@@ -6,3 +6,10 @@ export const transformFieldForSelect = (array: IItemsFilter[]) => {
 		label: obj.item_name,
 	}));
 };
+
+export const transformFieldForSelectInterval = (array:any) => {
+	return array.map((obj:any) => ({
+		value: obj.id,
+		label: obj.name,
+	}));
+};

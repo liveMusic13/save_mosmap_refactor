@@ -1,0 +1,77 @@
+@import '../../../styles/variables';
+@import '../../../styles/functions';
+
+.block__colorInterval {
+  width: adapt(400px, 1440px);
+	border: 1px solid $color_four;
+	border-top: none;
+	position: absolute;
+	z-index: 5490; //HELP: ПОСТАВИЛ МЕНЬШЕ ЧЕМ У SETTINGS MAP, ЧТОБЫ ОНО ПЕРЕКРЫЛО ВЕРСИЮ ИЗ ПК
+	left: adapt(583px, 1440px);
+	background-color: $color_three;
+	height: calc(100vh - #{adapt(51px, 1440px)});
+}
+
+.title {
+	background-color: $color_five;
+	font-weight: 500;
+	padding: adapt(8px, 1440px);
+	height: adapt(52px, 1440px);
+	border-bottom: 1px solid $color_four;
+
+	@media (max-width: 767.98px) {
+		height: adapt(100px, 1440px);
+	}
+}
+
+.block__options {
+	height: calc(100vh - #{adapt(51px, 1440px)} - #{adapt(52px, 1440px)});
+	overflow-y: auto;
+	overflow-x: hidden;
+
+	&::-webkit-scrollbar {
+		width: adapt(10px, 1440px);
+		background-color: $color_five;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: $color_four;
+	}
+}
+
+.button__confirm {
+	margin: adapt(5px, 1440px) 0px;
+  font-size: 1rem;
+  width: adapt(127px, 1440px);
+  height: adapt(40px, 1440px);
+  padding: 0px adapt(16px, 1440px);
+	background-color: $color_two_light;
+	color: $color_three;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	border-radius: 2px;
+
+	&:hover {
+    cursor: pointer;
+    background-color: transparent;
+    color: $color_one;
+  }
+
+	/*TABLE*/
+  @media (max-width: 991.98px) {
+    margin: adapt(25px, 1440px) 0px;
+    font-size: 1.2rem;
+    width: adapt(217px, 1440px);
+    height: adapt(60px, 1440px);
+    padding: 0px adapt(16px, 1440px);
+  }
+
+  @media (max-width: 767.98px) {
+    margin: adapt(45px, 1440px) 0px;
+    font-size: 1.4rem;
+    width: adapt(417px, 1440px);
+    height: adapt(100px, 1440px);
+    padding: 0px adapt(46px, 1440px);
+  }
+}

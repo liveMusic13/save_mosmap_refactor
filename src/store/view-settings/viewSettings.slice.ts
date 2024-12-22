@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { IViewSettings } from '@/types/slice.types';
 
 const initialState: IViewSettings = {
+	isColorInterval: false,
 	isDotInfo: false,
 	isSearchAddress: false,
 	isImportSettingsData: false,
@@ -42,6 +43,9 @@ export const viewSettings = createSlice({
 	name: 'viewSettings',
 	initialState,
 	reducers: {
+		SetIsColorInterval: (state, {payload}) => {
+			state.isColorInterval = payload;
+		},
 		SetIsDotInfo: (state, {payload}) => {
 			state.isDotInfo = payload;
 		},
