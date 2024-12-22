@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import useWindowDimensions from '@/hooks/useWindowDimensions';
 import { RootState } from '@/store/store';
+import { actions as viewSettingsAction } from '@/store/view-settings/viewSettings.slice';
 import styles from './ColorInterval.module.scss';
 import Range from './range/Range';
 import SelectInterval from './select-interval/SelectInterval';
@@ -16,7 +17,8 @@ const ColorInterval: FC = () => {
   const [data, setData] = useState<any>({})
   const [targetEditObject, setTargetEditObject] = useState()
   const { width } = useWindowDimensions();
-  const isTable = width && width < 992
+  const isTable = width && width < 992;
+  const isMobile = width && width < 768
 
   const getData = async () => setData(await mapService.color_interval(query, dispatch))
 
@@ -45,8 +47,13 @@ const ColorInterval: FC = () => {
     }
   
     const test = await mapService.color_interval_save(query, dispatch, obj)
-    console.log(test)
+    
     setData(test)
+
+    if (isMobile) {
+      dispatch(viewSettingsAction.toggleSettingsMap(''));
+			dispatch(viewSettingsAction.SetIsColorInterval(true))
+    }
   }
 
   return (
