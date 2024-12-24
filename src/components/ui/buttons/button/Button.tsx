@@ -1,7 +1,6 @@
+import { IButton } from '@/types/props.types';
 import { FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { IButton } from '@/types/props.types';
 
 import { actions as viewSettingsAction } from '@/store/view-settings/viewSettings.slice';
 
@@ -23,13 +22,19 @@ const Button: FC<IButton> = ({ icon, newCenter, elem }) => {
 	const [clickButton, setClickButton] = useState<boolean>(false);
 	const dispatch = useDispatch();
 	const { width } = useWindowDimensions();
-	const {setIsAuth} = useAuth()
+	const {isAuth,setIsAuth} = useAuth()
 	const router = useRouter()
+
+  const searchParams = new URLSearchParams(window.location.search);
+  const isEdit1 = Cookies.get(ACCESSIBLYMAP) === searchParams.get('map')
+	
+	// console.log('elem?.id === 17', icon?.id === 17,!(isAuth && isEdit1))
 
 	return (
 		<button
 			className={styles.icon__button}
-			disabled={elem?.crd === null}
+			disabled={elem?.crd === null || (icon?.id === 17 && !(isAuth && isEdit1))}
+			// disabled={elem?.crd === null}
 			onClick={() => {
 				if (icon.id === 1) {
 					dispatch(viewSettingsAction.toggleSearchAddress(''))

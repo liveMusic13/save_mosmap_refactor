@@ -129,7 +129,7 @@
   right: 0;
   z-index: 3;
   box-shadow: 0px adapt(11px, 1440px) adapt(15px, 1440px) adapt(-7px, 1440px) rgba(0, 0, 0, .2), 0px adapt(24px, 1440px) adapt(38px, 1440px) adapt(3px, 1440px) rgba(0, 0, 0, .14), 0px adapt(9px, 1440px) adapt(46px, 1440px) adapt(8px, 1440px) rgba(0, 0, 0, .12);
-  border-radius: adapt(11px, 1440px);
+  // border-radius: adapt(11px, 1440px);
   background-color: $color_three;
   
 
@@ -155,16 +155,20 @@
   width: adapt(127px, 1440px);
   height: adapt(40px, 1440px);
   padding: 0px adapt(16px, 1440px);
-  background-color: transparent;
-  border-radius: 2px;    
+	background-color: $color_two_light;
+	color: $color_three;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	border-radius: 2px;
 
-  &:hover {
+	&:hover {
     cursor: pointer;
-    background-color: $color_two_light;
-    color: $color_three;
+    background-color: transparent;
+    color: $color_one;
   }
 
-  /*TABLE*/
+	/*TABLE*/
   @media (max-width: 991.98px) {
     margin: adapt(25px, 1440px) 0px;
     font-size: 1.2rem;

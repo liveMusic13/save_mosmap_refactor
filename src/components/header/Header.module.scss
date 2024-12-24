@@ -11,6 +11,12 @@
 	position: relative;
 	z-index: 201;
 
+	// position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	width: 100%;
+
 	@media (max-width: 991.98px) {
 		height: adapt(71px, 1440px);
 	}

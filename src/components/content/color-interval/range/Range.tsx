@@ -14,23 +14,47 @@ const Range: FC<any> = ({ data, setTargetEditObject }) => {
   const [isViewColors, setIsViewColors] = useState<boolean[]>(ranges.map(el => false));
   const [maxValue, setMaxValue] = useState<number>(1000);
 
+  // useEffect(() => {
+  //   const sloi_fields = searchParams.get('Слой карты');
+  //   const mode_list = searchParams.get('Способ раскраски');
+  //   const num_fields = searchParams.get('Числовое поле');
+
+  //   const check = data?.intervals?.filter((el: any) =>
+  //     el.sloi === Number(sloi_fields) && el.type === Number(mode_list) && el.field_id === Number(num_fields)
+  //   );
+
+  //   if (check?.length > 0) {
+  //     setRanges(check[0]?.values);
+  //     setMaxValue(Math.max(...check[0]?.values.map((range: any) => range.max))); //HELP: здесь ставим максимальное значение для range
+  //   } else {
+  //     setRanges([{ min: 0, max: 250, color: 'rgba(0, 0, 0, .6)' }]);
+  //     setMaxValue(1000); //HELP: здесь ставим максимальное значение для range
+  //   }
+  // }, [searchParams.toString(), data]);
+
   useEffect(() => {
     const sloi_fields = searchParams.get('Слой карты');
     const mode_list = searchParams.get('Способ раскраски');
     const num_fields = searchParams.get('Числовое поле');
 
-    const check = data?.intervals?.filter((el: any) =>
-      el.sloi === Number(sloi_fields) && el.type === Number(mode_list) && el.field_id === Number(num_fields)
-    );
+    if (data?.intervals) {
+        const check = data.intervals.filter((el: any) =>
+            el && el.sloi === Number(sloi_fields) && el.type === Number(mode_list) && el.field_id === Number(num_fields)
+        );
 
-    if (check?.length > 0) {
-      setRanges(check[0]?.values);
-      setMaxValue(Math.max(...check[0]?.values.map((range: any) => range.max)));
+        if (check.length > 0) {
+            setRanges(check[0]?.values);
+            setMaxValue(Math.max(...check[0]?.values.map((range: any) => range.max))); //HELP: здесь ставим максимальное значение для range
+        } else {
+            setRanges([{ min: 0, max: 250, color: 'rgba(0, 0, 0, .6)' }]);
+            setMaxValue(1000); //HELP: здесь ставим максимальное значение для range
+        }
     } else {
-      setRanges([{ min: 0, max: 250, color: 'rgba(0, 0, 0, .6)' }]);
-      setMaxValue(1000);
+        setRanges([{ min: 0, max: 250, color: 'rgba(0, 0, 0, .6)' }]);
+        setMaxValue(1000); //HELP: здесь ставим максимальное значение для range
     }
-  }, [searchParams.toString(), data]);
+}, [searchParams.toString(), data]);
+
 
   const {
     handleAddRange,
@@ -51,16 +75,6 @@ const Range: FC<any> = ({ data, setTargetEditObject }) => {
   useEffect(() => {
     setIsViewColors(ranges.map(el => false));
   }, [ranges.length]);
-
-  // useEffect(() => {
-  //   window.addEventListener('mousemove', handleMouseMove);
-  //   window.addEventListener('mouseup', handleMouseUp);
-
-  //   return () => {
-  //     window.removeEventListener('mousemove', handleMouseMove);
-  //     window.removeEventListener('mouseup', handleMouseUp);
-  //   };
-  // }, [handleMouseMove, handleMouseUp]);
 
   useEffect(() => {
     const handleTouchMove = (event: TouchEvent) => {

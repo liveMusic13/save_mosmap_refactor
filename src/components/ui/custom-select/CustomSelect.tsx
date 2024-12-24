@@ -164,6 +164,18 @@ const CustomSelect: FC<ICustomSelect> = ({
 				value={selectedOption}
 				onChange={handleChange}
 				styles={customStyles}
+				onMenuOpen={()=> {
+					console.log('Меню открывается');
+					const element = document.getElementById('__next');
+					console.log('element',element) 
+					if (element) { 
+						element.style.position = 'relative'; 
+					}
+					if (element) { 
+						element.style.position = 'absolute'; 
+						console.log('element.style.position',element.style.position)
+					}
+				}}
 			/>
 		</div>
 	);

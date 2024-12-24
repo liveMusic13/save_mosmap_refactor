@@ -45,6 +45,13 @@ body {
 	color: $color_one;
 	overflow: hidden;
 
+	// width: 100%;
+	// position: absolute;
+	// bottom: 0;
+	// top: 0;
+	// left: 0;
+	// right: 0;
+
 	@media (max-width: 1920px) {
 		font-size: 18px;
 	}
@@ -82,7 +89,8 @@ body {
 	height: 100vh;
 	// Этим решается проблема скрытия хедера на планшете
 	width: 100%;
-	position: absolute;
+	position: fixed;
+	// overflow: hidden;
 }
 
 .background__opacity{
