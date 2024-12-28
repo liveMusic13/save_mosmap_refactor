@@ -194,6 +194,10 @@
   }
 }
 
+.move__colorPicker {
+  transform: translateX(60%);
+}
+
 .button__delete {
   background-color: transparent;
   &:hover {

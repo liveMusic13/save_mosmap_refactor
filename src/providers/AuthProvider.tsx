@@ -8,11 +8,7 @@ export const AuthContext = createContext<IIsAuth>({} as IIsAuth)
 const AuthProvider: FC<PropsWithChildren<unknown>> = ({children}) => {
   const [isAuth, setIsAuth] = useState(!!Cookies.get(TOKEN));
   const [isLoaded, setIsLoaded] = useState<boolean>(false) //HELP: ЧТОБЫ УБРАТЬ ОШИБКУ ГИДРАТАЦИИ
-  console.log(isAuth)
-  // const router = useRouter()
-  // useEffect(()=> {
-  //   if(isAuth) router.push('/')
-  // },[Cookies.get(TOKEN)])
+ 
   useEffect(()=> {
     if (Cookies.get(TOKEN)) setIsAuth(true)
   }, [Cookies.get(TOKEN)])

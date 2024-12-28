@@ -19,7 +19,7 @@ export const mapService = {
 				const response = await $axios.get(
 					`/api/get_objects.php${adresFilterString.srcRequest}`,
 				);
-				console.log('map', adresFilterString.srcRequest)
+				// console.log('map', adresFilterString.srcRequest)
 				dispatch(dataObjectsInMapAction.addDataObjectsInMap(response.data));
 			}
 		} catch (error) {

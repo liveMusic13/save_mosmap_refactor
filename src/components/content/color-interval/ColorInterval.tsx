@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Loading } from '@/components/ui/loading/Loading';
 import useWindowDimensions from '@/hooks/useWindowDimensions';
 import { RootState } from '@/store/store';
 import { actions as viewSettingsAction } from '@/store/view-settings/viewSettings.slice';
@@ -25,6 +26,12 @@ const ColorInterval: FC = () => {
   useEffect(()=> {
     getData()
   }, [])
+
+  // const getData = async () => await mapService.color_interval(query, dispatch)
+
+  // useEffect(()=> {
+  //   getData()
+  // }, [])
 
   let style: any = {};
 
@@ -60,11 +67,17 @@ const ColorInterval: FC = () => {
     <div className={styles.block__colorInterval} style={style}>
       <h2 className={styles.title}>Закрасить районы</h2>
       <div className={styles.block__options}>
-        <SelectInterval title='Слой карты' dataSelect={data.sloi_fields ? data.sloi_fields : []} current_value={data.current_sloi ? data.current_sloi : ''} />
-        <SelectInterval title='Способ раскраски' dataSelect={data.mode_list ? data.mode_list : []} current_value={data.mode_list ? data.mode_list[0].id : ''} />
-        <SelectInterval title='Числовое поле' dataSelect={data.num_fields ? data.num_fields : []} current_value={data.current_mode ? data.current_mode : ''} />
-        <Range data={data} setTargetEditObject={setTargetEditObject} />
-        <button className={styles.button__confirm} onClick={saveIntervals}>Применить</button>
+        {
+          (viewSettings.isLoading && (!data.sloi_fields || !data.mode_list || !data.num_fields)) ? <Loading height='calc(60/1440 * 100vw)' /> : (
+            <>
+              <SelectInterval title='Слой карты' dataSelect={data.sloi_fields ? data.sloi_fields : []} current_value={data.current_sloi ? data.current_sloi : ''} />
+              <SelectInterval title='Способ раскраски' dataSelect={data.mode_list ? data.mode_list : []} current_value={data.mode_list ? data.current_mode : ''} />
+              <SelectInterval title='Числовое поле' dataSelect={data.num_fields ? data.num_fields : []} current_value={data.current_mode ? data.mode_list[0].id : ''} />
+              <Range data={data} setTargetEditObject={setTargetEditObject} />
+              <button className={styles.button__confirm} onClick={saveIntervals}>Применить</button>
+            </>
+          )
+        }
       </div>
     </div>
   )
