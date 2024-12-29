@@ -28,12 +28,6 @@ const ColorInterval: FC = () => {
     getData()
   }, [])
 
-  // const getData = async () => await mapService.color_interval(query, dispatch)
-
-  // useEffect(()=> {
-  //   getData()
-  // }, [])
-
   let style: any = {};
 
   if (!viewSettings.isViewObjects && !viewSettings.isViewFilters && !viewSettings.isObjectInfo) {
@@ -63,7 +57,7 @@ const ColorInterval: FC = () => {
 			dispatch(viewSettingsAction.SetIsColorInterval(false))
     }
 
-    const getColorAreas = await mapService.color_map(query, obj.sloi, obj.type, obj.field_id)
+    const getColorAreas = await mapService.color_map(query, obj.sloi, obj.type, obj.field_id, dispatch)
   }
 
   const [isNumberField, setIsNumberField] = useState(true);

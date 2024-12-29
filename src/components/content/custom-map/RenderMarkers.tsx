@@ -33,13 +33,16 @@ const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 	const dotInfo = useSelector(
 		(state: RootState) => state.dotInfo,
 	);
+	const {color_map} = useSelector(
+		(state: RootState) => state.dataInterval,
+	);
 
 	const {data} = useSelector(
 		(state: RootState) => state.dataMapSettings,
 	);
 
 	// useEffect(() => {}, [dataObjectInfo.id, dotInfo, editingObjects]);
-	useEffect(() => {}, [dataObjectInfo.id]);
+	useEffect(() => {}, [dataObjectInfo.id, color_map]);
 
 	const eventHandlers = useMemo(
 			() => ({
@@ -63,6 +66,9 @@ const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 		<>
 		{
 			dataObjectInfo && dataObjectInfo.area && dataObjectInfo.area.length > 0 && <Polygon positions={dataObjectInfo.area} color='red' fillOpacity={0.4} />
+		}
+		{
+			color_map.length > 0 && color_map.map((el:any, ind) => <Polygon key={ind} positions={el.polygon} color={el.color} fillOpacity={0.4}/>)
 		}
 		{/* {
 			!editingObjects.isActiveAddButton && !editingObjects.isActiveEditButton && dotInfo.lat !== 0 && dotInfo.lng !== 0 && !dataObjectInfo.id && <Marker position={[dotInfo.lat, dotInfo.lng]} icon={L.icon({

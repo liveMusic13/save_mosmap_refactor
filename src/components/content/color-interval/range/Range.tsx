@@ -172,15 +172,18 @@ import styles from './Range.module.scss';
 const Range: FC<any> = ({ data, setTargetEditObject }) => {
   const searchParams = useSearchParams();
   const [ranges, setRanges] = useState([
-    { min: 0, max: 250, color: 'rgba(0, 0, 0, .6)' },
-    { min: 251, max: 500, color: 'blue' },
-    { min: 501, max: 750, color: 'green' },
+    { min: 0, max: 250, color: 'rgba(0, 0, 0, .6)' }
   ]);
   const [isViewColors, setIsViewColors] = useState<boolean[]>(ranges.map(el => false));
   const [maxValue, setMaxValue] = useState<number>(1000);
   const [minValue, setMinValue] = useState<number>(0);
   const [fieldVisible, setFieldVisible] = useState<boolean>(true);
   const [intervalVisible, setIntervalVisible] = useState<boolean>(true);
+
+  useEffect(()=> {
+    setTargetEditObject([...ranges])
+  }, [])
+
 
   useEffect(() => {
     const sloi_fields = searchParams.get('Слой карты');

@@ -290,6 +290,9 @@ const CanvasMarkersLayer: FC<ICanvasMarkersLayer> = ({
 	const {editingObjects} = useSelector(
 		(state: RootState) => state.viewSettings,
 	);
+	const {color_map} = useSelector(
+		(state: RootState) => state.dataInterval,
+	);
 	const map = useMap();
 	const dispatch = useDispatch();
 	const markersRef = useRef([]);
@@ -333,6 +336,20 @@ const CanvasMarkersLayer: FC<ICanvasMarkersLayer> = ({
 			polygonsRef.current = [];
 		}
 
+			/////HELP: Добавление районов
+			if (color_map.length > 0) {
+				let mapObject;
+				color_map.forEach((el:any) => {
+					mapObject = new L.Polygon(el.polygon, {
+						color: el.color,
+						weight: 1,
+					}).addTo(map);
+	
+					polygonsRef.current.push(mapObject);
+				})
+			}
+		/////
+
 			for (let marker of markersData) {
 				let mapObject;
 	
@@ -353,9 +370,7 @@ const CanvasMarkersLayer: FC<ICanvasMarkersLayer> = ({
 				}
 			}
 
-			///// Добавление зоны пешеходной доступности
-		
-			
+			/////HELP: Добавление зоны пешеходной доступности
 			if (dataObjectInfo && dataObjectInfo.area && dataObjectInfo.area.length) {
 					let mapObject;
 					mapObject = new L.Polygon(dataObjectInfo.area, {
@@ -365,8 +380,8 @@ const CanvasMarkersLayer: FC<ICanvasMarkersLayer> = ({
 	
 					polygonsRef.current.push(mapObject);
 				}
-			
 			/////
+			
 	
 			for (let marker of markersData) {
 				//HELP: ОТРИСОВКА КРУЖКОВ

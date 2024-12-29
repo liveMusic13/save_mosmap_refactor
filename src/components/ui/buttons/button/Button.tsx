@@ -10,6 +10,7 @@ import useWindowDimensions from '@/hooks/useWindowDimensions';
 import { ACCESSIBLYMAP, TOKEN } from '@/app.constants';
 import { useAuth } from '@/hooks/useAuth';
 import { mapService } from '@/services/map.service';
+import { actions as dataIntervalAction } from '@/store/data-intervals/dataInterval.slice';
 import { actions as mapLayersAction } from '@/store/map-layers/mapLayers.slice';
 import { RootState } from '@/store/store';
 import { actions as userMapAction } from '@/store/user-map/userMap.slice';
@@ -67,7 +68,10 @@ const Button: FC<IButton> = ({ icon, newCenter, elem }) => {
 				} else {
 					if (icon.id === 6) dispatch(viewSettingsAction.toggleFilters(''));
 					if (icon.id === 7) dispatch(viewSettingsAction.toggleObjects(''));
-					if (icon.id === 17) dispatch(viewSettingsAction.SetIsColorInterval(!isColorInterval))
+					if (icon.id === 17) {
+						dispatch(viewSettingsAction.SetIsColorInterval(!isColorInterval))
+						dispatch(dataIntervalAction.addColor_map([]))
+					}
 				}
 
 				if (width && width >= 767.98) setClickButton(!clickButton);

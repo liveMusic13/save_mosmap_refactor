@@ -1,5 +1,6 @@
 import { $axios, $axiosAuth } from "@/api";
 import { actions as dataFiltersAction } from "@/store/data-filters/dataFilters.slice";
+import { actions as dataIntervalAction } from "@/store/data-intervals/dataInterval.slice";
 import { actions as dataObjectInfoAction } from "@/store/data-object-info/dataObjectInfo.slice";
 import { actions as dataObjectsInMapAction } from "@/store/data-objects-in-map/dataObjectsInMap.slice";
 import { actions as viewSettingsAction } from "@/store/view-settings/viewSettings.slice";
@@ -168,11 +169,11 @@ export const mapService = {
 			dispatch(viewSettingsAction.defaultLoading(''));
 		}
 	},
-	color_map: async (query:any, sloi:string, mode: string, field_id:string) => {
+	color_map: async (query:any, sloi:string, mode: string, field_id:string, dispatch:any) => {
 		try {
 			const response = await $axiosAuth.get(`/api/color_map.php?map=${query.map}&sloi=${sloi}&mode=${mode}&field_id=${field_id}`)
 			console.log(response)
-			return response.data
+			dispatch(dataIntervalAction.addColor_map(response.data))
 		} catch (error) {
 			console.log(error);
 		}

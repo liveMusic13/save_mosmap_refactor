@@ -165,7 +165,9 @@ export const useFuncRange = (ranges: any, setRanges: Dispatch<SetStateAction<any
     const lastRange = ranges[ranges.length - 1];
     const newMin = lastRange.max + 1;
     setRanges([...ranges, { min: newMin, max: newMin + 1, color: 'rgba(0, 0, 0, .6)' }]);
-    setTargetEditObject({ min: newMin, max: newMin + 1, color: 'rgba(0, 0, 0, .6)' })
+    // setTargetEditObject({ min: newMin, max: newMin + 1, color: 'rgba(0, 0, 0, .6)' })
+    setTargetEditObject([...ranges, { min: newMin, max: newMin + 1, color: 'rgba(0, 0, 0, .6)' }])
+
   };
 
   const handleDeleteRange = (index: number) => {
