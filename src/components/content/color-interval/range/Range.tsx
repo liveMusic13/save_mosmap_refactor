@@ -201,20 +201,29 @@ const Range: FC<any> = ({ data, setTargetEditObject }) => {
             setMaxValue(check[0]?.max_value); // Установка max_value из данных
             setMinValue(check[0]?.min_value); // Установка min_value из данных
 
-            // Установка значений для видимости полей
-            const mode = data.mode_list.find((mode: any) => mode.id === Number(mode_list));
-            setFieldVisible(mode?.field_visible === 1);
-            setIntervalVisible(mode?.interval_visible === 1);
+            // // Установка значений для видимости полей
+            // const mode = data.mode_list.find((mode: any) => mode.id === Number(mode_list));
+            // setFieldVisible(mode?.field_visible === 1);
+            // setIntervalVisible(mode?.interval_visible === 1);
         } else {
             setRanges([{ min: 0, max: 250, color: 'rgba(0, 0, 0, .6)' }]);
             setMaxValue(1000); 
             setMinValue(0); // Установка значений по умолчанию
 
-            // Установка значений для видимости полей
+            // // Установка значений для видимости полей
+            // const mode = data.mode_list.find((mode: any) => mode.id === Number(mode_list));
+            // setFieldVisible(mode?.field_visible === 1);
+            // setIntervalVisible(mode?.interval_visible === 1);
+        }
+        const convertValue = Number(mode_list) === 1;
+        if (convertValue) {
+            setFieldVisible(false);
+        } else {
             const mode = data.mode_list.find((mode: any) => mode.id === Number(mode_list));
             setFieldVisible(mode?.field_visible === 1);
             setIntervalVisible(mode?.interval_visible === 1);
         }
+
     } else {
         setRanges([{ min: 0, max: 250, color: 'rgba(0, 0, 0, .6)' }]);
         setMaxValue(1000); 

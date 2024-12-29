@@ -167,5 +167,14 @@ export const mapService = {
 		} finally {
 			dispatch(viewSettingsAction.defaultLoading(''));
 		}
-	}
+	},
+	color_map: async (query:any, sloi:string, mode: string, field_id:string) => {
+		try {
+			const response = await $axiosAuth.get(`/api/color_map.php?map=${query.map}&sloi=${sloi}&mode=${mode}&field_id=${field_id}`)
+			console.log(response)
+			return response.data
+		} catch (error) {
+			console.log(error);
+		}
+	},
 }
