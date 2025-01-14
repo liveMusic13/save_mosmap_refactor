@@ -95,11 +95,14 @@ export const AllObjects: FC = () => {
 				<div className={styles.allObjects}>
 					<p className={styles.description}>Всего объектов в списке:</p>
 					<p className={styles.value}>
-							{
+							{/* {
 								mapLayers.arrayPolygons[mapLayers.indexTargetPolygon] ? objects.length : dataObjectsInMap.points['all-points']
 								? dataObjectsInMap.points['all-points']
 								: '0'
-							}
+							} */}
+							{dataObjectsInMap.points.points
+							? dataObjectsInMap.points.points.length
+							: '0'}
 					</p>
 				</div>
 				<div className={styles.allObjects__inMap}>

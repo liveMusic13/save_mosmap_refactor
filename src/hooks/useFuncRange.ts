@@ -1,6 +1,12 @@
-// import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 
-// export const useFuncRange = (ranges: any, setRanges: Dispatch<SetStateAction<any>>, maxValue: number, setTargetEditObject: Dispatch<SetStateAction<any>>) => {
+// export const useFuncRange = (
+//   ranges: any,
+//   setRanges: Dispatch<SetStateAction<any>>,
+//   maxValue: number,
+//   minValue: number,
+//   setTargetEditObject: Dispatch<SetStateAction<any>>
+// ) => {
 //   const [dragging, setDragging] = useState<number | null>(null);
 //   const sliderBarRef = useRef<HTMLDivElement | null>(null);
 
@@ -16,7 +22,7 @@
 //     if (dragging !== null && sliderBarRef.current) {
 //       const rect = sliderBarRef.current.getBoundingClientRect();
 //       const newValue = Math.round(
-//         ((event.clientX - rect.left) / rect.width) * maxValue
+//         ((event.clientX - rect.left) / rect.width) * (maxValue - minValue) + minValue
 //       );
 
 //       handleSliderChange(dragging, newValue);
@@ -33,21 +39,23 @@
 //       updatedRanges[index].min,
 //       Math.min(newValue, updatedRanges[index + 1]?.max || maxValue)
 //     );
+
 //     updatedRanges[index].max = clampedValue;
 
+//     // Установка минимального значения для следующего диапазона
 //     if (index < ranges.length - 1) {
 //       updatedRanges[index + 1].min = clampedValue + 1;
 //     }
 
 //     setRanges(updatedRanges);
-//     setTargetEditObject(updatedRanges)
+//     setTargetEditObject(updatedRanges);
 //   };
 
 //   const handleAddRange = () => {
 //     const lastRange = ranges[ranges.length - 1];
 //     const newMin = lastRange.max + 1;
-//     setRanges([...ranges, { min: newMin, max: newMin + 1, color: 'rgba(0, 0, 0, .6)' }]);
-//     setTargetEditObject({ min: newMin, max: newMin + 1, color: 'rgba(0, 0, 0, .6)' })
+//     setRanges([...ranges, { min: newMin, max: newMin + 1, color: '#00000099' }]);
+//     setTargetEditObject([...ranges, { min: newMin, max: newMin + 1, color: '#00000099' }]);
 //   };
 
 //   const handleDeleteRange = (index: number) => {
@@ -55,7 +63,7 @@
 //     updatedRanges.splice(index, 1);
 
 //     if (index === 0 && updatedRanges.length > 0) {
-//       updatedRanges[0].min = 0;
+//       updatedRanges[0].min = minValue;
 //     }
 
 //     if (index > 0 && index < updatedRanges.length) {
@@ -63,22 +71,23 @@
 //     }
 
 //     setRanges(updatedRanges);
-//     setTargetEditObject(updatedRanges)
+//     setTargetEditObject(updatedRanges);
 //   };
 
 //   const handleMaxChange = (index: number, value: string) => {
 //     const updatedRanges = [...ranges];
 //     updatedRanges[index].max = Number(value);
 //     setRanges(updatedRanges);
-//     setTargetEditObject(updatedRanges)
+//     setTargetEditObject(updatedRanges);
 //   };
 
 //   const handleMaxBlur = (index: number) => {
 //     const updatedRanges = [...ranges];
 //     const clampedValue = Math.max(
-//       updatedRanges[index].min,
+//       minValue, // Учитываем минимальное значение, которое может быть отрицательным
 //       Math.min(updatedRanges[index].max, updatedRanges[index + 1]?.max || maxValue)
 //     );
+
 //     updatedRanges[index].max = clampedValue;
 
 //     if (index < ranges.length - 1) {
@@ -86,7 +95,7 @@
 //     }
 
 //     setRanges(updatedRanges);
-//     setTargetEditObject(updatedRanges)
+//     setTargetEditObject(updatedRanges);
 //   };
 
 //   const handleColorChange = (index: number, newColor: string) => {
@@ -95,7 +104,7 @@
 //         idx === index ? { ...range, color: newColor } : range
 //       )
 //     );
-//     setTargetEditObject(ranges)
+//     setTargetEditObject(ranges);
 //   };
 
 //   return {
@@ -111,63 +120,71 @@
 //     handleColorChange,
 //     handleTouchStart,
 //     setDragging,
-//     handleSliderChange
+//     handleSliderChange,
 //   };
 // };
 
-
-import { Dispatch, SetStateAction, useRef, useState } from "react";
-
-export const useFuncRange = (ranges: any, setRanges: Dispatch<SetStateAction<any>>, maxValue: number, minValue: number, setTargetEditObject: Dispatch<SetStateAction<any>>) => {
+export const useFuncRange = (
+  ranges: any,
+  setRanges: Dispatch<SetStateAction<any>>,
+  maxValue: number,
+  minValue: number,
+  setTargetEditObject: Dispatch<SetStateAction<any>>
+) => {
   const [dragging, setDragging] = useState<number | null>(null);
   const sliderBarRef = useRef<HTMLDivElement | null>(null);
 
-  const handleMouseDown = (index: number) => {
-    setDragging(index);
-  };
-
-  const handleTouchStart = (index: number) => {
-    setDragging(index);
-  };
+  const handleMouseDown = (index: number) => setDragging(index);
+  const handleTouchStart = (index: number) => setDragging(index);
 
   const handleMouseMove = (event: MouseEvent) => {
     if (dragging !== null && sliderBarRef.current) {
       const rect = sliderBarRef.current.getBoundingClientRect();
       const newValue = Math.round(
-        ((event.clientX - rect.left) / rect.width) * (maxValue - minValue) + minValue
+        Math.max(
+          minValue,
+          Math.min(maxValue, ((event.clientX - rect.left) / rect.width) * (maxValue - minValue) + minValue)
+        )
       );
-
       handleSliderChange(dragging, newValue);
     }
   };
-
-  const handleMouseUp = () => {
-    setDragging(null);
-  };
+  
+  const handleMouseUp = () => setDragging(null);
 
   const handleSliderChange = (index: number, newValue: number) => {
     const updatedRanges = [...ranges];
-    const clampedValue = Math.max(
-      updatedRanges[index].min,
-      Math.min(newValue, updatedRanges[index + 1]?.max || maxValue)
-    );
-    updatedRanges[index].max = clampedValue;
+    updatedRanges[index].max = newValue;
 
-    if (index < ranges.length - 1) {
-      updatedRanges[index + 1].min = clampedValue + 1;
-    }
+    if (index < ranges.length - 1) updatedRanges[index + 1].min = newValue;
 
     setRanges(updatedRanges);
-    setTargetEditObject(updatedRanges)
+    setTargetEditObject(updatedRanges);
+  };
+
+  const handleMaxBlur = (index: number) => {
+    const updatedRanges = [...ranges];
+    const clampedValue = Math.max(minValue, Math.min(updatedRanges[index].max, maxValue));
+    updatedRanges[index].max = clampedValue;
+
+    if (index < ranges.length - 1) updatedRanges[index + 1].min = clampedValue;
+
+    setRanges(updatedRanges);
+    setTargetEditObject(updatedRanges);
+  };
+
+  const handleMaxChange = (index: number, value: string) => {
+    const updatedRanges = [...ranges];
+    updatedRanges[index].max = Number(value);
+    setRanges(updatedRanges);
+    setTargetEditObject(updatedRanges);
   };
 
   const handleAddRange = () => {
     const lastRange = ranges[ranges.length - 1];
-    const newMin = lastRange.max + 1;
-    setRanges([...ranges, { min: newMin, max: newMin + 1, color: 'rgba(0, 0, 0, .6)' }]);
-    // setTargetEditObject({ min: newMin, max: newMin + 1, color: 'rgba(0, 0, 0, .6)' })
-    setTargetEditObject([...ranges, { min: newMin, max: newMin + 1, color: 'rgba(0, 0, 0, .6)' }])
-
+    const newMin = lastRange.max;
+    setRanges([...ranges, { min: newMin, max: maxValue, color: '#00000099' }]);
+    setTargetEditObject([...ranges, { min: newMin, max: maxValue, color: '#00000099' }]);
   };
 
   const handleDeleteRange = (index: number) => {
@@ -178,44 +195,41 @@ export const useFuncRange = (ranges: any, setRanges: Dispatch<SetStateAction<any
       updatedRanges[0].min = minValue;
     }
 
-    if (index > 0 && index < updatedRanges.length) {
-      updatedRanges[index].min = updatedRanges[index - 1].max + 1;
-    }
-
     setRanges(updatedRanges);
-    setTargetEditObject(updatedRanges)
-  };
-
-  const handleMaxChange = (index: number, value: string) => {
-    const updatedRanges = [...ranges];
-    updatedRanges[index].max = Number(value);
-    setRanges(updatedRanges);
-    setTargetEditObject(updatedRanges)
-  };
-
-  const handleMaxBlur = (index: number) => {
-    const updatedRanges = [...ranges];
-    const clampedValue = Math.max(
-      updatedRanges[index].min,
-      Math.min(updatedRanges[index].max, updatedRanges[index + 1]?.max || maxValue)
-    );
-    updatedRanges[index].max = clampedValue;
-
-    if (index < ranges.length - 1) {
-      updatedRanges[index + 1].min = clampedValue + 1;
-    }
-
-    setRanges(updatedRanges);
-    setTargetEditObject(updatedRanges)
+    setTargetEditObject(updatedRanges);
   };
 
   const handleColorChange = (index: number, newColor: string) => {
-    setRanges((prev: any) =>
-      prev.map((range: any, idx: number) =>
-        idx === index ? { ...range, color: newColor } : range
-      )
-    );
-    setTargetEditObject(ranges)
+    setRanges((prev:any) => prev.map((range:any, idx:any) => (idx === index ? { ...range, color: newColor } : range)));
+    setTargetEditObject(ranges);
+  };
+
+  const handleMinInputChange = (index: number, value: string) => {
+    const newMin = Number(value);
+  
+    const updatedRanges = [...ranges];
+    updatedRanges[index].min = Math.max(minValue, Math.min(newMin, updatedRanges[index].max)); // Обеспечиваем корректный диапазон
+  
+    if (index > 0) {
+      updatedRanges[index - 1].max = updatedRanges[index].min; // Корректируем соседние диапазоны
+    }
+  
+    setRanges(updatedRanges);
+    setTargetEditObject(updatedRanges);
+  };
+  
+  const handleMaxInputChange = (index: number, value: string) => {
+    const newMax = Number(value);
+  
+    const updatedRanges = [...ranges];
+    updatedRanges[index].max = Math.max(updatedRanges[index].min, Math.min(newMax, maxValue)); // Обеспечиваем корректный диапазон
+  
+    if (index < ranges.length - 1) {
+      updatedRanges[index + 1].min = updatedRanges[index].max; // Корректируем соседние диапазоны
+    }
+  
+    setRanges(updatedRanges);
+    setTargetEditObject(updatedRanges);
   };
 
   return {
@@ -231,7 +245,9 @@ export const useFuncRange = (ranges: any, setRanges: Dispatch<SetStateAction<any
     handleColorChange,
     handleTouchStart,
     setDragging,
-    handleSliderChange
+    handleSliderChange,
+    handleMinInputChange,
+    handleMaxInputChange
   };
 };
 

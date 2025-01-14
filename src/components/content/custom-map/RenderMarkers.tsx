@@ -89,7 +89,7 @@ const RenderMarkers: FC<IRenderMarkers> = ({ isMobile, zoomLevel }) => {
 							const responce = await $axios.get(
 								`/api/object_info.php?id=${object.id}`,
 							);
-						
+						console.log('test', responce.data)
 							dispatch(dataObjectInfoAction.addObjectInfo(responce.data));
 							dispatch(viewSettingsAction.SetIsDotInfo(false));
 						} catch (error) {

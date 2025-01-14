@@ -40,6 +40,10 @@ const ColorInterval: FC = () => {
     // style.left = 'calc(283/1440*100vw)';
   }
 
+  useEffect(()=> {
+    console.log('проверяем данные для запроса: ', targetEditObject)
+  }, [targetEditObject])
+
   const saveIntervals = async () => {
     const obj:any = {
       values: targetEditObject,
@@ -57,7 +61,7 @@ const ColorInterval: FC = () => {
 			dispatch(viewSettingsAction.SetIsColorInterval(false))
     }
 
-    const getColorAreas = await mapService.color_map(query, obj.sloi, obj.type, obj.field_id, dispatch)
+    await mapService.color_map(query, obj.sloi, obj.type, obj.field_id, dispatch)
   }
 
   const [isNumberField, setIsNumberField] = useState(true);
