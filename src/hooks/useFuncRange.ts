@@ -204,11 +204,39 @@ export const useFuncRange = (
     setTargetEditObject(ranges);
   };
 
+  // const handleMinInputChange = (index: number, value: string) => {
+  //   const newMin = Number(value);
+  
+  //   const updatedRanges = [...ranges];
+  //   updatedRanges[index].min = Math.max(minValue, Math.min(newMin, updatedRanges[index].max)); // Обеспечиваем корректный диапазон
+  
+  //   if (index > 0) {
+  //     updatedRanges[index - 1].max = updatedRanges[index].min; // Корректируем соседние диапазоны
+  //   }
+  
+  //   setRanges(updatedRanges);
+  //   setTargetEditObject(updatedRanges);
+  // };
+  
+  // const handleMaxInputChange = (index: number, value: string) => {
+  //   const newMax = Number(value);
+  
+  //   const updatedRanges = [...ranges];
+  //   updatedRanges[index].max = Math.max(updatedRanges[index].min, Math.min(newMax, maxValue)); // Обеспечиваем корректный диапазон
+  
+  //   if (index < ranges.length - 1) {
+  //     updatedRanges[index + 1].min = updatedRanges[index].max; // Корректируем соседние диапазоны
+  //   }
+  
+  //   setRanges(updatedRanges);
+  //   setTargetEditObject(updatedRanges);
+  // };
+
   const handleMinInputChange = (index: number, value: string) => {
-    const newMin = Number(value);
+    const newMin = parseFloat(value.replace(',', '.')); // Заменяем запятую на точку
   
     const updatedRanges = [...ranges];
-    updatedRanges[index].min = Math.max(minValue, Math.min(newMin, updatedRanges[index].max)); // Обеспечиваем корректный диапазон
+    updatedRanges[index].min = Math.max(minValue, Math.min(newMin, updatedRanges[index].max)); // Корректный диапазон
   
     if (index > 0) {
       updatedRanges[index - 1].max = updatedRanges[index].min; // Корректируем соседние диапазоны
@@ -219,10 +247,10 @@ export const useFuncRange = (
   };
   
   const handleMaxInputChange = (index: number, value: string) => {
-    const newMax = Number(value);
+    const newMax = parseFloat(value.replace(',', '.')); // Заменяем запятую на точку
   
     const updatedRanges = [...ranges];
-    updatedRanges[index].max = Math.max(updatedRanges[index].min, Math.min(newMax, maxValue)); // Обеспечиваем корректный диапазон
+    updatedRanges[index].max = Math.max(updatedRanges[index].min, Math.min(newMax, maxValue)); // Корректный диапазон
   
     if (index < ranges.length - 1) {
       updatedRanges[index + 1].min = updatedRanges[index].max; // Корректируем соседние диапазоны
@@ -231,6 +259,7 @@ export const useFuncRange = (
     setRanges(updatedRanges);
     setTargetEditObject(updatedRanges);
   };
+  
 
   return {
     handleMaxBlur,
