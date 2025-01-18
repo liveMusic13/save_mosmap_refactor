@@ -383,13 +383,11 @@ const Range: FC<any> = ({ data, setTargetEditObject }) => {
         }
 
     } else {
-      console.log('zdes')
         setRanges([{ min: 0, max: 200, color: '#00000099' }, { min: 0, max: 250, color: '#00000099' }]);
         setMaxValue(1000); 
         setMinValue(0); // Установка значений по умолчанию
     }
 
-    console.log(ranges)
 }, [searchParams.toString(), data]);
 
 
@@ -466,68 +464,6 @@ const Range: FC<any> = ({ data, setTargetEditObject }) => {
     </div>
   )}
 
-  {/* {ranges.map((range, index) => (
-    <div key={index} className={styles.block__values}>
-       {fieldVisible && (
-      <>
-        <span>от</span>
-        <input
-          type="number"
-          value={range.min.toFixed(2)}
-          onChange={(e) => handleMinInputChange(index, e.target.value)}
-        />
-        <span>до</span>
-        <input
-          type="number"
-          value={index === ranges.length - 1 ? maxValue : range.max.toFixed(2)}
-          onChange={(e) => handleMaxInputChange(index, e.target.value)}
-        />
-        <span>-</span>
-      <div className={styles.block__color}>
-        <div
-          className={styles.color}
-          style={{ backgroundColor: range.color }}
-          onClick={() =>
-            setIsViewColors(prev => prev.map((item, idx) => (idx === index ? !item : item)))
-          }
-        ></div>
-        {isViewColors[index] && (
-          <div
-            className={`${styles.block__colorPicker} ${
-              !fieldVisible ? styles.move__colorPicker : ''
-            }`}
-          >
-            <HexColorPicker
-              color={range.color}
-              onChange={newColor => handleColorChange(index, newColor)}
-            />
-            <button
-              className={styles.button__colorPicker}
-              onClick={() =>
-                setIsViewColors(prev =>
-                  prev.map((item, idx) => (idx === index ? !item : item))
-                )
-              }
-            >
-              Закрыть
-            </button>
-          </div>
-        )}
-      </div>
-      {index !== ranges.length - 1 && (
-        <button
-          onClick={() => handleDeleteRange(index)}
-          style={{ marginLeft: '5px' }}
-          className={styles.button__delete}
-        >
-          X
-        </button>
-      )}
-      </>
-    )}
-    </div>
-  ))} */}
-
 {ranges.map((range, index) => (
   <div key={index} className={styles.block__values}>
     {fieldVisible && (
@@ -535,13 +471,13 @@ const Range: FC<any> = ({ data, setTargetEditObject }) => {
         <span>от</span>
         <input
           type="number"
-          value={range.min} // Убрано .toFixed(2)
+          value={range.min} 
           onChange={(e) => handleMinInputChange(index, e.target.value)}
         />
         <span>до</span>
         <input
           type="number"
-          value={index === ranges.length - 1 ? maxValue : range.max} // Убрано .toFixed(2)
+          value={index === ranges.length - 1 ? maxValue : range.max} 
           onChange={(e) => handleMaxInputChange(index, e.target.value)}
         />
         <span>-</span>

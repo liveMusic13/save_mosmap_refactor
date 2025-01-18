@@ -6,13 +6,13 @@ import styles from './SelectInterval.module.scss';
 
 interface ISelectIntervalProps {
   title: string;
-  dataSelect: { id: number, name: string }[];
+  dataSelect: { id: number | null, name: string }[];
   current_value: number | string; 
 }
 
 const SelectInterval: FC<ISelectIntervalProps> = ({ title, dataSelect, current_value }) => {
   const router = useRouter();
-  const [selectedOption, setSelectedOption] = useState<{ value: number, label: string } | null>(null);
+  const [selectedOption, setSelectedOption] = useState<{ value: number | null, label: string } | null>(null);
 
   const customStyles = {
     option: (provided: any, state: any) => ({
@@ -40,8 +40,9 @@ const SelectInterval: FC<ISelectIntervalProps> = ({ title, dataSelect, current_v
     }),
   };
 
-  const handleSelectChange = (selected: { value: number, label: string } | null) => {
+  const handleSelectChange = (selected: { value: number | null, label: string } | null) => {
     setSelectedOption(selected);
+    console.log('selected', selected)
     if (selected) {
       const newQuery = { ...router.query, [title]: selected.value };
       router.replace({
@@ -51,31 +52,86 @@ const SelectInterval: FC<ISelectIntervalProps> = ({ title, dataSelect, current_v
     }
   };
 
+  // useEffect(() => {
+  //   const queryValue = router.query[title];
+  //   let selectedValue;
+
+    
+  //   if (queryValue) {
+  //     selectedValue = Number(queryValue);
+  //     console.log('queryValue yes', queryValue)
+  //   } else {
+  //     console.log('queryValue no', queryValue)
+
+  //     selectedValue = Number(current_value);
+  //     const newQuery = { ...router.query, [title]: selectedValue };
+  //     router.replace(
+  //       {
+  //         pathname: router.pathname,
+  //         query: newQuery,
+  //       },
+  //       undefined,
+  //       { shallow: true }
+  //     );
+  //   }
+
+  //   const selectedOption = dataSelect.find((option) => option.id === selectedValue);
+  //   if (selectedOption) {
+  //     setSelectedOption({ value: selectedOption.id, label: selectedOption.name });
+  //   }
+  // }, [router.query, dataSelect, title, current_value]);
+
+  
+
   useEffect(() => {
     const queryValue = router.query[title];
     let selectedValue;
-
+  
     if (queryValue) {
       selectedValue = Number(queryValue);
     } else {
-      selectedValue = Number(current_value);
-      const newQuery = { ...router.query, [title]: selectedValue };
-      router.replace(
-        {
-          pathname: router.pathname,
-          query: newQuery,
-        },
-        undefined,
-        { shallow: true }
-      );
+      selectedValue = current_value !== null && current_value !== undefined ? Number(current_value) : null;
+  
+      // Проверяем, чтобы избежать лишних обновлений query
+      if (router.query[title] !== String(selectedValue)) {
+        const newQuery = { ...router.query, [title]: selectedValue };
+        router.replace(
+          {
+            pathname: router.pathname,
+            query: newQuery,
+          },
+          undefined,
+          { shallow: true }
+        );
+      }
     }
-
-    const selectedOption = dataSelect.find((option) => option.id === selectedValue);
+  
+    // Найти соответствующий объект в dataSelect
+    const selectedOption:any = dataSelect.find((option) => option.id === selectedValue);
+  
     if (selectedOption) {
+      // Если найдено соответствие
       setSelectedOption({ value: selectedOption.id, label: selectedOption.name });
+    } else if (!selectedOption && (!selectedOption || selectedOption?.value !== null)) {
+      // Если нет соответствия, установить "не установлено"
+      setSelectedOption({ value: null, label: '' });
+  
+      // Убедиться, что в URL нет лишнего обновления
+      if (router.query[title] !== 'null') {
+        const newQuery = { ...router.query, [title]: 'null' };
+        router.replace(
+          {
+            pathname: router.pathname,
+            query: newQuery,
+          },
+          undefined,
+          { shallow: true }
+        );
+      }
     }
   }, [router.query, dataSelect, title, current_value]);
-
+  
+  
   return (
     <div className={styles.block__select}>
       <h2 className={styles.title}>{title}</h2>

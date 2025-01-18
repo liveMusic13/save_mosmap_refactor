@@ -22,11 +22,20 @@ const ColorInterval: FC = () => {
   const isTable = width && width < 992;
   const isMobile = width && width < 768
 
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false); // состояние для кнопки
+
   const getData = async () => setData(await mapService.color_interval(query, dispatch))
 
   useEffect(()=> {
     getData()
   }, [])
+
+  useEffect(() => {
+    // Проверка всех query параметров
+    const isQueryInvalid = Object.values(query).some((value) => value === 'null' || value === 'undefined' || value === '');
+    console.log('isQueryInvalid',isQueryInvalid, Object.values(query))
+    setIsButtonDisabled(isQueryInvalid);
+  }, [query]);
 
   let style: any = {};
 
@@ -40,9 +49,9 @@ const ColorInterval: FC = () => {
     // style.left = 'calc(283/1440*100vw)';
   }
 
-  useEffect(()=> {
-    console.log('проверяем данные для запроса: ', targetEditObject)
-  }, [targetEditObject])
+  // useEffect(()=> {
+  //   console.log('проверяем данные для запроса: ', targetEditObject)
+  // }, [targetEditObject])
 
   const saveIntervals = async () => {
     const obj:any = {
@@ -70,11 +79,20 @@ const ColorInterval: FC = () => {
     const mode_list = searchParams.get('Способ раскраски');
     
     if (data && data.mode_list) {
-      console.log('mode_list', mode_list)
       const convertValue = Number(mode_list) === 0
       setIsNumberField(!convertValue)
     }
   }, [searchParams.toString(), data])
+
+  // const prepareDataSelect = (dataSelect: { id: number; name: string }[]) => {
+  //   // Проверяем, есть ли уже элемент с "не установлено"
+  //   const hasNullOption = dataSelect.some(option => option.id === null);
+  //   if (!hasNullOption) {
+  //     return [{ id: null, name: 'не установлено' }, ...dataSelect];
+  //   }
+  //   return dataSelect;
+  // };
+  
 
   return (
     <div className={styles.block__colorInterval} style={style}>
@@ -83,12 +101,29 @@ const ColorInterval: FC = () => {
         {
           (viewSettings.isLoading && (!data.sloi_fields || !data.mode_list || !data.num_fields)) ? <Loading height='calc(60/1440 * 100vw)' /> : (
             <>
-              <SelectInterval title='Слой карты' dataSelect={data.sloi_fields ? data.sloi_fields : []} current_value={data.current_sloi ? data.current_sloi : ''} />
-              <SelectInterval title='Способ раскраски' dataSelect={data.mode_list ? data.mode_list : []} current_value={data.mode_list ? data.current_mode : ''} />
+              <SelectInterval title='Слой карты' dataSelect={data.sloi_fields ? data.sloi_fields : []} current_value={data.current_sloi ? data.current_sloi : null} />
+              <SelectInterval title='Способ раскраски' dataSelect={data.mode_list ? data.mode_list : []} current_value={data.mode_list ? data.current_mode : null} />
+              {
+                (isNumberField || isButtonDisabled) && (
+                  <>
+                    <SelectInterval title='Числовое поле' dataSelect={data.num_fields ? data.num_fields : []} current_value={data.current_mode ? data.mode_list[0].id : null} />
+                    <Range data={data} setTargetEditObject={setTargetEditObject} />
+                  </>
+                )
+              }
+              <button className={styles.button__confirm} onClick={saveIntervals} disabled={isButtonDisabled}>Применить</button>
+            </>
+          )
+        }
+         {/* {
+          (viewSettings.isLoading && (!data.sloi_fields || !data.mode_list || !data.num_fields)) ? <Loading height='calc(60/1440 * 100vw)' /> : (
+            <>
+              <SelectInterval title='Слой карты' dataSelect={prepareDataSelect(data.sloi_fields || [])}  current_value={data.current_sloi || null} />
+              <SelectInterval title='Способ раскраски' dataSelect={prepareDataSelect(data.mode_list || [])} current_value={data.current_mode || null} />
               {
                 isNumberField && (
                   <>
-                    <SelectInterval title='Числовое поле' dataSelect={data.num_fields ? data.num_fields : []} current_value={data.current_mode ? data.mode_list[0].id : ''} />
+                    <SelectInterval title='Числовое поле' dataSelect={prepareDataSelect(data.num_fields || [])} current_value={data.current_mode ? data.mode_list[0]?.id : null} />
                     <Range data={data} setTargetEditObject={setTargetEditObject} />
                   </>
                 )
@@ -96,7 +131,7 @@ const ColorInterval: FC = () => {
               <button className={styles.button__confirm} onClick={saveIntervals}>Применить</button>
             </>
           )
-        }
+        } */}
       </div>
     </div>
   )
