@@ -19,6 +19,7 @@ const ColorInterval: FC = () => {
   const [data, setData] = useState<any>({})
   const [targetEditObject, setTargetEditObject] = useState()
   const { width } = useWindowDimensions();
+  const searchParams = useSearchParams();
   const isTable = width && width < 992;
   const isMobile = width && width < 768
 
@@ -31,11 +32,32 @@ const ColorInterval: FC = () => {
   }, [])
 
   useEffect(() => {
-    // Проверка всех query параметров
-    const isQueryInvalid = Object.values(query).some((value) => value === 'null' || value === 'undefined' || value === '');
-    console.log('isQueryInvalid',isQueryInvalid, Object.values(query))
-    setIsButtonDisabled(isQueryInvalid);
-  }, [query]);
+    // Получение значений из query параметров
+    const sloiValue = query['Слой карты'];
+    const modeValue = query['Способ раскраски'];
+    const numFieldValue = query['Числовое поле'];
+  
+    console.log('query', 
+      query['Слой карты']
+    );
+
+    // Проверка совпадения с id в соответствующих массивах
+    const isSloiValid = data?.sloi_fields?.some((field: any) => field.id === Number(sloiValue));
+    const isModeValid = data?.mode_list?.some((mode: any) => mode.id === Number(modeValue));
+    const isNumFieldValid = data?.num_fields?.some((field: any) => field.id === Number(numFieldValue));
+  
+   
+
+    // Установка состояния кнопки в зависимости от валидности всех параметров
+    if (!isSloiValid || !isModeValid || !isNumFieldValid) {
+      setIsButtonDisabled(true);
+    } else {
+      setIsButtonDisabled(false);
+    }
+    console.log('data',data)
+    console.log('Query Validation:', { isSloiValid, isModeValid, isNumFieldValid });
+  }, [query, data, searchParams.toString()]);
+  
 
   let style: any = {};
 
@@ -74,7 +96,7 @@ const ColorInterval: FC = () => {
   }
 
   const [isNumberField, setIsNumberField] = useState(true);
-  const searchParams = useSearchParams();
+ 
   useEffect(() => {
     const mode_list = searchParams.get('Способ раскраски');
     
@@ -104,10 +126,10 @@ const ColorInterval: FC = () => {
               <SelectInterval title='Слой карты' dataSelect={data.sloi_fields ? data.sloi_fields : []} current_value={data.current_sloi ? data.current_sloi : null} />
               <SelectInterval title='Способ раскраски' dataSelect={data.mode_list ? data.mode_list : []} current_value={data.mode_list ? data.current_mode : null} />
               {
-                (isNumberField || isButtonDisabled) && (
+                 isNumberField && (
                   <>
                     <SelectInterval title='Числовое поле' dataSelect={data.num_fields ? data.num_fields : []} current_value={data.current_mode ? data.mode_list[0].id : null} />
-                    <Range data={data} setTargetEditObject={setTargetEditObject} />
+                    {!isButtonDisabled && <Range data={data} setTargetEditObject={setTargetEditObject} />}
                   </>
                 )
               }
